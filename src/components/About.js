@@ -1,63 +1,41 @@
 import React from 'react';
-import HeaderApp from './HeaderApp.js';
-import memojiK from './images/memoji_kevin.png';
-import memojiR from './images/memoji_rafael.png';
+import './Home.css';
+import { Link } from 'react-router-dom';
 
 class About extends React.Component {
-
-   /**
-    * Renders/Displays website elements.
-    */
-    render() {
-        return (
-            <div>
-                <HeaderApp />
-                <div id="aboutBanner" className="banner">
-                    <div className="aboutContent">
-                        <h1>COMP 4513 Assignment 1</h1>
-                        <p className="para1">
-                            This is a website that demonstrates our understanding of how to generate a single-page application using React.
-                        </p>
-                        <h3>Team Members:</h3>
-                        <div className="memojis">  
-                            <a href="https://github.com/xDKevz" target="_blank">
-                                <figure>
-                                    <img src={memojiK} width="200" height="200" alt="Kevin" />
-                                    <figcaption>John Kevin Ruiz</figcaption>
-                                </figure>
-                            </a>
-                            
-                            <a href="https://github.com/Rancelot" target="_blank">
-                                <figure>
-                                    <img src={memojiR} width="200" height="200" alt="Rafael" />
-                                    <figcaption>Rafael Angelo Pucut</figcaption>
-                                </figure>
-                            </a>
-                            <br></br>
-                        </div>
-                        <h3>CREDITS AND OTHER RESOURCES</h3>
-                        <div>
-                            <ul className="resources">
-                                <li><a href="https://codepen.io/peternguyen/pen/hICga/">Favorites Toggle</a></li>
-                                <li><a href="https://www.npmjs.com/package/google-maps-react">Google Maps React</a></li>
-                                <li><a href="https://www.movable-type.co.uk/scripts/latlong.html">Haversine Formula JavaScript</a></li>
-                                <li><a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en">CORS Extension</a></li>
-                                <li><a href="https://stuk.github.io/jszip/documentation/examples/downloader.html">JSZip Helpful Code</a></li>
-                            </ul>
-                        </div>
-                        <h3>Technology use:</h3>
-                        <div className="powered">
-                            <p><a href="https://nodejs.org/en/"><img src="https://nodejs.org/static/images/logo.svg" width="200" height="200" alt="NodeJsLogo" /></a></p>
-                            <p><a href="https://reactjs.org/"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width="200" height="200" alt="ReactLogo" /></a></p>
-                            <p><a href="https://www.javascript.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png" width="200" height="200" alt="JSLogo" /></a></p>
-                            <p><a href="https://www.github.com/"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="200" height="200" alt="GithubLogo" /></a></p>
-                            <p><a href="https://cloud.google.com/maps-platform/"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="200" height="200" alt="GoogleLogo" /></a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+	
+	render() {
+		return (
+			<div className="banner">
+				<div className="bannerBody">
+					<h1>Travel Photos</h1>
+					<section>
+						<h3>About</h3>
+						<p>My name is Ben and I am in Web III taught by Randy Connoly.</p>
+						<p>This is an app that displays travel photos, allows you to edit their info, and keeps track of their information.</p>
+					</section>
+					<section>
+						<h3>Thanks To...</h3>
+						<ul>
+							<li>Home & About photos from <a href="https://unsplash.com/photos/z6wdpf9fpM4">Jason Lam</a></li>
+							<li>Travel images from the one and only Randy Connoly</li>
+							<li>Image downloading code from <a href="https://stuk.github.io/jszip/documentation/examples/downloader.html">Stuart Knightley on GitHub</a></li>
+							<li>Further image downloading stuff from <a href="https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141">sideshowbarker on StackOverflow</a></li>
+							<li>Google Maps stuff from <a href="https://scotch.io/tutorials/react-apps-with-the-google-maps-api-and-google-maps-react">scotch.io</a></li>
+							<li>Geolocation stuff from <a href="https://www.npmjs.com/package/react-geolocated">Dan Homola</a></li>
+							<li>User distance calculations from <a href="https://www.movable-type.co.uk/scripts/latlong.html">Movable Type Scripts</a> and <a href="https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula">Stack Overflow</a></li>
+						</ul>
+					</section>
+					<section>
+						<h3>Apologies</h3>
+						<ul>
+							<li>This thing is incredibly ugly and I apologize for that</li>
+						</ul>
+					</section>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default About;
