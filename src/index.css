@@ -1,36 +1,25 @@
-/* purple + orange + blues
- :root {
-  --list-back: #bccbde;
-  --details-back: #e6e9f0;
-  --header-back: #431c5d;
-  --button-back: #e05915;
-  --border-color: #c2dde6;
-  --box-back: white;
-} */
-
 :root {
-  --list-back: #2b7a78;
-  --favorites-back: #def2f1;
-  --details-back: #feffff;
-  --details-box-back: #def2f1;
-  --header-back: #17252A;
-  --button-back: #3aafa9;
-  --border-color: #c2dde6;
-  --list-box-back: #feffff;
-}
+  --list-back: #F2EEE2;
+  --favorites-back: #0F1626;
+  --header-back: #28AED5;
+  --button-back: #FF3B3F;
 
-a:visited {
-	color: #ffa;
+  --list-box-back: #DFDCE3;
+  --details-back: #30415D;
+  --details-box-back: #F2EEE2;
+
+  --border-color: #FF3B3F;
 }
 
 body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
+    sans-serif; */
+    /* font-family: 'Raleway', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -70,33 +59,38 @@ button {
   padding: 10px;
   border-radius:5px;
   font-size: 1em;  
+  font-family: 'Courier New', Courier, monospace;
+}
+button:active {
+  transform: translateY(4px);
 }
 
 .container {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 47% auto;
+  grid-template-columns: 45% 50%;
   grid-gap: 0;
-  height: 100%;
-}
 
-.photoContainer {
-  max-height: calc(100vh - 239px);
-  overflow-y: scroll;
 }
 
 .photos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 250px);
-  grid-gap: 5px;
   background-color: var(--list-back);
-  max-height: calc(100vh - 239px);
-  overflow-y: scroll;
+
+}
+
+.photos .list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 275px);
+  grid-gap: 5px;
+  
+  overflow-y: auto ;
+  height: 900px;
 }
 
 .photoBox {
   display: grid;
   grid-template-columns: 110px 1fr;
+  grid-template-rows: 150px;
   grid-gap: 2px;
 
   background-color: var(--list-box-back);
@@ -104,13 +98,8 @@ button {
   padding: 0.5rem;
   place-self: center center;
   justify-content: space-evenly;
-  
 
-}
-
-.photoBox figure {
-	position: relative;
-	place-self: center center;
+  position: relative;
 }
 
 .photoBox button {
@@ -119,36 +108,72 @@ button {
   border-radius: 3px;
   margin: 0;
 }
+
 .photoBox h3 {
   font-size: 0.85em;
   font-weight: bold;
 }
+
 .photoBox p {
   font-size: 0.75em;
   margin: 0.25em 0 0.25em 0;
 }
-.photoBox button {
-  margin: 0 0.5em;
-  width: 3em;
 
+.photoBox button {
+  margin: 1px 0.5em;
+  width: 3.0em;
+  height: 2.5em;
 }
 
-img.photoThumb {
+.photoBox div {
+  margin: auto;
+  text-align: center;
+}
+
+.photoBox img {
   width: 100px;
-  height: 100px;
+  height: 100px; 
+  border-radius: 5px;
+  margin-left: 5%;
+  position: absolute;
+  top: 45%;
+  -ms-transform: translateY(-45%);
+  transform: translateY(-45%);
+}
+
+.photoBoxDetails button.close {
+  opacity: 0;
+  color: white;
+  /* padding: 5px; */
+  border-radius:0px;
+  font-size: 0.50em;  
+  position: absolute;
+  top: -1px;
+  right: -4px;
+}
+
+.photoBox:hover .photoBoxDetails button.close {
+  opacity: 1;
 }
 
 .details {
   background-color: var(--details-back);
-  padding: 0.5em;
-  width: 95%
+  /* padding: 0.5em; */
+  width: 100%;
 }
 .detailsPhotoBox {
   box-sizing: border-box;
-  margin: 0.75em;
-  position: relative;
-  padding: 1em;
-  background-color: var(--details-box-back)
+  /* margin: 0.75em; */
+  padding: 2em;
+  padding-left: 3em;
+  padding-right: 3em;
+  background-color: var(--details-box-back);
+  height: 900px;
+}
+.details label {
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 figure {
@@ -161,55 +186,13 @@ legend {
   font-size: 1.2em;
 }
 .photoForm img {
-   width: 100%
-}
-
-.faveText {
-	text-align: center;
-}
-
-.dlText {
-	cursor: pointer;
-}
-
-.dlIcon {
-    font-size: 2.2em;
-    line-height: 1em;
-}
-
-.favoriteItem {
-	position: relative;
-	transition: all 300ms ease-in-out;
-}
-
-button.closeButton {
-	position: absolute;
-	left: 5px;
-	top: 5px;
-	z-index: 0;
-	padding: 5px;
-	opacity: 0;
-	margin: 0;
-	width: 1.5em;
-	transition: all 150ms ease-in-out;
-}
-
-.photoBox:hover .closeButton {
-	opacity: 1;
-}
-
-.favoriteItem:hover .closeButton {
-	opacity: 1;
-}
-
-.closeButton:hover {
-	font-weight: bold;
-	background-color: red;
-	
-}
-
-.faveWrapper {
-	position: relative;
+  /* center image */
+   width: 640px;
+   height: 480px;
+   margin-left: auto;
+   margin-right: auto;
+   display: block;
+   border-radius: 1em;
 }
 
 .favorites {
@@ -218,75 +201,139 @@ button.closeButton {
   grid-auto-flow: column;
 
   align-items: center;
-  grid-gap: 5px;
+  grid-gap: 25px;
   background: var(--favorites-back);
   color: var(--header-back);
   padding: 5px;
   font-size: 0.8em;
   font-weight: bold;
   text-transform: uppercase;
-  padding-top: 30px;
+  width: 99.5%;
+
+  overflow: auto;
+}
+
+.favoriteItem {
   position: relative;
-	max-width: 100%;
-	overflow-x: scroll;
 }
 
-.faveWrapper.showFaves {
-	height: initial;
+.favoriteItem img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  padding: 0.5em;
+  border-radius: 10px;
+  border: 2px dashed #ddd;
 }
 
-.faveWrapper.hideFaves {
-	height: 30px;
-	overflow-y: hidden;
-}
-.faveToggle {
-    position: absolute;
-    left: 50%;
-    top: 2px;
-    background-color: black;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 4px;
-	z-index: 1;
-	cursor: pointer;
-	-webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+.favoriteItem button {
+  opacity: 0;
+  color: white;
+  padding: 6px;
+  border-radius:0px;
+  font-size: 0.75em;  
+  position: absolute;
+  top: 7px;
+  right: 0px;
 }
 
-.photoFilter {
-	display: grid;
-	text-align: center;
-	padding: 10px;
-	margin: 5px;
-	background-color: #666;
-	place-self: center center;
+.favoriteItem:hover button {
+  opacity: 1;
 }
 
-.photoFilter legend {
-	color:#fff;
+.sorting {
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 98%;
+  padding: 1em;
+
 }
 
-.photoFilter input {
-	width: 200px;
+.photoBrowser {
+  background-color: var(--list-back);
 }
 
-.warning {
-	color: #fff;
-	display: block;
-	height: calc(100vh - 84px);
+.location {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(15, 1fr);
+  grid-auto-flow: column;
 }
 
-.singlePhotoView {
-	text-align: center;
+input {
+  font-family: inherit;
 }
 
-.singlePhotoView img {
-	max-width: 100%;
-	max-height: 100%;
-	height: auto;
+select {
+  /* font-size: 0.8em; */
+  /* font-weight: bold; */
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  /* width: 98%; */
+  /* padding: 1em; */
+}
+
+.mapContainer {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 45%;
+  grid-gap: 5px;
+
+}
+
+.mapDetails {
+  position: absolute;
+  left: 55%;
+  top: 0px;
+}
+
+/* Minimize/Maximize Favorites FROM https://codepen.io/peternguyen/pen/hICga/ */
+#toggleBox {
+    background: var(--favorites-back);
+    color: var(--header-back);
+}
+
+#toggleBox input {
+    display: none;
+    visibility: hidden;
+}
+
+#toggleBox label {
+    display: block;
+    padding: 0.5em;
+    text-align: center;
+    border-bottom: 1px solid var(--header-back);
+    color: #208AAA;
+}
+
+#toggleBox label:hover {
+    color: var(--header-back);
+}
+
+#toggleBox label::before {
+    font-weight: bold;
+    font-size: 14px;
+    content: "+";
+    vertical-align: text-top;
+    display: inline-block;
+    width: 20px;
+    height: 18px;
+    margin-right: 3px;
+    background: radial-gradient(ellipse at center, #0B3542 50%, transparent 50%);
+}
+
+#expandf {
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.5s;
+}
+
+#togglef:checked ~ #expandf {
+    height: 144px;
+}
+
+#togglef:checked ~ label::before {
+    content: "-";
 }
