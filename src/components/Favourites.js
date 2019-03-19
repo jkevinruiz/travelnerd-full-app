@@ -2,30 +2,30 @@ import React from 'react';
 import FavouriteItem from './FavouriteItem.js';
 
 class Favourites extends React.Component {
-
+	
 	constructor(props) {
 		super(props);
 		this.state = { toggle: "showFaves" };
 	}
-
+	
 	handleDownloadClick = () => {
 		this.props.downloadFaves();
 	}
-
+	
 	handleToggleClick = () => {
-
+		
 		if (this.state.toggle == "showFaves") {
 			this.setState({ toggle: "hideFaves" });
 		} else {
 			this.setState({ toggle: "showFaves" });
 		}
-
+		
 	}
-
+	
 	render() {
-
+		
 		const favePhotos = this.props.photos.filter((p) => this.props.favourites.includes(p.id));
-
+		
 		if (favePhotos.length > 0) {
 			return (
 				<div className={`faveWrapper ${this.state.toggle}`}>
@@ -35,7 +35,7 @@ class Favourites extends React.Component {
 							<p>❤ Favourites</p>
 							<p className="dlText" onClick={this.handleDownloadClick}><span className="dlIcon">⮋</span> Download</p>
 						</div>
-						{ favePhotos.map( (p) =>
+						{ favePhotos.map( (p) => 
 							<FavouriteItem
 								photo={p}
 								key={p.id}
