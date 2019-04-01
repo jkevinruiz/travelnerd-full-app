@@ -1,0 +1,47 @@
+body {
+   background-color: black;   
+}
+
+.banner h1 { font-size: 3em; }
+.banner h3 {
+  font-size: 2em;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.banner h1, .banner h3, .banner p {
+  margin: 0;
+  text-shadow: 2px 2px 6px #000;
+  text-align: center;
+}
+
+.banner {
+  color: white;
+  background: url('https://source.unsplash.com/z6wdpf9fpM4/1024x489') top left/cover no-repeat;
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner p {
+   margin-top: 0.75em;
+}
+
+.banner button {
+   font-size: 1.75rem;
+   padding: 0.5em;
+
+}
+
+.banner section {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.banner .bannerBody {
+	background: rgba(5,5,5,0.5);
+	padding: 2em;
+	border-radius: 15px;
+}
