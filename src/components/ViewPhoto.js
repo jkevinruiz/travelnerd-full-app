@@ -2,17 +2,17 @@ import React from 'react';
 import './EditPhotoDetails.css';
 
 class ViewPhoto extends React.Component {
-		
+
 	handleEditClick = () => {
 		this.props.setViewState('edit');
 	}
-	
+
 	handleMapClick = () => {
 		this.props.setViewState('map');
 	}
-	
+
 	render() {
-		
+
 		const id = this.props.currentPhoto;
 		const imgURL = 'https://storage.googleapis.com/funwebdev-3rd-travel/large/';
 		if (this.props.photos.length > 0) {
@@ -22,7 +22,7 @@ class ViewPhoto extends React.Component {
 					<article className="singlePhotoView">
 						<div className="detailsPhotoBox">
 							<h1>{photo.title}</h1>
-							<img src={imgURL+photo.path} alt="{photo.title}" />
+							<img src={imgURL+photo.path} alt={photo.title} />
 							<h2>Description</h2>
 							<p>{photo.description}</p>
 							<p><strong>Country:</strong> {photo.country}</p>
