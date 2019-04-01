@@ -108,12 +108,14 @@ class App extends Component {
 	}
 	
 	async componentDidMount() {
+		if (localStorage.getItem('favourites') != null) {
+			this.setState( {favourites: JSON.parse(localStorage.getItem('favourites'))} );
+		}
 		try {
 			const url = "http://randyconnolly.com/funwebdev/services/travel/images.php";
 			const response = await fetch(url);
 			const jsonData = await response.json();
 			this.setState( {photos: jsonData} );
-			this.setState( {favourites: JSON.parse(localStorage.getItem('favourites'))} );
 		}
 		catch (error) {
 			console.error(error);

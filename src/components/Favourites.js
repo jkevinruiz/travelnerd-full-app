@@ -24,9 +24,8 @@ class Favourites extends React.Component {
 	
 	render() {
 		
-		const favePhotos = this.props.photos.filter((p) => this.props.favourites.includes(p.id));
-		
-		if (favePhotos.length > 0) {
+		if (this.props.favourites != null) {
+			const favePhotos = this.props.photos.filter((p) => this.props.favourites.includes(p.id));
 			return (
 				<div className={`faveWrapper ${this.state.toggle}`}>
 					<div onClick={this.handleToggleClick} className="faveToggle">Show/Hide</div>
