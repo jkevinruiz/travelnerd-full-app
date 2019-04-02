@@ -27,7 +27,7 @@ class About extends React.Component {
                                 </figure>
                             </a>
                             
-                            <a href="https://github.com/Rancelot" rel="noopener noreferrer" target="_blank">
+                            <a href="https://github.com/Rancelot" rel="noopener noreferrer " target="_blank">
                                 <figure>
                                     <img src={memojiR} width="200" height="200" alt="Rafael" />
                                     <figcaption>Rafael Angelo Pucut</figcaption>
