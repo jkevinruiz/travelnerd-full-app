@@ -11,6 +11,9 @@ const passport = require('passport');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+// create connection to database
+require('./config/dataConnector.js').connect();
+
 const app = express();
 
 // view engine setup
