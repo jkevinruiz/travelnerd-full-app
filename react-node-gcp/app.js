@@ -18,6 +18,7 @@ require('./config/dataConnector.js').connect();
 const app = express();
 
 /* --- middleware section --- */
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

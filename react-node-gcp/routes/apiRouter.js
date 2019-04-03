@@ -13,7 +13,7 @@ router.get('/images', (req, resp) => {
     });
 });
 
-router.get('/images/:id', (req, resp) => {
+router.get('/image/:id', (req, resp) => {
     ImageModel.find({id: req.params.id}, (err, data) => {
         if (err) {
             resp.json({Error: 'Image not found'});
