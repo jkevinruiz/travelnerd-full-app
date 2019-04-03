@@ -287,6 +287,8 @@ select {
   position: absolute;
   left: 55%;
   top: 0px;
+  background-color: rgba(255, 255, 255, 0.84);
+  padding: 5px;
 }
 
 /* Minimize/Maximize Favorites FROM https://codepen.io/peternguyen/pen/hICga/ */
