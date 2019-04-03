@@ -7,7 +7,7 @@ const connect = () => {
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function callback() {
-        console.log("Now connected to mongo");
+        console.log("Now connected to MongoDB Atlas");
     });
 };
 

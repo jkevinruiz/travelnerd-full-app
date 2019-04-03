@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var cors = require('cors');
+const cors = require('cors');
 
 const createError = require('http-errors');
 const express = require('express');
@@ -14,7 +14,10 @@ const usersRouter = require('./routes/users');
 // create connection to database
 require('./config/dataConnector.js').connect();
 
+//create express app
 const app = express();
+
+/* --- middleware section --- */
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +34,10 @@ require("./config/passport");
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+//use route handlers for API
+const apiRoutes = require('./routes/apiRouter.js');
+app.use('/api', apiRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
