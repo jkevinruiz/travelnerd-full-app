@@ -3,3 +3,34 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  //- form(method='POST' action='/api/image/insertId')
+  //-   div
+  //-     label(for='id') Id:
+  //-     input#id(type='text', placeholder='Type Id here', name='id')
+  //-   div
+  //-     label(for='title') Title:
+  //-     input#title(type='text', placeholder='Type Title here', name='title')
+  //-   div
+  //-     label(for='description') Description:
+  //-     input#title(type='text', placeholder='Type Description here', name='description')
+  //-   div
+  //-     label(for='iso') ISO:
+  //-     input#title(type='text', placeholder='Type ISO here', name='iso')
+  //-   div
+  //-     label(for='country') Country:
+  //-     input#title(type='text', placeholder='Type Country here', name='country')
+  //-   div
+  //-     label(for='city') City:
+  //-     input#title(type='text', placeholder='Type City here', name='city')
+  //-   div
+  //-     label(for='cityCode') CityCode (Number):
+  //-     input#title(type='number', placeholder='Type CityCode here', name='cityCode')
+  //-   button(type='submit') Insert Record
+  
+  //- form(method='PUT' action='')
+  //-   div
+  //-     h2= "PUT REQUEST TEST"
+  //-   div
+  //-     label(for='title') Title:
+  //-     input#title(type='text', placeholder='Type Title here', name='title')
+  //-   button(type='submit') Update Record
