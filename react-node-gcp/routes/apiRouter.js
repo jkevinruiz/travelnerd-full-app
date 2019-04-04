@@ -1,8 +1,9 @@
 const express = require('express');
 const ImageModel = require('../models/Image.js');
-
+const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 
+/* Provide JSON for all images */
 router.get('/images', (req, resp) => {
     ImageModel.find({}, (err, data) => {
         if (err) {
@@ -13,6 +14,8 @@ router.get('/images', (req, resp) => {
     });
 });
 
+/* Provide JSON for the specified image id */
+/* MUST SUPPLY VALID API KEY??? FOUND IN users.json/logins.json dataset*/
 router.get('/image/:id', (req, resp) => {
     ImageModel.find({id: req.params.id}, (err, data) => {
         if (err) {
@@ -22,6 +25,80 @@ router.get('/image/:id', (req, resp) => {
             resp.json(data);
         }
     });
+});
+
+/* PUT REQUEST NOT WORKING YET */
+/* TESTING LINK: /api/image/30386ea7-d672-4460-b5df-ca0cf9759ea2 */
+/* Modify the image data in MongoDB Atlas Database */
+/* NEEDS VALID AUTH TOKEN */
+router.put('/image/:id', (req, resp) => {
+    console.log("REQQUERY: " + req.query.title);
+    ImageModel.findByIdAndUpdate({id: req.params.id}, req.body, (err, data) => {
+        // console.log(data);
+        // resp.send(data);
+    });
+});
+
+/* Add a new image to MongoDB Atlas Database */
+/* WORKS BUT NEEDS VALID AUTH TOKEN FOR LOGIN FUNCTIONALITY*/
+router.post('/image/:id', urlencodedParser, (req, resp) => {
+    let imageRecord = new ImageModel({
+        id: req.body.id, 
+        title: req.body.title,
+        description: req.body.description,
+        location: {
+            iso: req.body.iso,
+            country: req.body.country,
+            city: req.body.city,
+            cityCode: req.body.cityCode,
+            continent: req.body.continent,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude
+        },
+        user: {
+            userid: req.body.userid,
+            picture: {
+                large: req.body.large,
+                thumbnail: req.body.thumbnail
+            },
+            firstname: req.body.firstname,
+            lastname: req.body.lastname
+        },
+        exif: {
+            make: req.body.make,
+            model: req.body.model,
+            exposure_time: req.body.exposure_time,
+            aperture: req.body.aperture,
+            focal_length: req.body.focal_length,
+            iso: req.body.exifiso
+        },
+        filename: req.body.filename,
+        colors: [
+            {
+                hex: req.body.hex1,
+                name: req.body.name1
+            },
+            {
+                hex: req.body.hex2,
+                name: req.body.name2
+            },
+            {
+                hex: req.body.hex3,
+                name: req.body.name3
+            },
+            {
+                hex: req.body.hex4,
+                name: req.body.name4
+            }
+        ]
+    });
+    imageRecord.save((err, imageR) => {
+        if (err) {
+            console.log("ERROR: INSERT IS WRONG");
+        } else {
+            console.log(imageR.title + " Inserted on images Collection");
+        }
+    });    
 });
 
 module.exports = router;
