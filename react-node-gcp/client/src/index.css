@@ -276,17 +276,17 @@ select {
 }
 
 .mapContainer {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto 45%;
-  grid-gap: 5px;
+  width: 100%;
+
+}
+
+.mapInside{
+  height: 50%;
 
 }
 
 .mapDetails {
-  position: absolute;
-  left: 55%;
-  top: 0px;
+  text-align: center;
   background-color: rgba(255, 255, 255, 0.84);
   padding: 5px;
 }

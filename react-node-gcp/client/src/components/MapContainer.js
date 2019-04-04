@@ -22,29 +22,8 @@ export class MapContainer extends React.Component {
         //Code from https://www.npmjs.com/package/google-maps-react
         if (photo != null) {
             return (
-                <div className="mapContainer">
-                <div>
-                    <Map className="map" 
-                    key={photo.id}
-                    style={{width: '500px', height: '900px', position: 'relative'}} 
-                    google={this.props.google} zoom={14}
-                    initialCenter={{lat: Number(photo.latitude), lng: Number(photo.longitude) }}
-                    onClick={this.onMapClicked}
-                    
-                    >
-                
-                        <Marker onClick={this.onMarkerClick}
-                                name={'Current location'} />
-                
-                        {/* <InfoWindow onClose={this.onInfoWindowClose}>
-                            <div>
-                            <h1>{this.state.selectedPlace.name}</h1>
-                            </div>
-                        </InfoWindow> */}
-                    </Map>
-                </div>
-            
-                <div className="mapDetails">
+                <div className="mapContainer"> 
+                    <div className="mapDetails">
                         <img src={imgURL+photo.path} alt={photo.title}/>
                         <br></br>
                         <h2>{photo.title}</h2>
@@ -53,8 +32,30 @@ export class MapContainer extends React.Component {
                         <p>{photo.city}, {photo.country}</p>
                         <button onClick={this.handleView}>View</button>
                         <button onClick={this.handleEdit}>Edit</button>
+                    </div>
+                    <div className="map">
+                        <div className="mapInside">
+                           <Map
+                            key={photo.id}
+                            style={{width: '760px', height: '500px'}} 
+                            google={this.props.google} zoom={14}
+                            initialCenter={{lat: Number(photo.latitude), lng: Number(photo.longitude) }}
+                            onClick={this.onMapClicked}>
+                
+                           <Marker onClick={this.onMarkerClick}
+                                name={'Current location'} />
+                
+                            {/* <InfoWindow onClose={this.onInfoWindowClose}>
+                                <div>
+                                <h1>{this.state.selectedPlace.name}</h1>
+                                </div>
+                            </InfoWindow> */}
+                            </Map>  
+                        </div>
+                      
+                    </div>
                 </div>
-                </div>
+                
             );
         } else {
             return (
