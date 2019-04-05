@@ -1,6 +1,6 @@
 const express = require('express');
 const ImageModel = require('../models/Image.js');
-const LoginModel = require('../models/Login.js');
+const LoginModel = require('../models/User.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 

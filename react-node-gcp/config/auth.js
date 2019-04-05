@@ -1,6 +1,6 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const UserModel = requre('../models/Login.js');
+const UserModel = require('../models/User.js');
 
 const localOptions = {
 	usernameField : 'email',
@@ -30,7 +30,7 @@ const strategy = new LocalStrategy(localOptions, async (email, password, done) =
 });
 
 // for localLogin, use our strategy to handle user login
-passportuse('localLogin', strategy);
+passport.use('localLogin', strategy);
 
 // save email in session data
 passport.serializeUser( (user, done) => done(null, user.email) );
