@@ -21,6 +21,7 @@
     "debug": "^4.1.1",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
+    "file-system": "^2.2.2",
     "http-errors": "^1.7.2",
     "mongoose": "^5.4.20",
     "morgan": "^1.9.1",

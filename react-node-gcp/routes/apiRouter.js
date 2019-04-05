@@ -4,7 +4,7 @@ const LoginModel = require('../models/Login.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 const Multer = require('multer');
-const Upload = Multer({ dest: './public/' });
+// const Upload = Multer({ dest: 'public/' });
 const imgUpload = require('./ImgUpload.js');
 
 const multer = Multer({
@@ -59,7 +59,7 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
     //     });
     // });
 
-    ImageModel.updateOne( {id: req.params.id},  
+ImageModel.updateOne( {id: req.params.id},  
         {
             title: req.body.title, 
             description: req.body.description,
@@ -155,9 +155,7 @@ router.get('/logins', (req, resp) => {
     });
 });
 
-// UPLOAD 
-router.post('/api/upload', upload.any(), function(req, res, next) {
-    res.render('index', {title: 'Express'});
+router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, (req, res) => {
+    res.json({Success: "Success"});
 });
-
 module.exports = router;
