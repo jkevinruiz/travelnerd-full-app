@@ -134,7 +134,7 @@ button:active {
   width: 100px;
   height: 100px; 
   border-radius: 5px;
-  margin-left: 5%;
+  margin-left: 2%;
   position: absolute;
   top: 45%;
   -ms-transform: translateY(-45%);
@@ -276,12 +276,12 @@ select {
 }
 
 .mapContainer {
-  width: 100%;
+  width: 55%;
+  position: absolute;
 
 }
 
 .mapInside{
-  height: 50%;
   position: relative;
 
 }
