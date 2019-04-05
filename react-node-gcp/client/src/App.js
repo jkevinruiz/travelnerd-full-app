@@ -5,6 +5,7 @@ import PhotoBrowser from './components/PhotoBrowser.js';
 import Home from './components/Home.js';
 import About from './components/About.js';
 import _ from 'lodash';
+import ImageUpload from './components/ImageUpload.js';
 
 
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Route path='/upload' exact component={ImageUpload}></Route>
         <Route path='/' exact component={Home} />
         <Route path='/home' exact component={Home} />
         <Route path='/browse' exact 
