@@ -1,37 +1,44 @@
 import React from 'react';
-import axios from 'axios';
-
+const axios = require('axios');
 
 class ImageUpload extends React.Component {
-
     constructor(props) {
         super(props);
-        // temp backup copy of photos
-        this.state = { selectedFile: null};
-      }
-
-    fileSelectedHandler = event => {
-        console.log(event.target.files[0]);
-        this.setState({
-            selectedFile: event.target.files[0],
-            fileName: event.target.files[0].name
-        })
+        this.state ={
+            file: null
+        };
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+    }
+    onFormSubmit(e){
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('myImage',this.state.file);
+        const config = {
+            headers: {
+                
+                'content-type': 'multipart/form-data'
+            }
+        };
+        axios.post("/api/upload",formData,config)
+            .then((response) => {
+                alert("The file is successfully uploaded");
+            }).catch((error) => {
+        });
+    }
+    onChange(e) {
+        this.setState({file:e.target.files[0]});
     }
 
-    fileUploadHandler = () => {
-        
-    }
-    
-    
     render() {
         return (
-            <div className="upload">
-                <input type="file" onChange={this.fileSelectedHandler}/>
-                <button onClick={this.fileUploadHandler}>Upload</button>
-            </div>
-        );
-    }
-
+            <form onSubmit={this.onFormSubmit}>
+                <h1>File Upload</h1>
+                <input type="file" name="myImage" onChange= {this.onChange} />
+                <button type="submit">Upload</button>
+            </form>
+        )
+        }
 }
 
-export default ImageUpload;
+export default ImageUpload

@@ -3,6 +3,14 @@ const ImageModel = require('../models/Image.js');
 const LoginModel = require('../models/Login.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
+const Multer = require('multer');
+const Upload = Multer({ dest: './public/' });
+const imgUpload = require('./ImgUpload.js');
+
+const multer = Multer({
+    storage: Multer.MemoryStorage,
+    fileSize: 5 * 1024 * 1024
+});
 
 /* Provide JSON for all images */
 router.get('/images', (req, resp) => {
@@ -145,6 +153,11 @@ router.get('/logins', (req, resp) => {
             resp.json(data);
         }
     });
+});
+
+// UPLOAD 
+router.post('/api/upload', upload.any(), function(req, res, next) {
+    res.render('index', {title: 'Express'});
 });
 
 module.exports = router;
