@@ -1,0 +1,38 @@
+.uploadBtns{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    width: 80%;
+    margin: auto;
+
+
+}
+.uploadForm{
+    background-color: lightgray;
+    width: 65%;
+    margin: auto;
+    height: 450px;
+    border-radius: 25px;
+}
+
+.formContainer {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center; 
+}
+
+
+
+form.uploadForm label{
+    display: block;
+    margin-top: 0.5rem;
+    margin: auto;
+}
+
+form.uploadForm input{
+    padding: 12px 30px;
+    margin: 0;
+    width: 50%;
+    
+}
+
+
