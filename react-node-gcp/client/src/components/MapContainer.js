@@ -16,7 +16,7 @@ export class MapContainer extends React.Component {
      * Renders/Displays website elements.
      */
     render() {
-        const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/square-medium/`;
+        const imgURL = `https://storage.googleapis.com/project-pixels/square/`;
         let photo = this.props.photos.find((obj) => obj.id === this.props.currentPhoto);
         //handles what happens when selected photo to display map does not exist.
         //Code from https://www.npmjs.com/package/google-maps-react
@@ -24,12 +24,12 @@ export class MapContainer extends React.Component {
             return (
                 <div className="mapContainer"> 
                     <div className="mapDetails">
-                        <img src={imgURL+photo.path} alt={photo.title}/>
+                        <img src={imgURL+photo.filename} alt={photo.title}/>
                         <br></br>
                         <h2>{photo.title}</h2>
-                        <p>Distance from User(KM): {this.calculateDistance(photo.latitude, photo.longitude)}</p>
+                        <p>Distance from User(KM): {this.calculateDistance(photo.location.latitude, photo.location.longitude)}</p>
                         <p>{photo.description}</p>
-                        <p>{photo.city}, {photo.country}</p>
+                        <p>{photo.location.city}, {photo.location.country}</p>
                         <button onClick={this.handleView}>View</button>
                         <button onClick={this.handleEdit}>Edit</button>
                     </div>
@@ -39,7 +39,7 @@ export class MapContainer extends React.Component {
                             key={photo.id}
                             style={{width: '100%', height: '23em'}} 
                             google={this.props.google} zoom={14}
-                            initialCenter={{lat: Number(photo.latitude), lng: Number(photo.longitude) }}
+                            initialCenter={{lat: Number(photo.location.latitude), lng: Number(photo.location.longitude) }}
                             onClick={this.onMapClicked}>
                 
                            <Marker onClick={this.onMarkerClick}

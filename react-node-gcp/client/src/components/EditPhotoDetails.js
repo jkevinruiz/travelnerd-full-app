@@ -8,7 +8,7 @@ class EditPhotoDetails extends React.Component {
      */
     render() {
         const id = this.props.currentPhoto;
-        const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/medium/`;
+        const imgURL = `https://storage.googleapis.com/project-pixels/large/`;
 
         // just in case, handle missing photos in the props
         if ( this.props.photos.length > 0 ) {
@@ -20,7 +20,7 @@ class EditPhotoDetails extends React.Component {
                         <div className="detailsPhotoBox">
                             <form className="photoForm">
                                 {/* <legend>Edit Photo Details</legend> */}
-                                <img src={imgURL+photo.path} alt={ photo.title } />
+                                <img src={imgURL+photo.filename} alt={ photo.title } />
                                 <br></br>
                                 <label>Title</label>
                                 <input type="text" name="title" value={ photo.title } onChange={ this.handleChange } />
@@ -31,17 +31,17 @@ class EditPhotoDetails extends React.Component {
                                 <div className="location">
                                     <span>
                                         <label>City</label>
-                                        <input type="text" name="city" value={ photo.city } onChange={ this.handleChange } />
+                                        <input type="text" name="city" value={ photo.location.city } onChange={ this.handleChange } />
                 
                                         <label>Country</label>
-                                        <input type="text" name="country" value={ photo.country } onChange={ this.handleChange } />
+                                        <input type="text" name="country" value={ photo.location.country } onChange={ this.handleChange } />
                                     </span>    
                                     <span>
                                         <label>latitude</label>
-                                        <input type="number" name="latitude" value={ photo.latitude } onChange={ this.handleChange } />
+                                        <input type="number" name="latitude" value={ photo.location.latitude } onChange={ this.handleChange } />
                 
                                         <label>longitude</label>
-                                        <input type="number" name="longitude" value={ photo.longitude } onChange={ this.handleChange } />
+                                        <input type="number" name="longitude" value={ photo.location.longitude } onChange={ this.handleChange } />
                                     </span>                           
                                 </div>
                             </form>
