@@ -1,3 +1,5 @@
+//https://medium.com/google-cloud/upload-images-to-google-cloud-storage-with-react-native-and-expressjs-61b8874abc49
+
 'use strict';
 const {Storage} = require('@google-cloud/storage');
 const fs = require('file-system');
