@@ -1,5 +1,6 @@
 const express = require('express');
 const ImageModel = require('../models/Image.js');
+const LoginModel = require('../models/Login.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 
@@ -134,6 +135,16 @@ router.post('/image/:id', urlencodedParser, (req, resp) => {
             console.log(imageR.title + " Inserted on images Collection");
         }
     });    
+});
+
+router.get('/logins', (req, resp) => {
+    LoginModel.find({}, (err, data) => {
+        if (err) {
+            resp.json({ Error: 'Login Data not found'});
+        } else {
+            resp.json(data);
+        }
+    });
 });
 
 module.exports = router;
