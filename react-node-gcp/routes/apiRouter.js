@@ -3,6 +3,14 @@ const ImageModel = require('../models/Image.js');
 const LoginModel = require('../models/Login.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
+const Multer = require('multer');
+const imgUpload = require('./imgUpload.js');
+
+const multer = Multer({
+    storage: Multer.MemoryStorage,
+    fileSize: 5 * 1024 *1024
+});
+
 
 /* Provide JSON for all images */
 router.get('/images', (req, resp) => {
@@ -145,6 +153,10 @@ router.get('/logins', (req, resp) => {
             resp.json(data);
         }
     });
+});
+
+router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, (req, res) => {
+    res.json({Success: "Success"});
 });
 
 module.exports = router;
