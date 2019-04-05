@@ -31,12 +31,47 @@ router.get('/image/:id', (req, resp) => {
 /* TESTING LINK: /api/image/30386ea7-d672-4460-b5df-ca0cf9759ea2 */
 /* Modify the image data in MongoDB Atlas Database */
 /* NEEDS VALID AUTH TOKEN */
-router.put('/image/:id', (req, resp) => {
-    console.log("REQQUERY: " + req.query.title);
-    ImageModel.findByIdAndUpdate({id: req.params.id}, req.body, (err, data) => {
-        // console.log(data);
-        // resp.send(data);
-    });
+router.put('/image/:id', urlencodedParser, (req, resp) => {
+    // console.log("REQQUERY: " + req.query.title);
+    // ImageModel.findById({id: req.params.id}, req.body.firstname, {new: true}, (err, data) => {
+    //     if(err) {
+    //         return resp.status(500).send(err);
+    //     } 
+    //     return resp.send(data);
+    //     console.log(data);
+    //     resp.send(data);
+    // });
+    // ImageModel.updateOne({id: req.params.id}, function(err, image) {
+    //     image.firstname = "john";
+    //     image.save(function(err) {
+    //         if(err) {
+    //             console.error("ERROR!");
+    //         }
+    //     });
+    // });
+
+    ImageModel.updateOne( {id: req.params.id},  
+        {
+            title: req.body.title, 
+            description: req.body.description,
+            'location.country': req.body.country,
+            'location.city': req.body.city,
+            'location.longitude': req.body.longitude,
+            'location.latitude': req.body.latitude,
+            'exif.make': req.body.exmake,
+            'exif.model': req.body.exmodel,
+            'exif.exposure_time': req.body.exptime,
+            'exif.aperture': req.body.exaperture,
+            'exif.focal_length': req.body.exfocal,
+            'exif.iso': req.body.exiso,
+
+        }, 
+        function(err, data) {
+            if (err) {
+                return resp.json({Error: err});
+            }
+            return resp.json({Message: "Success"});
+        });
 });
 
 /* Add a new image to MongoDB Atlas Database */
