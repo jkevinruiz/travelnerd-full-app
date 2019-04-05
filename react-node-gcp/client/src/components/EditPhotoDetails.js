@@ -38,10 +38,10 @@ class EditPhotoDetails extends React.Component {
                                     </span>    
                                     <span>
                                         <label>latitude</label>
-                                        <input type="text" name="latitude" value={ photo.latitude } onChange={ this.handleChange } />
+                                        <input type="number" name="latitude" value={ photo.latitude } onChange={ this.handleChange } />
                 
                                         <label>longitude</label>
-                                        <input type="text" name="longitude" value={ photo.longitude } onChange={ this.handleChange } />
+                                        <input type="number" name="longitude" value={ photo.longitude } onChange={ this.handleChange } />
                                     </span>                           
                                 </div>
                             </form>

@@ -37,19 +37,14 @@ export class MapContainer extends React.Component {
                         <div className="mapInside">
                            <Map
                             key={photo.id}
-                            style={{width: '760px', height: '500px'}} 
+                            style={{width: '100%', height: '23em'}} 
                             google={this.props.google} zoom={14}
                             initialCenter={{lat: Number(photo.latitude), lng: Number(photo.longitude) }}
                             onClick={this.onMapClicked}>
                 
                            <Marker onClick={this.onMarkerClick}
                                 name={'Current location'} />
-                
-                            {/* <InfoWindow onClose={this.onInfoWindowClose}>
-                                <div>
-                                <h1>{this.state.selectedPlace.name}</h1>
-                                </div>
-                            </InfoWindow> */}
+        
                             </Map>  
                         </div>
                       
