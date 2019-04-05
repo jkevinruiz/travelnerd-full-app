@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
-const loginSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     id: Number,
     details: {
         firstname: String,
@@ -12,4 +13,15 @@ const loginSchema = new mongoose.Schema({
     password_bcrypt: String,
     apikey: String
 });
-module.exports = mongoose.model('Login', loginSchema);
+
+// Check the user's credentials
+UserSchema.methods.isValidPassword = async function(formPassword) {
+	const user = this;
+	const hash = user.password_bcrypt;
+	
+	// hashes the password sent and checks against the DB.
+	const compare = await bcrypt.compare(formPassword, hash);
+	return compare;
+}
+
+module.exports = User = mongoose.model('users', UserSchema);
