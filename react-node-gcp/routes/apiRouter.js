@@ -3,9 +3,14 @@ const ImageModel = require('../models/Image.js');
 const LoginModel = require('../models/User.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
+const cors = require('cors');
+
+const corsOptions = {
+  origin: 'http://localhost:8080'
+}
 
 /* Provide JSON for all images */
-router.get('/images', (req, resp) => {
+router.get('/images', cors(corsOptions), (req, resp) => {
     ImageModel.find({}, (err, data) => {
         if (err) {
             resp.json({ Error: 'Images not found'});
@@ -37,7 +42,7 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
     // ImageModel.findById({id: req.params.id}, req.body.firstname, {new: true}, (err, data) => {
     //     if(err) {
     //         return resp.status(500).send(err);
-    //     } 
+    //     }
     //     return resp.send(data);
     //     console.log(data);
     //     resp.send(data);
@@ -51,9 +56,9 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
     //     });
     // });
 
-    ImageModel.updateOne( {id: req.params.id},  
+    ImageModel.updateOne( {id: req.params.id},
         {
-            title: req.body.title, 
+            title: req.body.title,
             description: req.body.description,
             'location.country': req.body.country,
             'location.city': req.body.city,
@@ -66,7 +71,7 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
             'exif.focal_length': req.body.exfocal,
             'exif.iso': req.body.exiso,
 
-        }, 
+        },
         function(err, data) {
             if (err) {
                 return resp.json({Error: err});
@@ -79,7 +84,7 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
 /* WORKS BUT NEEDS VALID AUTH TOKEN FOR LOGIN FUNCTIONALITY*/
 router.post('/image/:id', urlencodedParser, (req, resp) => {
     let imageRecord = new ImageModel({
-        id: req.body.id, 
+        id: req.body.id,
         title: req.body.title,
         description: req.body.description,
         location: {
@@ -134,7 +139,7 @@ router.post('/image/:id', urlencodedParser, (req, resp) => {
         } else {
             console.log(imageR.title + " Inserted on images Collection");
         }
-    });    
+    });
 });
 
 router.get('/logins', (req, resp) => {
