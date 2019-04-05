@@ -159,7 +159,7 @@ button:active {
 .details {
   background-color: var(--details-back);
   /* padding: 0.5em; */
-  width: 100%;
+  width: 180%;
 }
 .detailsPhotoBox {
   box-sizing: border-box;
@@ -253,6 +253,10 @@ legend {
 
 .photoBrowser {
   background-color: var(--list-back);
+}
+
+#editTwoBtns{
+  margin-bottom: 25px 
 }
 
 .location {

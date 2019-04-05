@@ -1,6 +1,7 @@
 import React from 'react';
 import './EditPhotoDetails.css';
 
+
 class EditPhotoDetails extends React.Component {
 
     /**
@@ -35,6 +36,9 @@ class EditPhotoDetails extends React.Component {
                 
                                         <label>Country</label>
                                         <input type="text" name="country" value={ photo.location.country } onChange={ this.handleChange } />
+                                        
+                                        <label>ISO</label>
+                                        <input type="number" name="iso"></input>
                                     </span>    
                                     <span>
                                         <label>latitude</label>
@@ -42,12 +46,28 @@ class EditPhotoDetails extends React.Component {
                 
                                         <label>longitude</label>
                                         <input type="number" name="longitude" value={ photo.location.longitude } onChange={ this.handleChange } />
+                                        <label id="editTwoBtns">  </label>
+                                        <button onClick={this.handleView}>View</button>
+                                    </span>
+                                    <span>
+                                        <label>Shot with: </label>
+                                        <input type="text" name="shot" ></input>
+                                        <label>Exposure: </label>
+                                        <input type="text" name="exposure"></input>
+                                        <label id="editTwoBtns">  </label>
+                                        <button onClick={this.handleMap}>Map</button> 
+                                    </span>
+                                    <span>
+                                    <label>Aperture</label>
+                                        <input type="text" name="aperture"></input>
+                                        <label>Focal length: </label>
+                                        <input type="number" name="focal"></input>
                                     </span>                           
                                 </div>
                             </form>
                             <br></br>
-                            <button onClick={this.handleView}>View</button>
-                            <button onClick={this.handleMap}>Map</button>
+                            
+                            
                         </div>
                     </article>
                 );
@@ -96,6 +116,10 @@ class EditPhotoDetails extends React.Component {
 
         // 3. tell parent (or above) to update the state for this photo
         this.props.updatePhoto(this.props.currentPhoto, clonedPhoto);
+    }
+
+    defaultImage = () => {
+        this.props.defaultImage();
     }
 }
 

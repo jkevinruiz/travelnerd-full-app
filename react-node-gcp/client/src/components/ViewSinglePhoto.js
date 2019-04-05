@@ -68,33 +68,30 @@ class ViewSinglePhoto extends React.Component {
         var iso = 'Not available';
         
 
-        if(photo.exif.make != undefined) {
+        if(photo.exif.make !== undefined) {
             make = photo.exif.make; 
         }
-        if(photo.exif.model != undefined) {
+        if(photo.exif.model !== undefined) {
             model = photo.exif.model;
         }
-        if(photo.exif.exposure_time != undefined) {
+        if(photo.exif.exposure_time !== undefined) {
             exposure = photo.exif.exposure_time;
         }
-        if(photo.exif.aperature != undefined) {
+        if(photo.exif.aperature !== undefined) {
             aperature = photo.exif.aperature;
         }
-        if(photo.exif.focal_length != undefined) {
+        if(photo.exif.focal_length !== undefined) {
             iso = photo.exif.iso;
         }
-
         return(
             <div className="exifInfo"> 
                 <p><strong>Shot with:</strong> {make}, {model}</p>
-                <p><strong>Exposure:</strong> {exposure}, <strong>Aperature:</strong> {aperature}</p>
+                <p><strong>Exposure:</strong> {exposure}, <strong>Aperture:</strong> {aperature}</p>
                 <p><strong>Focal Length:</strong> {focalLength}, <strong>ISO:</strong> {iso}</p>
             </div>
         );
         
     }
-
-
 }
 
 export default ViewSinglePhoto;

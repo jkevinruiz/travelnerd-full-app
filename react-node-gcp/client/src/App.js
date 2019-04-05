@@ -32,7 +32,7 @@ class App extends Component {
 	    const url = "/api/images";
       const response = await fetch(url);
       const photoJson = await response.json();
-      //console.log(photosJson);
+      console.log(photoJson);
 
       this.setState({photos: photoJson, temp: photoJson});
     }
