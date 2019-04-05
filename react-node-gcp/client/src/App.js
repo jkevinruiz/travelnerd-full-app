@@ -204,8 +204,8 @@ class App extends Component {
 
     // iterates through favorites array and adds each image to zip
     for(let img of this.state.favorites) {
-      console.log(proxy+url+img.path);
-      zip.file(img.title+".jpg", image(proxy+url + img.path), {binary:true} );
+      console.log(proxy+url+img.filename);
+      zip.file(img.title+".jpg", image(proxy + url + img.filename), {binary:true} );
     }
 
     // saves images as zip

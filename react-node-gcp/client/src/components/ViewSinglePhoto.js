@@ -22,6 +22,10 @@ class ViewSinglePhoto extends React.Component {
                                 <p>{photo.location.city}, {photo.location.country}</p>
                                 <button onClick={this.handleEdit}>Edit</button>
                                 <button onClick={this.handleMap}>Map</button>
+                                <span>
+                                    <p>EXIF Data</p>
+                                    <p>`Make: ${photo.exif.make}`</p>
+                                </span>
                             </div>
                         </div>
                     </article>
