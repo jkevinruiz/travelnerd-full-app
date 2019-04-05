@@ -29,13 +29,13 @@ router.post('/register', function(req, res) {
 
     const newUser = new User({
       details: {firstname: req.body.name},
-      email: req.body.name,
+      email: req.body.email,
       password_bcrypt: req.body.password
     });
 
     bcrypt.hash(newUser.password_bcrypt, 10, (err, hash) => {
       if (err) throw err;
-      newUser.password = hash;
+      newUser.password_bcrypt = hash;
       newUser
         .save()
         .then(user => res.json(user))
@@ -49,16 +49,7 @@ router.post('/register', function(req, res) {
 // @access Public
 router.post(
   '/login',
-  function(req,res, next) {
-    // Form validation
-    const {errors, isValid} = validateLoginInput(req.body);
-
-    // Check validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-  },
-  passport.authenticate('local'),
+  passport.authenticate('localLogin'),
   (req, res) => {
 
     const user = JSON.parse(JSON.stringify(req.user)); // hack???
