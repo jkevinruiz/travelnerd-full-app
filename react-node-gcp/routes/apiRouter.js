@@ -16,29 +16,18 @@ const corsOptions = {
     origin: 'http://localhost:3000'
 }
 
-/* Provide JSON for all images */
-router.get('/images', (req, resp) => {
-    ImageModel.find({}, (err, data) => {
+/* Provide JSON for specified image id */
+/* MUST SUPPLY VALID API KEY???*/
+router.get('/image/:id', (req, resp) => {
+    ImageModel.find({id: req.params.id}, (err, data) => {
         if (err) {
-            resp.json({ Error: 'Images not found'});
+            resp.json({ Error: 'Image not found'});
         } else {
             resp.json(data);
         }
     });
 });
 
-/* Provide JSON for the specified image id */
-/* MUST SUPPLY VALID API KEY??? FOUND IN users.json/logins.json dataset*/
-// router.get('/image/:id', (req, resp) => {
-//     ImageModel.find({id: req.params.id}, (err, data) => {
-//         if (err) {
-//             resp.json({Error: 'Image not found'});
-//         } else {
-//             console.log(data);
-//             resp.json(data);
-//         }
-//     });
-// });
 router.get('/images', cors(corsOptions), (req, resp) => {
     ImageModel.find({}, (err, data) => {
         if (err) {
