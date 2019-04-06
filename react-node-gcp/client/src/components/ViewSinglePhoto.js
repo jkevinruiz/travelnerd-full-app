@@ -36,7 +36,7 @@ class ViewSinglePhoto extends React.Component {
                 console.log("viewsinglephoto photo is null");
                 return (
                         <div className="detailsPhotoBox">
-                            <h1>Photo Removed</h1>
+                            <h1>Select Photo to display here</h1>
                         </div>
                 );
             }

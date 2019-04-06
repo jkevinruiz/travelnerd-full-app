@@ -1,0 +1,35 @@
+.loginContainer{
+    text-align: center;
+    align-content: center;
+    background-color: white;
+     position: absolute;
+    left: 300px;
+    top: 100px;
+    width: 70%;
+    height: 80%;
+    border-radius: 35px;
+    background: url('./images/randyForWeb3.jpg');
+    background-size: cover ;
+    background-repeat: no-repeat;
+
+}
+
+.loginBox {
+    position: relative;
+    top: 300px;
+}
+
+.loginForm label{
+    display: block;
+}
+
+.loginForm input{
+    width: 400px;
+}
+
+
+
+.loginContainer button{
+    align-content: center;
+
+}
