@@ -10,7 +10,7 @@ import MapContainer from './MapContainer.js';
 class PhotoBrowser extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { currentPhoto: 50,
+        this.state = { currentPhoto: 25,
                        filteredPhoto: [],
                        renderView: "view",
                     };
@@ -22,6 +22,7 @@ class PhotoBrowser extends React.Component {
     componentWillReceiveProps(nextProps){
         if(nextProps.photos !== this.props.photos ){
              this.setState({ filteredPhoto: nextProps.photos} );
+
         }
 
     }
@@ -31,6 +32,7 @@ class PhotoBrowser extends React.Component {
      */
     componentDidMount() {
         this.setState({ filteredPhoto: this.props.photos});
+
     }
 
     componentWillMount() {
