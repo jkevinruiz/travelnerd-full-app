@@ -33,6 +33,10 @@ class About extends React.Component {
                                     <figcaption>Rafael Angelo Pucut</figcaption>
                                 </figure>
                             </a>
+                            <figcaption>Kevin Lam</figcaption>
+                            <figcaption>Ben Carr</figcaption>
+                            <figcaption>Ross McConnell</figcaption>
+                            <figcaption>Lee Palisoc</figcaption>
                             <br></br>
                         </div>
                         <h3>CREDITS AND OTHER RESOURCES</h3>
