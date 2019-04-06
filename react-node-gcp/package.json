@@ -9,11 +9,11 @@
     "client": "cd client && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
- 
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@google-cloud/storage": "^2.5.0",
+    "axios": "^0.18.0",
     "bcrypt": "^3.0.5",
     "concurrently": "^4.1.0",
     "cookie-parser": "^1.4.4",
