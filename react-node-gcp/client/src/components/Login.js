@@ -9,7 +9,7 @@ class Login extends Component {
     render() {
         return (
             <div className="loginContainer">
-            <HeaderApp />
+            <span id="headerapp"><HeaderApp /></span>
                 <div className="loginBox">
                     <form className="loginForm">
                     <label><strong>Username</strong></label>
