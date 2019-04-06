@@ -16,7 +16,6 @@ class EditPhotoDetails extends React.Component {
             // find the object with this id
             const photo = this.props.photos.find( p => p.id === id );
             if (photo != null) {
-                console.log(photo);
                 return(
                     <article className="details">
                         <div className="detailsPhotoBox">
@@ -33,40 +32,40 @@ class EditPhotoDetails extends React.Component {
                                 <div className="location">
                                     <span>
                                         <label>City</label>
-                                        <input type="text" data="location" name="city" value={ photo.location.city } onChange={ this.handleChange }/>
+                                        <input type="text" name="city" placeholder={ photo.location.city } onChange={ this.handleChange }/>
                 
                                         <label>Country</label>
-                                        <input type="text" data="location" name="country" value={ photo.location.country } onChange={ this.handleChange } />
+                                        <input type="text" name="country" placeholder={ photo.location.country } onChange={ this.handleChange } />
                                         
                                         <label>ISO</label>
-                                        <input type="number" data="exif" name="iso" value={photo.exif.iso} onChange={ this.handleChange } ></input>
+                                        <input type="number" name="iso" placeholder={photo.exif.iso}></input>
                                     </span>    
                                     <span>
                                         <label>latitude</label>
-                                        <input type="number" data="location" name="latitude" value={ photo.location.latitude } onChange={ this.handleChange } />
+                                        <input type="number" name="latitude" placeholder={ photo.location.latitude } onChange={ this.handleChange } />
                 
                                         <label>longitude</label>
-                                        <input type="number" data="location" name="longitude" value={ photo.location.longitude } onChange={ this.handleChange } />
+                                        <input type="number" name="longitude" placeholder={ photo.location.longitude } onChange={ this.handleChange } />
                                         
                                         <label id="editTwoBtn">  </label>
                                         <button onClick={this.handleView}>View</button>
                                     </span>
                                     <span>
                                         <label>Shot with: </label>
-                                        <input type="text" data="exif" name="model" value={photo.exif.model} onChange={ this.handleChange } ></input>
+                                        <input type="text" name="shot" placeholder={photo.exif.model}></input>
                                         
                                         <label>Exposure: </label>
-                                        <input type="text" data="exif" name="exposure_time" value={photo.exif.exposure_time} onChange={ this.handleChange } ></input>
+                                        <input type="text" name="exposure" placeholder={photo.exif.exposure_time}></input>
                                         
                                         <label id="editTwoBtn">  </label>
-                                        <button onClick={this.handleMap} >Map</button> 
+                                        <button onClick={this.handleMap}>Map</button> 
                                     </span>
                                     <span>
                                         <label>Aperture</label>
-                                        <input type="text" data="exif" name="aperture" value={photo.exif.aperture} onChange={ this.handleChange } ></input>
+                                        <input type="text" name="aperture" placeholder={photo.exif.aperture}></input>
                                         
                                         <label>Focal length: </label>
-                                        <input type="text" data="exif" name="focal_length" value={photo.exif.focal_length} onChange={ this.handleChange } ></input>
+                                        <input type="text" name="focal" placeholder={photo.exif.focal_length}></input>
                                     </span>                           
                                 </div>
                             </form>
@@ -110,7 +109,6 @@ class EditPhotoDetails extends React.Component {
         // find the current photo in our photo array
         const id = this.props.currentPhoto;
         const photo = this.props.photos.find( p => p.id === id );
-        const name = e.currentTarget.name;
 
         // update the photo using these 3 steps ...
 
@@ -118,10 +116,7 @@ class EditPhotoDetails extends React.Component {
         const clonedPhoto = { ...photo };
 
         // 2. update value of field that just changed
-        if (!e.currentTarget.getAttribute('data'))
-            clonedPhoto[name] = e.currentTarget.value;
-        else 
-            clonedPhoto[e.currentTarget.getAttribute('data')][name] = e.currentTarget.value;
+        clonedPhoto[e.currentTarget.name] = e.currentTarget.value;
 
         // 3. tell parent (or above) to update the state for this photo
         this.props.updatePhoto(this.props.currentPhoto, clonedPhoto);
