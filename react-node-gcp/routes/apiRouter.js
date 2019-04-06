@@ -42,7 +42,7 @@ router.get('/images', cors(corsOptions), (req, resp) => {
 /* TESTING LINK: /api/image/30386ea7-d672-4460-b5df-ca0cf9759ea2 */
 /* Modify the image data in MongoDB Atlas Database */
 /* NEEDS VALID AUTH TOKEN */
-router.put('/image/:id', urlencodedParser, (req, resp) => {
+router.put('/image/:id', multer.single(), (req, resp) => {
     // console.log("REQQUERY: " + req.query.title);
     // ImageModel.findById({id: req.params.id}, req.body.firstname, {new: true}, (err, data) => {
     //     if(err) {
@@ -69,18 +69,19 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
             'location.city': req.body.city,
             'location.longitude': req.body.longitude,
             'location.latitude': req.body.latitude,
-            'exif.make': req.body.exmake,
-            'exif.model': req.body.exmodel,
-            'exif.exposure_time': req.body.exptime,
-            'exif.aperture': req.body.exaperture,
-            'exif.focal_length': req.body.exfocal,
-            'exif.iso': req.body.exiso,
+            'exif.make': req.body.make,
+            'exif.model': req.body.model,
+            'exif.exposure_time': req.body.exposure_time,
+            'exif.aperture': req.body.aperture,
+            'exif.focal_length': req.body.focal_length,
+            'exif.iso': req.body.exifiso,
 
         }, 
         function(err, data) {
             if (err) {
                 return resp.json({Error: err});
             }
+            console.log("Update Success");
             return resp.json({Message: "Success"});
         });
 });

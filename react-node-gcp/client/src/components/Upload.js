@@ -18,6 +18,7 @@ class Upload extends Component {
                 longitude: null,
                 
                 make: null,
+                model: null,
                 aperture: null,
                 exposure_time: null,
                 focal_length: null,

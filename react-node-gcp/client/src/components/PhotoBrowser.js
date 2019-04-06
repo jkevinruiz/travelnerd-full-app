@@ -59,7 +59,7 @@ class PhotoBrowser extends React.Component {
 
         let renderView = this.state.renderView;
         if (renderView === "edit")
-            return (<EditPhotoDetails changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} />);
+            return (<EditPhotoDetails updateDB={this.props.updateDB} changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} />);
         else if (renderView === "map")
             return (<MapContainer changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} />);
         else 

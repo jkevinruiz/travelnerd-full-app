@@ -1,8 +1,15 @@
 import React from 'react';
 import './EditPhotoDetails.css';
+import axios from 'axios';
 
 
 class EditPhotoDetails extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: null
+        }
+    }
 
     /**
      * Renders/Displays website elements.
@@ -93,6 +100,7 @@ class EditPhotoDetails extends React.Component {
      */
     handleView = () => {
         this.props.changeRenderView("view");
+        this.props.updateDB(this.props.currentPhoto);
     }
 
     /**
@@ -107,6 +115,13 @@ class EditPhotoDetails extends React.Component {
      * @param e - event parameter
      */
     handleChange = (e) => {
+        // set field data for updating the db
+        // let fields = {...this.state.fields};
+        // fields[e.currentTarget.name] = e.target.value;
+        // this.setState({
+        //     fields
+        // });
+
         // find the current photo in our photo array
         const id = this.props.currentPhoto;
         const photo = this.props.photos.find( p => p.id === id );
@@ -125,6 +140,32 @@ class EditPhotoDetails extends React.Component {
 
         // 3. tell parent (or above) to update the state for this photo
         this.props.updatePhoto(this.props.currentPhoto, clonedPhoto);
+
+    }
+
+    updateDB = (e) => {
+        const formData = new FormData();
+        let fields = this.state.fields;
+        for(let property in fields ) {
+            formData.append(property, fields[property]);
+        }
+        // formData.append('filename', this.props.filename.name);
+
+        console.log(fields);
+        console.log(formData.entries);
+        const config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        };
+
+        axios.put("/api/image/" + this.props.currentPhoto , formData, config)
+            .then((response) => {
+                console.log("updated image");
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     defaultImage = () => {

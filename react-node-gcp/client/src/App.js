@@ -7,6 +7,7 @@ import About from './components/About.js';
 import _ from 'lodash';
 import ImageUpload from './components/ImageUpload.js';
 import Login from './components/Login.js';
+import axios from 'axios';
 
 
 class App extends Component {
@@ -61,6 +62,7 @@ class App extends Component {
             photos={ this.state.photos } 
             updatePhoto={ this.updatePhoto }  
             addPhotoToFavorites={ this.addPhotoToFavorites }
+            updateDB={this.updateDB }
               />
            }
         />
@@ -225,6 +227,49 @@ class App extends Component {
     .then(function(content) {
       FileSaver.saveAs(content, "Favorites.zip");
     });
+  }
+
+  updateDB = (id) => {
+    let index = _.findIndex(this.state.photos, ['id', id]);
+      
+    if (index > -1) {
+        // create copy of favorites
+        const photo = this.state.photos.find ( p => p.id === id);
+        console.log(id);
+        console.log(photo);
+        console.log(photo.exif.iso);
+        const formData = new FormData();
+        formData.append('title', photo.title);
+        formData.append('description', photo.description);
+        formData.append('country', photo.location.country);
+        formData.append('city', photo.location.city);
+        formData.append('latitude', photo.location.latitude);
+        formData.append('longitude', photo.location.longitude);
+        formData.append('exifiso', photo.exif.iso);
+        formData.append('make', photo.exif.make);
+        formData.append('model', photo.exif.model);
+        formData.append('exposure_time', photo.exif.exposure_time);
+        formData.append('aperture', photo.exif.aperture);
+        formData.append('focal_length', photo.exif.focal_length);
+
+        const config = {
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        };
+        
+        axios.put("/api/image/" + id , formData, config)
+            .then((response) => {
+                console.log("updated image");
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+        // for(let property in copyPhotos) {
+        //   console.log(property, copyPhotos[property]);
+        // }
+    }
   }
 
 
