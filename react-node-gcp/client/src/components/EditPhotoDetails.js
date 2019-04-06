@@ -47,9 +47,6 @@ class EditPhotoDetails extends React.Component {
                 
                                         <label>longitude</label>
                                         <input type="number" data="location" name="longitude" value={ photo.location.longitude } onChange={ this.handleChange } />
-                                        
-                                        <label id="editTwoBtn">  </label>
-                                        <button onClick={this.handleView}>View</button>
                                     </span>
                                     <span>
                                         <label>Shot with: </label>
@@ -61,8 +58,7 @@ class EditPhotoDetails extends React.Component {
                                         <label>Exposure: </label>
                                         <input type="text" data="exif" name="exposure_time" value={photo.exif.exposure_time} onChange={ this.handleChange } ></input>
                                         
-                                        <label id="editTwoBtn">  </label>
-                                        <button onClick={this.handleMap} >Map</button> 
+
                                     </span>
                                     <span>
                                         <label>Aperture</label>
@@ -72,8 +68,12 @@ class EditPhotoDetails extends React.Component {
                                         <input type="text" data="exif" name="focal_length" value={photo.exif.focal_length} onChange={ this.handleChange } ></input>
                                     </span>                           
                                 </div>
+
                             </form>
-                            
+                            <label id="editTwoBtn">  </label>
+                                <button onClick={this.handleView}>View</button>
+                                <label id="editTwoBtn">  </label>
+                                <button onClick={this.handleMap} >Map</button> 
                             
                         </div>
                     </article>
