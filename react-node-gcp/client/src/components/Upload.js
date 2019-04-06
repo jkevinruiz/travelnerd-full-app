@@ -9,27 +9,32 @@ class Upload extends Component {
                 <HeaderApp />
                 <div className="formContainer">
                     <form className="uploadForm">
-                        <label>Title</label>
-                       <span><input type="text" name="title" placeholder="title"/> </span> 
-                        <br></br>
-                        <label>Description</label>
-                        <input type="text" name="description" placeholder="description" />
-                        <br></br>
-                        <span>
+                        <span className="fileInput">
+                            <label for="selectFile">Select File</label>
+                            <input type="file" id="selectFile"/>
+                        </span>
+                        <span className="photoInfo">
+                            <h4><strong>Image Information</strong></h4>
+                            <label>Title</label>
+                            <input type="text" name="title"/>
+                    
                             <label>City</label>
-                            <input type="text" name="city" placeholder="city"/>
+                            <input type="text" name="city"/>
 
                             <label>Country</label>
-                            <input type="text" name="country" placeholder="country"/> 
+                            <input type="text" name="country"/> 
                             
                             <label>latitude</label>
-                            <input type="text" name="latitude" placeholder="latitude"/>
+                            <input type="text" name="latitude"/>
 
                             <label>longitude</label>
-                            <input type="text" name="longitude" placeholder="longitude"/>
+                            <input type="text" name="longitude"/>
+
+                            <label>Description</label>
+                            <input id="desc" type="text" name="description" />
                         </span>
                          
-                        <span>
+                        <span className="photoEXIF">
                             <label>Camera</label>
                             <input type="text" name="camera" placeholder="camera"/>
                             
@@ -43,17 +48,13 @@ class Upload extends Component {
                             <input type="text" name="Focal Length" />
 
                             <label> Iso </label>
-                            <input type="Number" name="iso"/>
-                            
-                        </span>
-                           
-                    </form>
-                    <input type="file" id="selectFile"/>
-                </div>
-                <div className="uploadBtns">
-                    <button value="selectImage">Select Image</button>
-                    <button type="submit" value="upload">Upload</button>
-                    <button value="addNewImage">addNewImage</button>
+                            <input type="Number" name="iso"/>   
+                        </span> 
+                        <div className="uploadBtns">
+                            <button className="btn" value="addEXIFInfo">Add EXIF Info</button> 
+                            <button className="btn" type="submit" value="upload">Upload</button>
+                        </div>
+                    </form> 
                 </div>
                 </div>
                 );
