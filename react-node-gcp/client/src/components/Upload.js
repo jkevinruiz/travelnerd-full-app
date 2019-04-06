@@ -40,7 +40,7 @@ class Upload extends Component {
                             <input type="text" name="exposure" />
 
                             <label> Focal Length </label>
-                            <input type="text" name="Focal Length" />
+                            <input type="text" name="focal_length" />
 
                             <label> Iso </label>
                             <input type="Number" name="iso"/>
