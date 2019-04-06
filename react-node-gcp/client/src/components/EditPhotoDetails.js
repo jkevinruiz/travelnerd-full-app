@@ -68,13 +68,11 @@ class EditPhotoDetails extends React.Component {
                                         <input type="text" data="exif" name="focal_length" value={photo.exif.focal_length} onChange={ this.handleChange } ></input>
                                     </span>                           
                                 </div>
-
                             </form>
-                            <label id="editTwoBtn">  </label>
-                                <button onClick={this.handleView}>View</button>
-                                <label id="editTwoBtn">  </label>
-                                <button onClick={this.handleMap} >Map</button> 
-                            
+                            {/* <label id="editTwoBtn">  </label> */}
+                            <button onClick={this.handleView}>View</button>
+                            {/* <label id="editTwoBtn">  </label> */}
+                            <button onClick={this.handleMap} >Map</button> 
                         </div>
                     </article>
                 );
