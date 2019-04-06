@@ -1,28 +1,60 @@
-.uploadBtns{
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    width: 80%;
+.uploadBtns {
+    display: grid; 
+    grid-template-columns: 100%;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
+
+.btn {
+    width: 75%;
     margin: auto;
     
+}
 
+.fileInput {
+    margin: auto;
+    background-color: #FE4448;
+    width: 75%;
+    color: white;
+    border-radius: 5px;
+    height: 30px;
+    padding-top: 10px;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
+
+.description {
+    grid-column-start: 1;
+    grid-row-start: 3;
+    grid-column-end: span 2;
 }
 .uploadForm{
-    width: 65%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 10% 45% 27% 10%;
+    background-color: #28AED5;
+    width: 100%;
     margin: auto;
-    height: 750px;
-    border-radius: 25px;
+    height: 710px;
+    border-radius: 15px;
 }
-
-.uploadContainer {
-    background-color: lightgray;
-}
-
-
 
 .formContainer {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem auto 0.5rem auto;
     text-align: center; 
+    width: 50%;
+    opacity: 0.95;
+    
+}
+
+.photoInfo {
+    grid-column-start: 1;
+    padding-bottom: 0;
+    height: 400px;
+}
+.photoEXIF {
+    grid-column-start: 2;
+    
 }
 
 form.uploadForm label{
@@ -36,10 +68,13 @@ form.uploadForm input{
     margin: 0;
 }
 
-#selectFile{
-    position: relative;
-    bottom: 70px;
-    left: 100px;
+
+#selectFile {
+    display: none;
 }
 
 
+#desc {
+    padding: 75px 19%;
+    text-align: left;
+}
