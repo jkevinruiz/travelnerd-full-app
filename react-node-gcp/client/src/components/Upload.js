@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import './Upload.css';
 import HeaderApp from "./HeaderApp"
+import ImageUpload from "./ImageUpload";
 
 class Upload extends Component {
     render() {
         return (
             <div className="uploadContainer">
                 <HeaderApp />
+
                 <div className="formContainer">
+
                     <form className="uploadForm">
+                        <ImageUpload />
                         <label>Title</label>
-                       <span><input type="text" name="title" placeholder="title"/> </span> 
+                        <span><input type="text" name="title" placeholder="title"/> </span> 
                         <br></br>
                         <label>Description</label>
                         <input type="text" name="description" placeholder="description" />
@@ -34,28 +38,22 @@ class Upload extends Component {
                             <input type="text" name="camera" placeholder="camera"/>
                             
                             <label>Aperture</label>
-                            <input type="text" name="aperture"/>
+                            <input type="text" name="aperture" placeholder="longitude"/>
 
                             <label> Exposure </label>
-                            <input type="text" name="exposure" />
+                            <input type="text" name="exposure" placeholder="exposure" />
 
                             <label> Focal Length </label>
-                            <input type="text" name="Focal Length" />
+                            <input type="text" name="focal" placeholder="focal" />
 
                             <label> Iso </label>
-                            <input type="Number" name="iso"/>
-                            
+                            <input type="Number" name="iso" placeholder="iso"/>
+                            <br/>
+                            <button type="submit">addNewImage</button>   
                         </span>
-                           
                     </form>
-                    <input type="file" id="selectFile"/>
                 </div>
-                <div className="uploadBtns">
-                    <button value="selectImage">Select Image</button>
-                    <button type="submit" value="upload">Upload</button>
-                    <button value="addNewImage">addNewImage</button>
-                </div>
-                </div>
+            </div>
                 );
             }
         }
