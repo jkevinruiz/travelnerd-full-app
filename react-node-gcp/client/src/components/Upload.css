@@ -1,6 +1,8 @@
 .uploadBtns {
     display: grid; 
     grid-template-columns: 100%;
+    grid-column-start: 1;
+    grid-column-end: span 2;
 }
 
 .btn {
@@ -16,33 +18,43 @@
     border-radius: 5px;
     height: 30px;
     padding-top: 10px;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
+
+.description {
+    grid-column-start: 1;
+    grid-row-start: 3;
+    grid-column-end: span 2;
 }
 
 .uploadForm{
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 10% 45% 27% 10%;
     background-color: #28AED5;
     width: 100%;
     margin: auto;
     height: 710px;
     border-radius: 15px;
-    padding: 5px;
 }
 
 .formContainer {
     margin: 0.5rem auto 0.5rem auto;
     text-align: center; 
-    width: 25%;
+    width: 50%;
     opacity: 0.95;
     
 }
 
 .photoInfo {
+    grid-column-start: 1;
     padding-bottom: 0;
-    height: 450px;
+    height: 400px;
 }
 .photoEXIF {
-    display: none;
+    grid-column-start: 2;
+    
 }
 
 form.uploadForm label{
@@ -60,12 +72,13 @@ form.uploadForm input{
     text-align: center;
 }
 
+
 #selectFile {
     display: none;
 }
 
 
 #desc {
-    padding: 75px 50px;
+    padding: 75px 19%;
     text-align: left;
 }
