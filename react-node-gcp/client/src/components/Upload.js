@@ -69,13 +69,14 @@ class Upload extends Component {
      
                 <div className="formContainer">
                     <form className="uploadForm" onSubmit={this.onFormSubmit}>
-                        <span className="photoInfo">
-
-                            <h4><strong>Image Information</strong></h4>
-                            
-                            <label>Title</label>
-                            <input type="text" name="title" placeholder="title" onChange={this.onChange} /> 
-
+                        
+                        <label>Title</label>
+                        <span><input type="text" name="title" placeholder="title" onChange={this.onChange} /> </span> 
+                        <br></br>
+                        <label>Description</label>
+                        <input type="text" name="description" placeholder="description" onChange={this.onChange}/>
+                        <br></br>
+                        <span>
                             <label>City</label>
                             <input type="text" name="city" placeholder="city" onChange={this.onChange}/>
 
@@ -87,13 +88,9 @@ class Upload extends Component {
 
                             <label>longitude</label>
                             <input type="number" name="longitude" placeholder="longitude" onChange={this.onChange}/>
-
-                            <label>Description</label>
-                            <input id="desc" type="text" name="description" placeholder="description" onChange={this.onChange}/>
-
                         </span>
-                                                 
-                        <span className="photoEXIF">
+                         
+                        <span>
                             <label>Camera</label>
                             <input type="text" name="make" placeholder="make" onChange={this.onChange}/>
                             
@@ -112,10 +109,6 @@ class Upload extends Component {
                             <button type="submit">Add Image</button>   
                         </span>
                     </form>
-                        {/* <div className="uploadBtns">
-                            <button className="btn" value="addEXIFInfo">Add EXIF Info</button> 
-                            <button className="btn" type="submit" value="upload">Upload</button>
-                        </div> */}
                 </div>
                 );
             }

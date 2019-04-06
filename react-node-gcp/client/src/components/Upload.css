@@ -1,32 +1,16 @@
-.uploadBtns {
-    display: grid; 
-    grid-template-columns: 100%;
-}
-
-.btn {
-    width: 75%;
-    margin: auto;
-}
-
-.fileInput {
-    margin: auto;
-    background-color: #FE4448;
-    width: 75%;
-    color: white;
-    border-radius: 5px;
-    height: 30px;
-    padding-top: 10px;
-}
-
-.uploadForm{
+.uploadBtns{
     display: grid;
-    grid-template-columns: 100%;
-    background-color: #28AED5;
-    width: 100%;
+    grid-template-columns: 33% 33% 33%;
+    width: 80%;
     margin: auto;
-    height: 710px;
-    border-radius: 15px;
-    padding: 5px;
+    
+
+}
+.uploadForm{
+    width: 65%;
+    margin: auto;
+    height: 750px;
+    border-radius: 25px;
 }
 
 .uploadContainer {
@@ -36,42 +20,26 @@
 
 
 .formContainer {
-    margin: 0.5rem auto 0.5rem auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     text-align: center; 
-    width: 25%;
-    opacity: 0.95;
-    
-}
-
-.photoInfo {
-    padding-bottom: 0;
-    height: 450px;
-}
-.photoEXIF {
-    display: none;
 }
 
 form.uploadForm label{
     display: block;
+    margin-top: 0.5rem;
     margin: auto;
 }
 
 form.uploadForm input{
-    padding: 10px 50px;
-    width: 50px;
-    height: 10px;
-    margin: 2px;
-    width: 50%;
-    font: 12px;
-    text-align: center;
+    padding: 12px 30px;
+    margin: 0;
 }
 
-#selectFile {
-    display: none;
+#selectFile{
+    position: relative;
+    bottom: 70px;
+    left: 100px;
 }
 
 
-#desc {
-    padding: 75px 50px;
-    text-align: left;
-}

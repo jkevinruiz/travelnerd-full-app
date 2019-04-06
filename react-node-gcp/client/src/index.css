@@ -22,7 +22,6 @@ body {
     /* font-family: 'Raleway', sans-serif; */
     font-family: 'Courier New', Courier, monospace;
   -moz-osx-font-smoothing: grayscale;
-  background: url('https://source.unsplash.com/user/anniespratt/qyAka7W5uMY/1920x1080') top left/cover no-repeat;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -197,10 +196,6 @@ legend {
    border-radius: 1em;
 }
 
-.photoForm {
-  height: 0px;
-}
-
 .favorites {
   display: grid;
   grid-template-columns: repeat(15, 1fr);
@@ -296,22 +291,6 @@ select {
 .mapInside{
   position: relative;
 
-}
-
-.exifInfo {
-  transform: translate(11.2px, 0px);
-  opacity: 0;
-  border-radius: 2%;
-  color: black;
-  text-align: center;
-  width: 640px; 
-  height: 480px;
-  background-color: white; 
-  position: absolute;
-}
-
-.exifInfo:hover {
-  opacity: 0.6;
 }
 
 .mapDetails {
