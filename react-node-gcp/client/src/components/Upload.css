@@ -3,14 +3,14 @@
     grid-template-columns: 33% 33% 33%;
     width: 80%;
     margin: auto;
-
+    
 
 }
 .uploadForm{
     background-color: lightgray;
     width: 65%;
     margin: auto;
-    height: 450px;
+    height: 750px;
     border-radius: 25px;
 }
 
@@ -19,8 +19,6 @@
     margin-bottom: 0.5rem;
     text-align: center; 
 }
-
-
 
 form.uploadForm label{
     display: block;
@@ -31,6 +29,12 @@ form.uploadForm label{
 form.uploadForm input{
     padding: 12px 30px;
     margin: 0;
+}
+
+#selectFile{
+    position: relative;
+    bottom: 70px;
+    left: 100px;
 }
 
 
