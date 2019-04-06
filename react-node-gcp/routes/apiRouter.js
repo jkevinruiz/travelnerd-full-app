@@ -11,6 +11,10 @@ const multer = Multer({
     storage: Multer.MemoryStorage,
     fileSize: 5 * 1024 * 1024
 });
+const cors = require('cors');
+const corsOptions = {
+    origin: 'http://localhost:3000'
+}
 
 /* Provide JSON for all images */
 router.get('/images', (req, resp) => {

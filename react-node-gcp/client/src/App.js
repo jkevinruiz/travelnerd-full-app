@@ -64,7 +64,7 @@ class App extends Component {
            }
         />
         <Route path='/about' exact component={About} />
-        <Route path='/upload' exact component={Upload} />
+        <Route path='/upload' exact component={ImageUpload} />
       </div>
      
     );
