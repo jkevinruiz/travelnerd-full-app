@@ -4,6 +4,7 @@ const LoginModel = require('../models/Login.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 const Multer = require('multer');
+<<<<<<< HEAD
 const imgUpload = require('./imgUpload.js');
 
 const multer = Multer({
@@ -11,6 +12,15 @@ const multer = Multer({
     fileSize: 5 * 1024 *1024
 });
 
+=======
+// const Upload = Multer({ dest: 'public/' });
+const imgUpload = require('./ImgUpload.js');
+
+const multer = Multer({
+    storage: Multer.MemoryStorage,
+    fileSize: 5 * 1024 * 1024
+});
+>>>>>>> react-upload-test-branch
 const cors = require('cors');
 const corsOptions = {
     origin: 'http://localhost:3000'
@@ -72,7 +82,7 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
     //     });
     // });
 
-    ImageModel.updateOne( {id: req.params.id},  
+ImageModel.updateOne( {id: req.params.id},  
         {
             title: req.body.title, 
             description: req.body.description,
@@ -171,5 +181,8 @@ router.get('/logins', (req, resp) => {
 router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, (req, res) => {
     res.json({Success: "Success"});
 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> react-upload-test-branch
 module.exports = router;
