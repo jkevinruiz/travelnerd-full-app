@@ -5,7 +5,7 @@ import PhotoBrowser from './components/PhotoBrowser.js';
 import Home from './components/Home.js';
 import About from './components/About.js';
 import _ from 'lodash';
-import Upload from './components/Upload.js';
+import ImageUpload from './components/ImageUpload.js';
 import Login from './components/Login.js';
 
 
@@ -48,7 +48,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path='/upload' exact component={Upload}></Route>
+        <Route path='/upload' exact component={ImageUpload}></Route>
         <Route path='/' exact component={Home} />
         <Route path='/home' exact component={Home} />
         <Route path='/browse' exact 

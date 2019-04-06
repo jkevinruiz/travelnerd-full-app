@@ -299,6 +299,7 @@ select {
   padding: 5px;
 }
 
+
 /* Minimize/Maximize Favorites FROM https://codepen.io/peternguyen/pen/hICga/ */
 #toggleBox {
     background: var(--favorites-back);

@@ -98,9 +98,9 @@ ImageModel.updateOne( {id: req.params.id},
 
 /* Add a new image to MongoDB Atlas Database */
 /* WORKS BUT NEEDS VALID AUTH TOKEN FOR LOGIN FUNCTIONALITY*/
-router.post('/image/:id', urlencodedParser, (req, resp) => {
+router.post('/image/:id', multer.single(), (req, resp) => {
     let imageRecord = new ImageModel({
-        id: req.body.id, 
+        id: req.params.id, 
         title: req.body.title,
         description: req.body.description,
         location: {
@@ -154,6 +154,7 @@ router.post('/image/:id', urlencodedParser, (req, resp) => {
             console.log("ERROR: INSERT IS WRONG");
         } else {
             console.log(imageR.title + " Inserted on images Collection");
+            resp.json({Message: "Success"});
         }
     });    
 });
@@ -168,7 +169,7 @@ router.get('/logins', (req, resp) => {
     });
 });
 
-router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, (req, res) => {
+router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, imgUpload.uploadToGcsSquare,  (req, res) => {
     res.json({Success: "Success"});
 });
 module.exports = router;

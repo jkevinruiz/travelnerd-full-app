@@ -23,12 +23,43 @@ const gcs = new Storage({
   
     // Can optionally add a path to the gcsname below by concatenating it before the filename
     const gcsname = "/large/" + req.file.originalname;
+    const gcsname2 = "/square/" + req.file.originalname;
     const file = bucket.file(gcsname);
+    const file2 = bucket.file(gcsname2);
   
     const stream = file.createWriteStream({
       metadata: {
         contentType: req.file.mimetype,
         destination: "large"
+      }
+    });
+  
+    stream.on('error', (err) => {
+      console.log('gcp upload error');
+      req.file.cloudStorageError = err;
+      next(err);
+    });
+  
+    stream.on('finish', () => {
+      req.file.cloudStorageObject = gcsname;
+      req.file.cloudStoragePublicUrl = getPublicUrl(gcsname);
+      next();
+    });
+  
+    stream.end(req.file.buffer);
+  }
+
+  ImgUpload.uploadToGcsSquare = (req, res, next) => {
+    if(!req.file) return next();
+  
+    // Can optionally add a path to the gcsname below by concatenating it before the filename
+    const gcsname = "/square/" + req.file.originalname;
+    const file = bucket.file(gcsname);
+  
+    const stream = file.createWriteStream({
+      metadata: {
+        contentType: req.file.mimetype,
+        destination: "square"
       }
     });
   

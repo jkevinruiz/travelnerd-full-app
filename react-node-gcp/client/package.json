@@ -13,7 +13,8 @@
     "react-geolocated": "^2.4.1",
     "react-native-image-picker": "^0.28.1",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

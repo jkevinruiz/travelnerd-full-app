@@ -24,7 +24,7 @@ export class MapContainer extends React.Component {
             return (
                 <div className="mapContainer"> 
                     <div className="mapDetails">
-                        <img src={imgURL+photo.filename} alt={photo.title}/>
+                        <img src={imgURL+photo.filename} alt={photo.title} height="200" width="200"/>
                         <br></br>
                         <h2>{photo.title}</h2>
                         <p>Distance from User(KM): {this.calculateDistance(photo.location.latitude, photo.location.longitude)}</p>
