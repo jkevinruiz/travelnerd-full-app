@@ -11,6 +11,7 @@
   --border-color: #FF3B3F;
 }
 
+
 body {
   box-sizing: border-box;
   margin: 0;
@@ -134,7 +135,7 @@ button:active {
   width: 100px;
   height: 100px; 
   border-radius: 5px;
-  margin-left: 5%;
+  margin-left: 2%;
   position: absolute;
   top: 45%;
   -ms-transform: translateY(-45%);
@@ -159,7 +160,7 @@ button:active {
 .details {
   background-color: var(--details-back);
   /* padding: 0.5em; */
-  width: 100%;
+  object-fit: scale-down;
 }
 .detailsPhotoBox {
   box-sizing: border-box;
@@ -255,12 +256,18 @@ legend {
   background-color: var(--list-back);
 }
 
+#editTwoBtns{
+  margin-bottom: 25px 
+}
+
 .location {
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(15, 1fr);
   grid-auto-flow: column;
 }
+
+
 
 input {
   font-family: inherit;
@@ -276,12 +283,12 @@ select {
 }
 
 .mapContainer {
-  width: 100%;
+  width: 55%;
+  position: absolute;
 
 }
 
 .mapInside{
-  height: 50%;
   position: relative;
 
 }
