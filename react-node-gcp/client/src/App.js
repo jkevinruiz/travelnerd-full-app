@@ -6,6 +6,7 @@ import Home from './components/Home.js';
 import About from './components/About.js';
 import _ from 'lodash';
 import Upload from './components/Upload.js';
+import Login from './components/Login.js';
 
 
 class App extends Component {
@@ -65,6 +66,7 @@ class App extends Component {
            }
         />
         <Route path='/about' exact component={About} />
+        <Route path='/login' exact component={Login} />
       </div>
      
     );
