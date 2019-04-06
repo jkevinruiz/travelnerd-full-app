@@ -32,36 +32,40 @@ class EditPhotoDetails extends React.Component {
                                 <div className="location">
                                     <span>
                                         <label>City</label>
-                                        <input type="text" name="city" value={ photo.location.city } onChange={ this.handleChange } />
+                                        <input type="text" name="city" placeholder={ photo.location.city } onChange={ this.handleChange }/>
                 
                                         <label>Country</label>
-                                        <input type="text" name="country" value={ photo.location.country } onChange={ this.handleChange } />
+                                        <input type="text" name="country" placeholder={ photo.location.country } onChange={ this.handleChange } />
                                         
                                         <label>ISO</label>
-                                        <input type="number" name="iso"></input>
+                                        <input type="number" name="iso" placeholder={photo.exif.iso}></input>
                                     </span>    
                                     <span>
                                         <label>latitude</label>
-                                        <input type="number" name="latitude" value={ photo.location.latitude } onChange={ this.handleChange } />
+                                        <input type="number" name="latitude" placeholder={ photo.location.latitude } onChange={ this.handleChange } />
                 
                                         <label>longitude</label>
-                                        <input type="number" name="longitude" value={ photo.location.longitude } onChange={ this.handleChange } />
-                                        <label id="editTwoBtns">  </label>
+                                        <input type="number" name="longitude" placeholder={ photo.location.longitude } onChange={ this.handleChange } />
+                                        
+                                        <label id="editTwoBtn">  </label>
                                         <button onClick={this.handleView}>View</button>
                                     </span>
                                     <span>
                                         <label>Shot with: </label>
-                                        <input type="text" name="shot" ></input>
+                                        <input type="text" name="shot" placeholder={photo.exif.model}></input>
+                                        
                                         <label>Exposure: </label>
-                                        <input type="text" name="exposure"></input>
-                                        <label id="editTwoBtns">  </label>
+                                        <input type="text" name="exposure" placeholder={photo.exif.exposure_time}></input>
+                                        
+                                        <label id="editTwoBtn">  </label>
                                         <button onClick={this.handleMap}>Map</button> 
                                     </span>
                                     <span>
-                                    <label>Aperture</label>
-                                        <input type="text" name="aperture"></input>
+                                        <label>Aperture</label>
+                                        <input type="text" name="aperture" placeholder={photo.exif.aperture}></input>
+                                        
                                         <label>Focal length: </label>
-                                        <input type="number" name="focal"></input>
+                                        <input type="text" name="focal" placeholder={photo.exif.focal_length}></input>
                                     </span>                           
                                 </div>
                             </form>

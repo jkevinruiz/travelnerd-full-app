@@ -11,6 +11,7 @@
   --border-color: #FF3B3F;
 }
 
+
 body {
   box-sizing: border-box;
   margin: 0;
@@ -159,7 +160,7 @@ button:active {
 .details {
   background-color: var(--details-back);
   /* padding: 0.5em; */
-  width: 180%;
+  object-fit: scale-down;
 }
 .detailsPhotoBox {
   box-sizing: border-box;
@@ -265,6 +266,8 @@ legend {
   grid-template-columns: repeat(15, 1fr);
   grid-auto-flow: column;
 }
+
+
 
 input {
   font-family: inherit;
