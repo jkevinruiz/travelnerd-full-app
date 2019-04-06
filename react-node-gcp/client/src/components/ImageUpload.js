@@ -44,11 +44,11 @@ class ImageUpload extends React.Component {
             <div>
                 <HeaderApp />
                 <div className="uploadContainer">
-                    <div className="formContainer">            
+                    <div className="formContainer fileInput" >            
                         <form onSubmit={this.onFormSubmit}>
                             <h1>Image Upload</h1>
                             <input type="file" name="image" onChange= {this.onChange} />
-                            <button type="submit">Upload</button>
+                            <button className="btn" type="submit">Upload</button>
                         </form>
                         <Upload filename={this.state.file} />
                     </div>

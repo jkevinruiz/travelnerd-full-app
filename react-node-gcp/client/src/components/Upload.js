@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './Upload.css';
-
-import ImageUpload from "./ImageUpload";
 import axios from 'axios';
 
 const uuidv4 = require('uuid/v4');

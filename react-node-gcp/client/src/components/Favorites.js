@@ -1,6 +1,5 @@
 import React from 'react';
 import FavoriteItem from './FavoriteItem.js';
-import { Link } from 'react-router-dom';
 
 class Favorites extends React.Component {
 
