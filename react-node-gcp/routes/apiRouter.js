@@ -4,6 +4,7 @@ const LoginModel = require('../models/Login.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 const Multer = require('multer');
+<<<<<<< HEAD
 const imgUpload = require('./imgUpload.js');
 
 const multer = Multer({
@@ -11,6 +12,19 @@ const multer = Multer({
     fileSize: 5 * 1024 *1024
 });
 
+=======
+// const Upload = Multer({ dest: 'public/' });
+const imgUpload = require('./ImgUpload.js');
+
+const multer = Multer({
+    storage: Multer.MemoryStorage,
+    fileSize: 5 * 1024 * 1024
+});
+>>>>>>> react-upload-test-branch
+const cors = require('cors');
+const corsOptions = {
+    origin: 'http://localhost:3000'
+}
 
 /* Provide JSON for all images */
 router.get('/images', (req, resp) => {
@@ -25,16 +39,25 @@ router.get('/images', (req, resp) => {
 
 /* Provide JSON for the specified image id */
 /* MUST SUPPLY VALID API KEY??? FOUND IN users.json/logins.json dataset*/
-router.get('/image/:id', (req, resp) => {
-    ImageModel.find({id: req.params.id}, (err, data) => {
+// router.get('/image/:id', (req, resp) => {
+//     ImageModel.find({id: req.params.id}, (err, data) => {
+//         if (err) {
+//             resp.json({Error: 'Image not found'});
+//         } else {
+//             console.log(data);
+//             resp.json(data);
+//         }
+//     });
+// });
+router.get('/images', cors(corsOptions), (req, resp) => {
+    ImageModel.find({}, (err, data) => {
         if (err) {
-            resp.json({Error: 'Image not found'});
+            resp.json({ Error: 'Images not found'});
         } else {
-            console.log(data);
             resp.json(data);
         }
     });
-});
+ })
 
 /* PUT REQUEST NOT WORKING YET */
 /* TESTING LINK: /api/image/30386ea7-d672-4460-b5df-ca0cf9759ea2 */
@@ -59,7 +82,7 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
     //     });
     // });
 
-    ImageModel.updateOne( {id: req.params.id},  
+ImageModel.updateOne( {id: req.params.id},  
         {
             title: req.body.title, 
             description: req.body.description,
@@ -158,5 +181,8 @@ router.get('/logins', (req, resp) => {
 router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, (req, res) => {
     res.json({Success: "Success"});
 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> react-upload-test-branch
 module.exports = router;

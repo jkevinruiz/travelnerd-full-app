@@ -1,6 +1,7 @@
 import React from 'react';
 import './EditPhotoDetails.css';
 
+
 class EditPhotoDetails extends React.Component {
 
     /**
@@ -8,19 +9,20 @@ class EditPhotoDetails extends React.Component {
      */
     render() {
         const id = this.props.currentPhoto;
-        const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/medium/`;
+        const imgURL = `https://storage.googleapis.com/project-pixels/large/`;
 
         // just in case, handle missing photos in the props
         if ( this.props.photos.length > 0 ) {
             // find the object with this id
             const photo = this.props.photos.find( p => p.id === id );
             if (photo != null) {
+                console.log(photo);
                 return(
                     <article className="details">
                         <div className="detailsPhotoBox">
                             <form className="photoForm">
                                 {/* <legend>Edit Photo Details</legend> */}
-                                <img src={imgURL+photo.path} alt={ photo.title } />
+                                <img src={imgURL+photo.filename} alt={ photo.title } />
                                 <br></br>
                                 <label>Title</label>
                                 <input type="text" name="title" value={ photo.title } onChange={ this.handleChange } />
@@ -31,23 +33,46 @@ class EditPhotoDetails extends React.Component {
                                 <div className="location">
                                     <span>
                                         <label>City</label>
-                                        <input type="text" name="city" value={ photo.city } onChange={ this.handleChange } />
+                                        <input type="text" data="location" name="city" value={ photo.location.city } onChange={ this.handleChange }/>
                 
                                         <label>Country</label>
-                                        <input type="text" name="country" value={ photo.country } onChange={ this.handleChange } />
+                                        <input type="text" data="location" name="country" value={ photo.location.country } onChange={ this.handleChange } />
+                                        
+                                        <label>ISO</label>
+                                        <input type="number" data="exif" name="iso" value={photo.exif.iso} onChange={ this.handleChange } ></input>
                                     </span>    
                                     <span>
                                         <label>latitude</label>
-                                        <input type="text" name="latitude" value={ photo.latitude } onChange={ this.handleChange } />
+                                        <input type="number" data="location" name="latitude" value={ photo.location.latitude } onChange={ this.handleChange } />
                 
                                         <label>longitude</label>
-                                        <input type="text" name="longitude" value={ photo.longitude } onChange={ this.handleChange } />
+                                        <input type="number" data="location" name="longitude" value={ photo.location.longitude } onChange={ this.handleChange } />
+                                        
+                                        <label id="editTwoBtn">  </label>
+                                        <button onClick={this.handleView}>View</button>
+                                    </span>
+                                    <span>
+                                        <label>Shot with: </label>
+                                        <input type="text" data="exif" name="model" value={photo.exif.model} onChange={ this.handleChange } ></input>
+                                        
+                                        <label>Exposure: </label>
+                                        <input type="text" data="exif" name="exposure_time" value={photo.exif.exposure_time} onChange={ this.handleChange } ></input>
+                                        
+                                        <label id="editTwoBtn">  </label>
+                                        <button onClick={this.handleMap} >Map</button> 
+                                    </span>
+                                    <span>
+                                        <label>Aperture</label>
+                                        <input type="text" data="exif" name="aperture" value={photo.exif.aperture} onChange={ this.handleChange } ></input>
+                                        
+                                        <label>Focal length: </label>
+                                        <input type="text" data="exif" name="focal_length" value={photo.exif.focal_length} onChange={ this.handleChange } ></input>
                                     </span>                           
                                 </div>
                             </form>
                             <br></br>
-                            <button onClick={this.handleView}>View</button>
-                            <button onClick={this.handleMap}>Map</button>
+                            
+                            
                         </div>
                     </article>
                 );
@@ -85,6 +110,7 @@ class EditPhotoDetails extends React.Component {
         // find the current photo in our photo array
         const id = this.props.currentPhoto;
         const photo = this.props.photos.find( p => p.id === id );
+        const name = e.currentTarget.name;
 
         // update the photo using these 3 steps ...
 
@@ -92,10 +118,17 @@ class EditPhotoDetails extends React.Component {
         const clonedPhoto = { ...photo };
 
         // 2. update value of field that just changed
-        clonedPhoto[e.currentTarget.name] = e.currentTarget.value;
+        if (!e.currentTarget.getAttribute('data'))
+            clonedPhoto[name] = e.currentTarget.value;
+        else 
+            clonedPhoto[e.currentTarget.getAttribute('data')][name] = e.currentTarget.value;
 
         // 3. tell parent (or above) to update the state for this photo
         this.props.updatePhoto(this.props.currentPhoto, clonedPhoto);
+    }
+
+    defaultImage = () => {
+        this.props.defaultImage();
     }
 }
 
