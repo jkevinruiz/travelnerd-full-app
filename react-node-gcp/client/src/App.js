@@ -86,12 +86,20 @@ class App extends Component {
 
     // replace photo fields with edited values
     photoToReplace.title = photo.title;
+    photoToReplace.description = photo.description;
+
     photoToReplace.location.city = photo.location.city;
     photoToReplace.location.country = photo.location.country;
-    photoToReplace.description = photo.description;
     photoToReplace.location.latitude = photo.location.latitude;
     photoToReplace.location.longitude = photo.location.longitude;
-
+    
+    photoToReplace.exif.make = photo.exif.make;
+    photoToReplace.exif.model = photo.exif.model;
+    photoToReplace.exif.exposure_time = photo.exif.exposure_time;
+    photoToReplace.exif.aperture = photo.exif.aperture;
+    photoToReplace.exif.focal_length = photo.exif.focal_length;
+    photoToReplace.exif.iso = photo.exif.iso;
+    
     // update state
     this.setState( { photos: copyPhotos } );
   }

@@ -53,6 +53,9 @@ class EditPhotoDetails extends React.Component {
                                     </span>
                                     <span>
                                         <label>Shot with: </label>
+                                        <input type="text" data="exif" name="make" value={photo.exif.make} onChange={ this.handleChange } ></input>
+
+                                        <label>Model</label>
                                         <input type="text" data="exif" name="model" value={photo.exif.model} onChange={ this.handleChange } ></input>
                                         
                                         <label>Exposure: </label>
@@ -70,7 +73,6 @@ class EditPhotoDetails extends React.Component {
                                     </span>                           
                                 </div>
                             </form>
-                            <br></br>
                             
                             
                         </div>

@@ -92,6 +92,9 @@ class Upload extends Component {
                             <label>Camera</label>
                             <input type="text" name="make" placeholder="make" onChange={this.onChange}/>
                             
+                            <label>Model</label>
+                            <input type="text" name="model" placeholder="model" onChange={this.onChange}/>
+
                             <label>Aperture</label>
                             <input type="text" name="aperture" placeholder="aperture" onChange={this.onChange}/>
 
