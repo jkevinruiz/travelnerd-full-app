@@ -44,9 +44,11 @@ class Upload extends Component {
 
                             <label> Iso </label>
                             <input type="Number" name="iso"/>
+                            
                         </span>
                            
                     </form>
+                    <input type="file" id="selectFile"/>
                 </div>
                 <div className="uploadBtns">
                     <button value="selectImage">Select Image</button>

@@ -31,4 +31,10 @@ form.uploadForm input{
     margin: 0;
 }
 
+#selectFile{
+    position: relative;
+    bottom: 70px;
+    left: 100px;
+}
+
 
