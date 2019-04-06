@@ -196,6 +196,10 @@ legend {
    border-radius: 1em;
 }
 
+.photoForm {
+  height: 0px;
+}
+
 .favorites {
   display: grid;
   grid-template-columns: repeat(15, 1fr);
@@ -291,6 +295,36 @@ select {
 .mapInside{
   position: relative;
 
+}
+/* #delete {
+  transform: translate(-6px, -179px);
+  opacity: 0;
+  width: 170px;
+  height: 170px;
+  
+  color: black;
+  border-radius: 0px;
+  font-size: 32px;
+  
+}
+
+#delete:hover {
+  opacity: 0.6; 
+} */
+.exifInfo {
+  transform: translate(11.2px, 0px);
+  opacity: 0;
+  border-radius: 2%;
+  color: black;
+  text-align: center;
+  width: 640px; 
+  height: 480px;
+  background-color: white; 
+  position: absolute;
+}
+
+.exifInfo:hover {
+  opacity: 0.6;
 }
 
 .mapDetails {
