@@ -17,6 +17,9 @@ const HeaderMenu = function (props) {
             <Link to="/about">
                 <button>About</button>
             </Link>
+            <Link to="/upload">
+                <button>Upload</button>
+            </Link>
             <Link to="/login"> 
                 <button>Login</button>
             </Link>
