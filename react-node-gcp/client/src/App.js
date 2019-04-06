@@ -24,10 +24,17 @@ class App extends Component {
     }
 
     try {
-      const url = "https://randyconnolly.com/funwebdev/services/travel/images.php";
+      // const url = "https://randyconnolly.com/funwebdev/services/travel/images.php";
+      // const response = await fetch(url);
+      // const jsonData = await response.json();
+      // this.setState( { photos: jsonData, temp: jsonData } );
+      //const url = "https://randyconnolly.com/funwebdev/services/travel/images.php"
+	    const url = "/api/images";
       const response = await fetch(url);
-      const jsonData = await response.json();
-      this.setState( { photos: jsonData, temp: jsonData } );
+      const photoJson = await response.json();
+      console.log(photoJson);
+
+      this.setState({photos: photoJson, temp: photoJson});
     }
     catch (error) {
       console.error(error);
@@ -57,6 +64,7 @@ class App extends Component {
            }
         />
         <Route path='/about' exact component={About} />
+        <Route path='/upload' exact component={Upload} />
       </div>
      
     );
@@ -77,11 +85,11 @@ class App extends Component {
 
     // replace photo fields with edited values
     photoToReplace.title = photo.title;
-    photoToReplace.city = photo.city;
-    photoToReplace.country = photo.country;
+    photoToReplace.location.city = photo.location.city;
+    photoToReplace.location.country = photo.location.country;
     photoToReplace.description = photo.description;
-    photoToReplace.latitude = photo.latitude;
-    photoToReplace.longitude = photo.longitude;
+    photoToReplace.location.latitude = photo.location.latitude;
+    photoToReplace.location.longitude = photo.location.longitude;
 
     // update state
     this.setState( { photos: copyPhotos } );
@@ -181,7 +189,7 @@ class App extends Component {
     const JSZipUtils = require('jszip-utils');
     const FileSaver = require("file-saver");
     const zip = new JSZip();
-    const url = "https://storage.googleapis.com/funwebdev-3rd-travel/large/";
+    const url = "https://storage.googleapis.com/project-pixels/large/";
     const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 
@@ -199,8 +207,8 @@ class App extends Component {
 
     // iterates through favorites array and adds each image to zip
     for(let img of this.state.favorites) {
-      console.log(proxy+url+img.path);
-      zip.file(img.title+".jpg", image(proxy+url + img.path), {binary:true} );
+      console.log(proxy+url+img.filename);
+      zip.file(img.title+".jpg", image(proxy + url + img.filename), {binary:true} );
     }
 
     // saves images as zip

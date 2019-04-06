@@ -47,11 +47,12 @@ class PhotoThumb extends React.Component {
         this.props.changeRenderView("map");
     }
 
+
     /**
      * Renders/Displays website elements.
      */
     render() {
-        const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/square-medium/${ this.props.photo.path }`;
+        const imgURL = `https://storage.googleapis.com/project-pixels/square/${ this.props.photo.filename }`;
     
         return (
             <div className="photoBox" onClick= { this.handleViewClick }>
@@ -62,11 +63,12 @@ class PhotoThumb extends React.Component {
                 <div className="photoBoxDetails">
                     <button className="close" onClick={this.handleRemovePhoto} >X</button>
                     <h3>{ this.props.photo.title }</h3>
-                    <p>{ this.props.photo.city  }, { this.props.photo.country  }</p>
+                    {/* {console.log(this.props.photo.location.city)} */}
+                    <p>{ this.props.photo.location.city }, { this.props.photo.location.country  }</p>
                     <button onClick={ this.handleView } >View</button>
                     <button onClick={ this.handleFavorites}> ❤ </button>
                     <button onClick={ this.handleMap}>Map</button>
-                    <button onClick={ this.handleEdit}>Edit</button>              
+                    <button onClick={ this.handleEdit}>Edit</button>
                 </div>
             </div>
         );

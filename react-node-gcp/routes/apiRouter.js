@@ -25,16 +25,25 @@ router.get('/images', (req, resp) => {
 
 /* Provide JSON for the specified image id */
 /* MUST SUPPLY VALID API KEY??? FOUND IN users.json/logins.json dataset*/
-router.get('/image/:id', (req, resp) => {
-    ImageModel.find({id: req.params.id}, (err, data) => {
+// router.get('/image/:id', (req, resp) => {
+//     ImageModel.find({id: req.params.id}, (err, data) => {
+//         if (err) {
+//             resp.json({Error: 'Image not found'});
+//         } else {
+//             console.log(data);
+//             resp.json(data);
+//         }
+//     });
+// });
+router.get('/images', cors(corsOptions), (req, resp) => {
+    ImageModel.find({}, (err, data) => {
         if (err) {
-            resp.json({Error: 'Image not found'});
+            resp.json({ Error: 'Images not found'});
         } else {
-            console.log(data);
             resp.json(data);
         }
     });
-});
+ })
 
 /* PUT REQUEST NOT WORKING YET */
 /* TESTING LINK: /api/image/30386ea7-d672-4460-b5df-ca0cf9759ea2 */
