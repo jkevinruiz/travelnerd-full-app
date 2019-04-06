@@ -1,7 +1,11 @@
+
+// Credit to
 // https://medium.com/@mahesh_joshi/reactjs-nodejs-upload-image-how-to-upload-image-using-reactjs-and-nodejs-multer-918dc66d304c
-// Working
 import React from 'react';
+import Upload from './Upload';
+import HeaderApp from "./HeaderApp"
 const axios = require('axios');
+
 
 class ImageUpload extends React.Component {
     constructor(props) {
@@ -28,6 +32,8 @@ class ImageUpload extends React.Component {
                 alert("The file is successfully uploaded");
             }).catch((error) => {
         });
+
+        
     }
     onChange(e) {
         this.setState({file:e.target.files[0]});
@@ -35,11 +41,21 @@ class ImageUpload extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.onFormSubmit}>
-                <h1>File Upload</h1>
-                <input type="file" name="image" onChange= {this.onChange} />
-                <button type="submit">Upload</button>
-            </form>
+            <div>
+                <HeaderApp />
+                <div className="uploadContainer">
+                    <div className="formContainer fileInput" >            
+                        <form onSubmit={this.onFormSubmit}>
+                            <h1>Image Upload</h1>
+                            <input type="file" name="image" onChange= {this.onChange} />
+                            <button className="btn" type="submit">Upload</button>
+                        </form>
+                        <Upload filename={this.state.file} />
+                    </div>
+                </div>
+            </div>
+            
+
         )
         }
 }

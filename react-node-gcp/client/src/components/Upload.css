@@ -8,8 +8,8 @@
 .btn {
     width: 75%;
     margin: auto;
+    
 }
-
 .fileInput {
     margin: auto;
     background-color: #FE4448;
@@ -27,7 +27,6 @@
     grid-row-start: 3;
     grid-column-end: span 2;
 }
-
 .uploadForm{
     display: grid;
     grid-template-columns: 50% 50%;
@@ -59,17 +58,13 @@
 
 form.uploadForm label{
     display: block;
+    margin-top: 0.5rem;
     margin: auto;
 }
 
 form.uploadForm input{
-    padding: 10px 50px;
-    width: 50px;
-    height: 10px;
-    margin: 2px;
-    width: 50%;
-    font: 12px;
-    text-align: center;
+    padding: 12px 30px;
+    margin: 0;
 }
 
 

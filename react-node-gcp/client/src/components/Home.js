@@ -20,8 +20,8 @@ class Home extends React.Component {
                         <Link to='/about'>
                             <button>About</button>
                         </Link>
-                        <Link to='/upload'>
-                            <button>Upload</button>
+                        <Link to='/login'>
+                            <button>Login</button>
                         </Link>
                     </p>
                 </div>

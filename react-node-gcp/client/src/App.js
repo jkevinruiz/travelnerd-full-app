@@ -5,7 +5,7 @@ import PhotoBrowser from './components/PhotoBrowser.js';
 import Home from './components/Home.js';
 import About from './components/About.js';
 import _ from 'lodash';
-import Upload from './components/Upload.js';
+import ImageUpload from './components/ImageUpload.js';
 import Login from './components/Login.js';
 
 
@@ -48,7 +48,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path='/upload' exact component={Upload}></Route>
+        <Route path='/upload' exact component={ImageUpload}></Route>
         <Route path='/' exact component={Home} />
         <Route path='/home' exact component={Home} />
         <Route path='/browse' exact 
@@ -61,7 +61,6 @@ class App extends Component {
             photos={ this.state.photos } 
             updatePhoto={ this.updatePhoto }  
             addPhotoToFavorites={ this.addPhotoToFavorites }
-
               />
            }
         />
@@ -78,7 +77,6 @@ class App extends Component {
    * @param photo - input data associated with 
    */
   updatePhoto = (id, photo) => {
-    console.log("updating details");
     // Create a deep clone of photo array from state.
     // We will use a lodash function for that task.
     const copyPhotos = cloneDeep(this.state.photos);
@@ -88,9 +86,9 @@ class App extends Component {
 
     // replace photo fields with edited values
     photoToReplace.title = photo.title;
-    photoToReplace.description = photo.description;
     photoToReplace.location.city = photo.location.city;
     photoToReplace.location.country = photo.location.country;
+    photoToReplace.description = photo.description;
     photoToReplace.location.latitude = photo.location.latitude;
     photoToReplace.location.longitude = photo.location.longitude;
 

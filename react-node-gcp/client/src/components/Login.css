@@ -3,18 +3,16 @@
     align-content: center;
     background-color: white;
      position: absolute;
-    left: 400px;
-    top: 80px;
-    width: 58%;
-    height: 85%;
+    left: 300px;
+    top: 100px;
+    width: 70%;
+    height: 80%;
     border-radius: 35px;
     background: url('./images/randyForWeb3.jpg');
-    background-size: cover;
+    background-size: cover ;
     background-repeat: no-repeat;
 
-
 }
-
 
 .loginBox {
     position: relative;

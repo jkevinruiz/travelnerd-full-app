@@ -4,41 +4,30 @@ const LoginModel = require('../models/Login.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 const Multer = require('multer');
-// const Upload = Multer({ dest: 'public/' });
-const imgUpload = require('./ImgUpload.js');
+const imgUpload = require('./imgUpload.js');
 
 const multer = Multer({
     storage: Multer.MemoryStorage,
-    fileSize: 5 * 1024 * 1024
+    fileSize: 5 * 1024 *1024
 });
+
 const cors = require('cors');
 const corsOptions = {
     origin: 'http://localhost:3000'
 }
 
-/* Provide JSON for all images */
-router.get('/images', (req, resp) => {
-    ImageModel.find({}, (err, data) => {
+/* Provide JSON for specified image id */
+/* MUST SUPPLY VALID API KEY???*/
+router.get('/image/:id', (req, resp) => {
+    ImageModel.find({id: req.params.id}, (err, data) => {
         if (err) {
-            resp.json({ Error: 'Images not found'});
+            resp.json({ Error: 'Image not found'});
         } else {
             resp.json(data);
         }
     });
 });
 
-/* Provide JSON for the specified image id */
-/* MUST SUPPLY VALID API KEY??? FOUND IN users.json/logins.json dataset*/
-// router.get('/image/:id', (req, resp) => {
-//     ImageModel.find({id: req.params.id}, (err, data) => {
-//         if (err) {
-//             resp.json({Error: 'Image not found'});
-//         } else {
-//             console.log(data);
-//             resp.json(data);
-//         }
-//     });
-// });
 router.get('/images', cors(corsOptions), (req, resp) => {
     ImageModel.find({}, (err, data) => {
         if (err) {
@@ -72,7 +61,7 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
     //     });
     // });
 
-ImageModel.updateOne( {id: req.params.id},  
+    ImageModel.updateOne( {id: req.params.id},  
         {
             title: req.body.title, 
             description: req.body.description,
@@ -98,9 +87,9 @@ ImageModel.updateOne( {id: req.params.id},
 
 /* Add a new image to MongoDB Atlas Database */
 /* WORKS BUT NEEDS VALID AUTH TOKEN FOR LOGIN FUNCTIONALITY*/
-router.post('/image/:id', urlencodedParser, (req, resp) => {
+router.post('/image/:id', multer.single(), (req, resp) => {
     let imageRecord = new ImageModel({
-        id: req.body.id, 
+        id: req.params.id, 
         title: req.body.title,
         description: req.body.description,
         location: {
@@ -154,6 +143,7 @@ router.post('/image/:id', urlencodedParser, (req, resp) => {
             console.log("ERROR: INSERT IS WRONG");
         } else {
             console.log(imageR.title + " Inserted on images Collection");
+            resp.json({Message: "Success"});
         }
     });    
 });
@@ -168,7 +158,8 @@ router.get('/logins', (req, resp) => {
     });
 });
 
-router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, (req, res) => {
+router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, imgUpload.uploadToGcsSquare,  (req, res) => {
     res.json({Success: "Success"});
 });
+
 module.exports = router;

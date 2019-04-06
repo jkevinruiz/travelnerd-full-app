@@ -1,6 +1,5 @@
 import React from 'react';
 import FavoriteItem from './FavoriteItem.js';
-import { Link } from 'react-router-dom';
 
 class Favorites extends React.Component {
 
@@ -17,7 +16,6 @@ class Favorites extends React.Component {
                         <div className="label">
                             <p>❤ Favorites</p>
                             <button onClick={this.handleDownload}>Download</button>
-                            <Link to='/upload'><button>Upload</button> </Link>
                         </div>
                         { this.props.favorites.map ( (p) => <FavoriteItem removeFav={this.props.removeFav} favorites={p} key={p.id} /> )}
                     </div>
@@ -27,9 +25,10 @@ class Favorites extends React.Component {
     }
 
     handleDownload = () => {
-        if (this.props.favorites.length !== 0)
-            {console.log(this.props.favorites.length)}
+        if (this.props.favorites.length !== 0) {
+            console.log(this.props.favorites.length)
             this.props.downloadFavorites();
+        }
     }
 }
 
