@@ -7,12 +7,17 @@
 
 }
 .uploadForm{
-    background-color: lightgray;
     width: 65%;
     margin: auto;
     height: 750px;
     border-radius: 25px;
 }
+
+.uploadContainer {
+    background-color: lightgray;
+}
+
+
 
 .formContainer {
     margin-top: 0.5rem;
