@@ -31,10 +31,10 @@ class Upload extends Component {
                             <label>Country</label>
                             <input type="text" name="country"/> 
                             
-                            <label>latitude</label>
+                            <label>Latitude</label>
                             <input type="text" name="latitude"/>
 
-                            <label>longitude</label>
+                            <label>Longitude</label>
                             <input type="text" name="longitude"/>
                         </span>
                         <span className="description">
@@ -55,7 +55,7 @@ class Upload extends Component {
                             <label> Focal Length </label>
                             <input type="text" name="Focal Length" />
 
-                            <label> Iso </label>
+                            <label> ISO </label>
                             <input type="Number" name="iso"/>   
                         </span> 
                         <div className="uploadBtns">
