@@ -4,14 +4,17 @@
 import React from 'react';
 import Upload from './Upload';
 import HeaderApp from "./HeaderApp"
+import './ImageUpload.css';
 const axios = require('axios');
+
 
 
 class ImageUpload extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
-            file: null
+            file: null,
+            fileChosen: false
         };
         this.onFormSubmit = this.onFormSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -33,10 +36,15 @@ class ImageUpload extends React.Component {
             }).catch((error) => {
         });
 
+        this.setState({fileChosen: true}); 
+
         
     }
     onChange(e) {
         this.setState({file:e.target.files[0]});
+        document.querySelector('.btn').style.display = "block";
+        document.querySelector('#fileName').innerHTML = `<strong>${e.target.files[0].name}</strong>`;
+        document.querySelector('#fileName').style.color = "black";
     }
 
     render() {
@@ -45,17 +53,17 @@ class ImageUpload extends React.Component {
                 <HeaderApp />
                 <div className="uploadContainer">
                     <div className="formContainer fileInput" >            
-                        <form onSubmit={this.onFormSubmit}>
-                            <h1>Image Upload</h1>
-                            <input type="file" name="image" onChange= {this.onChange} />
+                        <form onSubmit={this.onFormSubmit} className="formStyle">
+                            <input type="file" name="image" onChange={this.onChange} id="fileUpload" accept="image/*"/>
+                            <label for="fileUpload" id="label">Select an Image to Upload</label>
+                            <p id="fileName"></p>
                             <button className="btn" type="submit">Upload</button>
                         </form>
-                        <Upload filename={this.state.file} />
+                        {/* <Upload filename={this.state.file} /> */}
+                        {this.state.fileChosen && <Upload filename={this.state.file} />}
                     </div>
                 </div>
             </div>
-            
-
         )
         }
 }
