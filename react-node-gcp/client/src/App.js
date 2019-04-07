@@ -39,6 +39,17 @@ class App extends Component {
       this.setState({favorites: this.getLocalStorageFav()});
     }
 
+    if (this.getLoginSession() !== null) {
+      console.log(this.getLoginSession());
+      const session = this.getLoginSession();
+      this.setState({
+        loggedIn: session.loggedIn,
+        email: session.email,
+        apiKey: session.apiKey,
+        userID: session.userID
+      })
+    }
+
     try {
       // const url = "https://randyconnolly.com/funwebdev/services/travel/images.php";
       // const response = await fetch(url);
@@ -58,6 +69,7 @@ class App extends Component {
   }
 
   logout = () => {
+    localStorage.removeItem("session_login");
     this.setState({
       loggedIn: false,
       email: null,
@@ -103,7 +115,7 @@ class App extends Component {
         <Route path='/upload' exact
           render={ (props) => (
             this.state.loggedIn ? (
-              <ImageUpload userEmail={ this.state.email } />
+              <ImageUpload userEmail={ this.state.email } userID={ this.state.userID} />
             ) : (
               <Redirect to="/login"/>
             )
@@ -134,7 +146,7 @@ class App extends Component {
         <Route
           path='/login'
           render={() =>
-            <Login updateUser={this.updateUser}/>
+            <Login updateUser={this.updateUser} loginLocalStorage={this.loginLocalStorage}/>
           }
         />
         <Route path='/register' exact component={Register} />
@@ -185,9 +197,11 @@ class App extends Component {
     const photo = this.state.photos.find ( p => p.id === id);
     console.log(photo);
 
+    // find photo in favorites
+
     // check if item is already in favorite
     // if not add it
-    if (!this.state.favorites.find (p => p.id === id) ) {
+    if (!this.state.favorites.find (p => p.id === id) && photo.user.userid !== this.state.usedID ) {
       // create copy of favorites
       const copyFavorites = cloneDeep(this.state.favorites);
 
@@ -241,6 +255,14 @@ class App extends Component {
         // update local storage
         this.updateLocalStorage(copyFav);
     }
+  }
+
+  loginLocalStorage = (data) => {
+    localStorage.setItem('session_login', JSON.stringify(data));
+  }
+
+  getLoginSession = () => {
+    return JSON.parse(localStorage.getItem('session_login'));
   }
 
   /**

@@ -46,6 +46,14 @@ class Login extends Component {
                userID: response.data.user.id
            })
 
+           // create a session storage
+           this.props.loginLocalStorage({
+            loggedIn: true,
+            email: response.data.user.email,
+            apikey: response.data.user.apikey,
+            userID: response.data.user.id
+           })
+
            // update the state to redirect to home
            console.log("updating redirectTo");
            this.setState({

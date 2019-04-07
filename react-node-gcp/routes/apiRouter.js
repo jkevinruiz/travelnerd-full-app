@@ -113,7 +113,7 @@ router.post('/image/:id', multer.single(), (req, resp) => {
             longitude: req.body.longitude
         },
         user: {
-            userid: req.body.userid,
+            userid: req.body.userID,
             picture: {
                 large: req.body.large,
                 thumbnail: req.body.thumbnail
@@ -152,6 +152,7 @@ router.post('/image/:id', multer.single(), (req, resp) => {
     imageRecord.save((err, imageR) => {
         if (err) {
             console.log("ERROR: INSERT IS WRONG");
+            resp.json({Error: err});
         } else {
             console.log(imageR.title + " Inserted on images Collection");
             resp.json({Message: "Success"});

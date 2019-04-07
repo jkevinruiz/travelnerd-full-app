@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("../config/auth")
 const uuid = require("uuid/v4");
+const randomInt = require('random-int');
 
 // load input validation
 const validateRegisterInput = require("../validation/register");
@@ -32,7 +33,7 @@ router.post('/register', function(req, res) {
       details: {firstname: req.body.name},
       email: req.body.email,
       password_bcrypt: req.body.password,
-      id: uuid(),
+      id: randomInt(15, 15000),
       apikey: uuid()
     });
 

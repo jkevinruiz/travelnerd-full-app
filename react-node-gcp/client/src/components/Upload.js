@@ -30,29 +30,34 @@ class Upload extends Component {
 
     onFormSubmit = (e) => {
         e.preventDefault();
-
-        const formData = new FormData();
-        let fields = this.state.fields;
-        for(let property in fields ) {
-            formData.append(property, fields[property]);
-        }
-        formData.append('filename', this.props.filename.name);
-
-        console.log(fields);
-        console.log(formData.entries);
-        const config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+        if (this.props.filename !== null) {
+            const formData = new FormData();
+            let fields = this.state.fields;
+            for(let property in fields ) {
+                formData.append(property, fields[property]);
             }
-        };
+            formData.append('filename', this.props.filename.name);
+            console.log(this.props.userID);
+            formData.append('userID', this.props.userID);
 
-        axios.post("/api/image/" + uuidv4(), formData, config)
-            .then((response) => {
-                alert("Added image to database");
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+            // console.log(fields);
+            // console.log(formData.entries);
+            const config = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            };
+
+            axios.post("/api/image/" + uuidv4(), formData, config)
+                .then((response) => {
+                    alert("Added image to database");
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        } else {
+            alert("Please select and upload an image before adding image");
+        }
     }
 
     onChange = (e) => {
