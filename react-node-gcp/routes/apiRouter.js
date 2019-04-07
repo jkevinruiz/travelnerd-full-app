@@ -5,6 +5,7 @@ const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 const Multer = require('multer');
 const imgUpload = require('./imgUpload.js');
+const helper = require('../config/authHelper.js');
 
 const multer = Multer({
     storage: Multer.MemoryStorage,
@@ -37,10 +38,10 @@ router.get('/images', cors(corsOptions), (req, resp) => {
     });
 });
 
-router.get('/images', cors(corsOptions), (req, resp) => {
-    ImageModel.find({}, (err, data) => {
+router.get('/image/:id', cors(corsOptions), (req, resp) => {
+    ImageModel.find({id: req.params.id}, (err, data) => {
         if (err) {
-            resp.json({ Error: 'Images not found'});
+            resp.json({ Error: 'Selected Images not found'});
         } else {
             resp.json(data);
         }

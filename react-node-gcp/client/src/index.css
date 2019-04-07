@@ -83,6 +83,7 @@ button:active {
 .photos .list {
   display: grid;
   grid-template-columns: repeat(auto-fit, 275px);
+  grid-template-rows: repeat(auto-fit, 180px);
   grid-gap: 5px;
   
   overflow-y: auto ;
