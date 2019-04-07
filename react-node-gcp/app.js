@@ -7,6 +7,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
+const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -20,6 +21,10 @@ const app = express();
 /* --- middleware section --- */
 app.use(cors());
 
+// server front end
+app.use(express.static('client'));
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -31,14 +36,29 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
-require("./config/passport");
+app.use(session({
+    secret: '5ced3db2-8ac6-46a3-a6de-cc0b7df13f6d', // random string
+    resave: false,
+    saveUninitialized: false
+  })
+);
 
-app.use('/', indexRouter);
+app.use(passport.session()); // calls serializeUser and deserializeUser in config/auth
+
+require("./config/auth");
+
+// app.use('/', indexRouter);
+
+// use route handler for users
 app.use('/users', usersRouter);
 
 //use route handlers for API
 const apiRoutes = require('./routes/apiRouter.js');
 app.use('/api', apiRoutes);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -5,13 +5,30 @@ import PhotoBrowser from './components/PhotoBrowser.js';
 import Home from './components/Home.js';
 import About from './components/About.js';
 import _ from 'lodash';
+import ImageUpload from './components/ImageUpload.js';
+import Login from './components/Login.js';
+import Register from './components/Register.js';
+import axios from 'axios';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.getUser = this.getUser.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
+    this.updateUser = this.updateUser.bind(this)
+
     // temp backup copy of photos
-    this.state = { photos: [], favorites: [], temp: [] };
+    this.state = {
+      photos: [],
+      favorites: [],
+      temp: [],
+      email: null,
+      apikey: null,
+      userID: null,
+      loggedIn: false
+    };
   }
 
   /**
@@ -23,47 +40,91 @@ class App extends Component {
     }
 
     try {
-      const url = "https://randyconnolly.com/funwebdev/services/travel/images.php";
+      // const url = "https://randyconnolly.com/funwebdev/services/travel/images.php";
+      // const response = await fetch(url);
+      // const jsonData = await response.json();
+      // this.setState( { photos: jsonData, temp: jsonData } );
+      //const url = "https://randyconnolly.com/funwebdev/services/travel/images.php"
+	    const url = "/api/images";
       const response = await fetch(url);
-      const jsonData = await response.json();
-      this.setState( { photos: jsonData, temp: jsonData } );
+      const photoJson = await response.json();
+      console.log(photoJson);
+
+      this.setState({photos: photoJson, temp: photoJson});
     }
     catch (error) {
       console.error(error);
     }
   }
 
+  updateUser (userObject) {
+    this.setState(userObject)
+  }
+
+  getUser() {
+      axios.get('/user/').then(response => {
+        console.log('Get user response: ')
+        console.log(response.data)
+        if (response.data.user) {
+          console.log('Get User: There is a user saved in the server session: ')
+
+          this.setState({
+            loggedIn: true,
+            email: response.data.user.email,
+            apiKey: response.data.user.apikey,
+            userID: response.data.user.id
+          })
+        } else {
+          console.log('Get user: no user');
+          this.setState({
+            loggedIn: false,
+            email: null,
+            apiKey: null,
+            userID: null
+          })
+        }
+      })
+    }
   /**
    * Renders/Displays website elements.
    */
   render() {
     return (
       <div>
+        <Route path='/upload' exact component={ImageUpload}></Route>
         <Route path='/' exact component={Home} />
         <Route path='/home' exact component={Home} />
-        <Route path='/browse' exact 
-          render={ (props) => 
+        <Route path='/browse' exact
+          render={ (props) =>
           <PhotoBrowser
             downloadFavorites={ this.downloadFavorites}
             removeFav={ this.removeFav}
             removePhoto={ this.removePhoto}
-            favorites={ this.state.favorites} 
-            photos={ this.state.photos } 
-            updatePhoto={ this.updatePhoto }  
+            favorites={ this.state.favorites}
+            photos={ this.state.photos }
+            updatePhoto={ this.updatePhoto }
             addPhotoToFavorites={ this.addPhotoToFavorites }
+            updateDB={this.updateDB }
               />
            }
         />
         <Route path='/about' exact component={About} />
+        <Route
+          path='/login'
+          render={() =>
+            <Login updateUser={this.updateUser}/>
+          }
+        />
+        <Route path='/register' exact component={Register} />
       </div>
-     
+
     );
   }
 
   /**
    * This function updates information of specific Photo Location selected.
    * @param id - the identification number of current Photo being edited
-   * @param photo - input data associated with 
+   * @param photo - input data associated with
    */
   updatePhoto = (id, photo) => {
     // Create a deep clone of photo array from state.
@@ -75,11 +136,19 @@ class App extends Component {
 
     // replace photo fields with edited values
     photoToReplace.title = photo.title;
-    photoToReplace.city = photo.city;
-    photoToReplace.country = photo.country;
     photoToReplace.description = photo.description;
-    photoToReplace.latitude = photo.latitude;
-    photoToReplace.longitude = photo.longitude;
+
+    photoToReplace.location.city = photo.location.city;
+    photoToReplace.location.country = photo.location.country;
+    photoToReplace.location.latitude = photo.location.latitude;
+    photoToReplace.location.longitude = photo.location.longitude;
+
+    photoToReplace.exif.make = photo.exif.make;
+    photoToReplace.exif.model = photo.exif.model;
+    photoToReplace.exif.exposure_time = photo.exif.exposure_time;
+    photoToReplace.exif.aperture = photo.exif.aperture;
+    photoToReplace.exif.focal_length = photo.exif.focal_length;
+    photoToReplace.exif.iso = photo.exif.iso;
 
     // update state
     this.setState( { photos: copyPhotos } );
@@ -99,10 +168,10 @@ class App extends Component {
     if (!this.state.favorites.find (p => p.id === id) ) {
       // create copy of favorites
       const copyFavorites = cloneDeep(this.state.favorites);
-      
+
       // push item into array
       copyFavorites.push(photo);
-      
+
       // update state
       this.setState( { favorites: copyFavorites });
 
@@ -119,7 +188,7 @@ class App extends Component {
    */
   removePhoto = (id) => {
     let index = _.findIndex(this.state.photos, ['id', id]);
-      
+
     if (index > -1) {
         // create copy of favorites
         const copyPhotos = cloneDeep(this.state.photos);
@@ -137,7 +206,7 @@ class App extends Component {
    */
   removeFav = (id) => {
     let index = _.findIndex(this.state.favorites, ['id', id]);
-    
+
     if (index > -1) {
         // create copy of favorites
         const copyFav = cloneDeep(this.state.favorites);
@@ -179,7 +248,7 @@ class App extends Component {
     const JSZipUtils = require('jszip-utils');
     const FileSaver = require("file-saver");
     const zip = new JSZip();
-    const url = "https://storage.googleapis.com/funwebdev-3rd-travel/large/";
+    const url = "https://storage.googleapis.com/project-pixels/large/";
     const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 
@@ -197,8 +266,8 @@ class App extends Component {
 
     // iterates through favorites array and adds each image to zip
     for(let img of this.state.favorites) {
-      console.log(proxy+url+img.path);
-      zip.file(img.title+".jpg", image(proxy+url + img.path), {binary:true} );
+      console.log(proxy+url+img.filename);
+      zip.file(img.title+".jpg", image(proxy + url + img.filename), {binary:true} );
     }
 
     // saves images as zip
@@ -206,6 +275,49 @@ class App extends Component {
     .then(function(content) {
       FileSaver.saveAs(content, "Favorites.zip");
     });
+  }
+
+  updateDB = (id) => {
+    let index = _.findIndex(this.state.photos, ['id', id]);
+
+    if (index > -1) {
+        // create copy of favorites
+        const photo = this.state.photos.find ( p => p.id === id);
+        console.log(id);
+        console.log(photo);
+        console.log(photo.exif.iso);
+        const formData = new FormData();
+        formData.append('title', photo.title);
+        formData.append('description', photo.description);
+        formData.append('country', photo.location.country);
+        formData.append('city', photo.location.city);
+        formData.append('latitude', photo.location.latitude);
+        formData.append('longitude', photo.location.longitude);
+        formData.append('exifiso', photo.exif.iso);
+        formData.append('make', photo.exif.make);
+        formData.append('model', photo.exif.model);
+        formData.append('exposure_time', photo.exif.exposure_time);
+        formData.append('aperture', photo.exif.aperture);
+        formData.append('focal_length', photo.exif.focal_length);
+
+        const config = {
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        };
+
+        axios.put("/api/image/" + id , formData, config)
+            .then((response) => {
+                console.log("updated image");
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+        // for(let property in copyPhotos) {
+        //   console.log(property, copyPhotos[property]);
+        // }
+    }
   }
 
 

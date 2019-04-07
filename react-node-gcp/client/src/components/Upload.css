@@ -1,0 +1,76 @@
+.uploadBtns {
+    display: grid; 
+    grid-template-columns: 100%;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
+
+.btn {
+    width: 75%;
+    margin: auto;
+    
+}
+.fileInput {
+    margin: auto;
+    background-color: #FE4448;
+    width: 75%;
+    color: white;
+    border-radius: 5px;
+    height: 30px;
+    padding-top: 10px;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
+
+.description {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    grid-column-end: span 2;
+    justify-items: stretch;
+}
+.uploadForm{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 60% 35% 10%;
+    
+}
+
+.photoInfo {
+    grid-column-start: 1;
+    padding-bottom: 0;
+    height: 400px;
+}
+.exifInfoUpload {
+    grid-column-start: 2;
+    
+}
+
+form.uploadForm label{
+    display: block;
+    margin-top: 0.5rem;
+    margin: auto;
+}
+
+form.uploadForm input{
+    padding: 12px 30px;
+    margin: 0;
+}
+
+
+#selectFile {
+    display: none;
+}
+
+#addImage {
+    padding: 15px 37% 15px 37%;
+}
+
+.addImage {
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
+#desc {
+    padding: 75px 30%;
+    text-align: left;
+}

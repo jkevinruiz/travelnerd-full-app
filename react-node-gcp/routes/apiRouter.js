@@ -1,6 +1,6 @@
 const express = require('express');
 const ImageModel = require('../models/Image.js');
-const LoginModel = require('../models/Login.js');
+const LoginModel = require('../models/User.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 const Multer = require('multer');
@@ -11,9 +11,33 @@ const multer = Multer({
     fileSize: 5 * 1024 *1024
 });
 
+const cors = require('cors');
+const corsOptions = {
+    origin: 'http://localhost:3000'
+}
+
+// /* Provide JSON for specified image id */
+// /* MUST SUPPLY VALID API KEY???*/
+// router.get('/image/:id', (req, resp) => {
+//     ImageModel.find({id: req.params.id}, (err, data) => {
+// const cors = require('cors');
+
+// const corsOptions = {
+//   origin: 'http://localhost:8080'
+// }
 
 /* Provide JSON for all images */
-router.get('/images', (req, resp) => {
+router.get('/images', cors(corsOptions), (req, resp) => {
+    ImageModel.find({}, (err, data) => {
+        if (err) {
+            resp.json({ Error: 'Image not found'});
+        } else {
+            resp.json(data);
+        }
+    });
+});
+
+router.get('/images', cors(corsOptions), (req, resp) => {
     ImageModel.find({}, (err, data) => {
         if (err) {
             resp.json({ Error: 'Images not found'});
@@ -21,31 +45,18 @@ router.get('/images', (req, resp) => {
             resp.json(data);
         }
     });
-});
-
-/* Provide JSON for the specified image id */
-/* MUST SUPPLY VALID API KEY??? FOUND IN users.json/logins.json dataset*/
-router.get('/image/:id', (req, resp) => {
-    ImageModel.find({id: req.params.id}, (err, data) => {
-        if (err) {
-            resp.json({Error: 'Image not found'});
-        } else {
-            console.log(data);
-            resp.json(data);
-        }
-    });
-});
+ })
 
 /* PUT REQUEST NOT WORKING YET */
 /* TESTING LINK: /api/image/30386ea7-d672-4460-b5df-ca0cf9759ea2 */
 /* Modify the image data in MongoDB Atlas Database */
 /* NEEDS VALID AUTH TOKEN */
-router.put('/image/:id', urlencodedParser, (req, resp) => {
+router.put('/image/:id', multer.single(), (req, resp) => {
     // console.log("REQQUERY: " + req.query.title);
     // ImageModel.findById({id: req.params.id}, req.body.firstname, {new: true}, (err, data) => {
     //     if(err) {
     //         return resp.status(500).send(err);
-    //     } 
+    //     }
     //     return resp.send(data);
     //     console.log(data);
     //     resp.send(data);
@@ -59,35 +70,36 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
     //     });
     // });
 
-    ImageModel.updateOne( {id: req.params.id},  
+    ImageModel.updateOne( {id: req.params.id},
         {
-            title: req.body.title, 
+            title: req.body.title,
             description: req.body.description,
             'location.country': req.body.country,
             'location.city': req.body.city,
             'location.longitude': req.body.longitude,
             'location.latitude': req.body.latitude,
-            'exif.make': req.body.exmake,
-            'exif.model': req.body.exmodel,
-            'exif.exposure_time': req.body.exptime,
-            'exif.aperture': req.body.exaperture,
-            'exif.focal_length': req.body.exfocal,
-            'exif.iso': req.body.exiso,
+            'exif.make': req.body.make,
+            'exif.model': req.body.model,
+            'exif.exposure_time': req.body.exposure_time,
+            'exif.aperture': req.body.aperture,
+            'exif.focal_length': req.body.focal_length,
+            'exif.iso': req.body.exifiso,
 
-        }, 
+        },
         function(err, data) {
             if (err) {
                 return resp.json({Error: err});
             }
+            console.log("Update Success");
             return resp.json({Message: "Success"});
         });
 });
 
 /* Add a new image to MongoDB Atlas Database */
 /* WORKS BUT NEEDS VALID AUTH TOKEN FOR LOGIN FUNCTIONALITY*/
-router.post('/image/:id', urlencodedParser, (req, resp) => {
+router.post('/image/:id', multer.single(), (req, resp) => {
     let imageRecord = new ImageModel({
-        id: req.body.id, 
+        id: req.params.id, 
         title: req.body.title,
         description: req.body.description,
         location: {
@@ -141,8 +153,9 @@ router.post('/image/:id', urlencodedParser, (req, resp) => {
             console.log("ERROR: INSERT IS WRONG");
         } else {
             console.log(imageR.title + " Inserted on images Collection");
+            resp.json({Message: "Success"});
         }
-    });    
+    });
 });
 
 router.get('/logins', (req, resp) => {
@@ -155,7 +168,7 @@ router.get('/logins', (req, resp) => {
     });
 });
 
-router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, (req, res) => {
+router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, imgUpload.uploadToGcsSquare,  (req, res) => {
     res.json({Success: "Success"});
 });
 
