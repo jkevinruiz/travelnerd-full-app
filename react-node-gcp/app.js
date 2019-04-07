@@ -36,7 +36,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(passport.initialize());
 
 app.use(session({
     secret: '5ced3db2-8ac6-46a3-a6de-cc0b7df13f6d', // random string
@@ -45,6 +44,7 @@ app.use(session({
   })
 );
 
+app.use(passport.initialize());
 app.use(passport.session()); // calls serializeUser and deserializeUser in config/auth
 
 require("./config/auth");

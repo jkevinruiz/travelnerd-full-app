@@ -34,10 +34,16 @@ const strategy = new LocalStrategy(localOptions, async (email, password, done) =
 passport.use('localLogin', strategy);
 
 // save email in session data
-passport.serializeUser( (user, done) => done(null, user.email) );
+passport.serializeUser(function(user, done){
+	console.log("serialize");
+	done(null, user.email);
+});
 
-passport.deserializeUser( (email, done) => {
-	UserModel.findOne({email: email}, (err, user) => done(err, user) );
+passport.deserializeUser(function(email, done){
+	console.log("deserialize");
+	UserModel.findOne({email: email}, function(err, user){
+		done(err, user)
+	 });
 });
 
 module.exports = passport;

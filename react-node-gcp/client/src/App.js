@@ -57,6 +57,15 @@ class App extends Component {
     }
   }
 
+  logout = () => {
+    this.setState({
+      loggedIn: false,
+      email: null,
+      apiKey: null,
+      userID: null
+    })
+  }
+
   updateUser (userObject) {
     this.setState(userObject)
   }
@@ -104,7 +113,8 @@ class App extends Component {
             photos={ this.state.photos }
             updatePhoto={ this.updatePhoto }
             addPhotoToFavorites={ this.addPhotoToFavorites }
-            updateDB={this.updateDB }
+            updateDB={ this.updateDB }
+            logout={ this.logout }
               />
            }
         />

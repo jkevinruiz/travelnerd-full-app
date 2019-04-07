@@ -62,7 +62,7 @@ class PhotoBrowser extends React.Component {
             return (<EditPhotoDetails updateDB={this.props.updateDB} changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} />);
         else if (renderView === "map")
             return (<MapContainer changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} />);
-        else 
+        else
             return (<ViewSinglePhoto changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} />);
     }
 
@@ -77,7 +77,7 @@ class PhotoBrowser extends React.Component {
         console.log(value);
         let filtered = [];
         const tmp = cloneDeep(this.props.photos);
-       
+
         if (name === "city") {
             if (value !== "default")
                 filtered = tmp.filter(obj => obj.location.city === value);
@@ -89,7 +89,7 @@ class PhotoBrowser extends React.Component {
                 filtered = tmp.filter(obj => obj.location.country === value);
                 console.log(filtered);
              }
-            else 
+            else
                 filtered = tmp;
         }
         this.setState({filteredPhoto: filtered, currentPhoto: filtered[0].id});
@@ -132,7 +132,7 @@ class PhotoBrowser extends React.Component {
     render() {
         return (
             <div>
-                <HeaderApp />
+                <HeaderApp logout={this.props.logout} />
                 <Favorites downloadFavorites={this.props.downloadFavorites} favorites={this.props.favorites} removeFav={this.props.removeFav} />
                 <div className="photoBrowser">
                     <div className="sorting">
