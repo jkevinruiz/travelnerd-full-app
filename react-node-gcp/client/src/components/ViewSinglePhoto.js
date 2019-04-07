@@ -14,17 +14,13 @@ class ViewSinglePhoto extends React.Component {
                 return (
                     <article className="details">
                         <div className="detailsPhotoBox">
+                                {this.handleEXIFDate(photo)}
                             <div className="photoForm">
                                 <img src={imgURL+photo.filename} alt={photo.title}/>
                                 <br></br>
                                 <h2>{photo.title}</h2>
                                 <p>{photo.description}</p>
                                 <p>{photo.location.city}, {photo.location.country}</p>
-                                {this.handleEXIFDate(photo)}
-                                {/* <span>
-                                    <p>Shot with: {photo.exif.make}, {photo.exif.model}</p>
-                                    <p>Exposure: {photo.exif.exposure_time}</p><p>Aperature: {photo.exif.aperature}</p>
-                                </span> */}
                             </div>
                             <button onClick={this.handleEdit}>Edit</button>
                             <button onClick={this.handleMap}>Map</button>

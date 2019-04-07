@@ -109,7 +109,12 @@ class App extends Component {
            }
         />
         <Route path='/about' exact component={About} />
-        <Route path='/login' exact component={Login} />
+        <Route
+          path='/login'
+          render={() =>
+            <Login updateUser={this.updateUser}/>
+          }
+        />
         <Route path='/register' exact component={Register} />
       </div>
 
