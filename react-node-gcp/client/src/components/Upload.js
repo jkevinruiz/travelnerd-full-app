@@ -69,8 +69,7 @@ class Upload extends Component {
                         <span className="photoInfo">
                             <label>Title</label>
                             <span><input type="text" name="title" placeholder="title" onChange={this.onChange} /> </span> 
-                            <label>Description</label>
-                            <input type="text" name="description" placeholder="description" onChange={this.onChange}/>
+            
                             <label>City</label>
                             <input type="text" name="city" placeholder="city" onChange={this.onChange}/>
 
@@ -83,7 +82,10 @@ class Upload extends Component {
                             <label>longitude</label>
                             <input type="number" name="longitude" placeholder="longitude" onChange={this.onChange}/>
                         </span>
-                         
+                        <span className="description">
+                            <label>Description</label>
+                            <input type="text" name="description" placeholder="description" id="desc" onChange={this.onChange}/>
+                        </span>
                         <span className="exifInfo">
                             <label>Camera</label>
                             <input type="text" name="make" placeholder="make" onChange={this.onChange}/>
@@ -99,9 +101,11 @@ class Upload extends Component {
 
                             <label> Iso </label>
                             <input type="Number" name="exifiso" placeholder="iso" onChange={this.onChange}/>
-                            <br/>
-                            <button type="submit">Add Image</button>   
+                            <br/>  
                         </span>
+                        <span className="addImage">
+                            <button type="submit" id="addImage">Add Image</button>
+                        </span> 
                     </form>
                 </div>
                 );
