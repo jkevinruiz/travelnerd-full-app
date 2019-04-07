@@ -172,4 +172,3 @@ router.get('/logins', (req, resp) => {
 module.exports = router;
 router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, imgUpload.uploadToGcsSquare,  (req, res) => {
     res.json({Success: "Success"});
-});
