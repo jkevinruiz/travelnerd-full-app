@@ -17,6 +17,7 @@ class Login extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  //  this.props.updateUser = this.props.updateUser.bind(this);
   }
 
   handleChange(event) {
@@ -26,7 +27,6 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    console.log("Submitted")
     event.preventDefault()
     console.log('handleSubmit')
 
@@ -42,9 +42,9 @@ class Login extends Component {
            // update App.js state
            this.props.updateUser({
                loggedIn: true,
-               email: response.data.email,
-               apikey: response.data.apikey,
-               userID: response.data.id
+               email: response.data.user.email,
+               apikey: response.data.user.apikey,
+               userID: response.data.user.id
            })
 
            // update the state to redirect to home
@@ -92,7 +92,7 @@ class Login extends Component {
                         />
 
                         </form>
-                        <button type="submit" onClick={this.handleSubmit}>Login</button>
+                        <button onClick={this.handleSubmit} type="submit">Login</button>
                         <Link to='/browse'><button> Cancel </button> </Link>
                     </div>
                 </div>
