@@ -14,9 +14,9 @@ class About extends React.Component {
                 <HeaderApp />
                 <div id="aboutBanner" className="banner">
                     <div className="aboutContent">
-                        <h1>COMP 4513 Assignment 1</h1>
+                        <h1>COMP 4513 Assignment 2</h1>
                         <p className="para1">
-                            This is a website that demonstrates our understanding of how to generate a single-page application using React.
+                            This is a single page application that incorporate react (front-end) and Node.JS authentication, MongoDB as a back-end.
                         </p>
                         <h3>Team Members:</h3>
                         <div className="memojis">  
