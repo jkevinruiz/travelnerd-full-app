@@ -12,32 +12,46 @@ const corsOptions = {
 /* Provide JSON for all images */
 router.get('/images', cors(corsOptions), (req, resp) => {
     ImageModel.find({}, (err, data) => {
+const Multer = require('multer');
+const imgUpload = require('./imgUpload.js');
+
+const multer = Multer({
+    storage: Multer.MemoryStorage,
+    fileSize: 5 * 1024 *1024
+});
+
+const cors = require('cors');
+const corsOptions = {
+    origin: 'http://localhost:3000'
+}
+
+/* Provide JSON for specified image id */
+/* MUST SUPPLY VALID API KEY???*/
+router.get('/image/:id', (req, resp) => {
+    ImageModel.find({id: req.params.id}, (err, data) => {
+        if (err) {
+            resp.json({ Error: 'Image not found'});
+        } else {
+            resp.json(data);
+        }
+    });
+});
+
+router.get('/images', cors(corsOptions), (req, resp) => {
+    ImageModel.find({}, (err, data) => {
         if (err) {
             resp.json({ Error: 'Images not found'});
         } else {
             resp.json(data);
         }
     });
-});
-
-/* Provide JSON for the specified image id */
-/* MUST SUPPLY VALID API KEY??? FOUND IN users.json/logins.json dataset*/
-router.get('/image/:id', (req, resp) => {
-    ImageModel.find({id: req.params.id}, (err, data) => {
-        if (err) {
-            resp.json({Error: 'Image not found'});
-        } else {
-            console.log(data);
-            resp.json(data);
-        }
-    });
-});
+ })
 
 /* PUT REQUEST NOT WORKING YET */
 /* TESTING LINK: /api/image/30386ea7-d672-4460-b5df-ca0cf9759ea2 */
 /* Modify the image data in MongoDB Atlas Database */
 /* NEEDS VALID AUTH TOKEN */
-router.put('/image/:id', urlencodedParser, (req, resp) => {
+router.put('/image/:id', multer.single(), (req, resp) => {
     // console.log("REQQUERY: " + req.query.title);
     // ImageModel.findById({id: req.params.id}, req.body.firstname, {new: true}, (err, data) => {
     //     if(err) {
@@ -64,27 +78,29 @@ router.put('/image/:id', urlencodedParser, (req, resp) => {
             'location.city': req.body.city,
             'location.longitude': req.body.longitude,
             'location.latitude': req.body.latitude,
-            'exif.make': req.body.exmake,
-            'exif.model': req.body.exmodel,
-            'exif.exposure_time': req.body.exptime,
-            'exif.aperture': req.body.exaperture,
-            'exif.focal_length': req.body.exfocal,
-            'exif.iso': req.body.exiso,
+            'exif.make': req.body.make,
+            'exif.model': req.body.model,
+            'exif.exposure_time': req.body.exposure_time,
+            'exif.aperture': req.body.aperture,
+            'exif.focal_length': req.body.focal_length,
+            'exif.iso': req.body.exifiso,
 
         },
         function(err, data) {
             if (err) {
                 return resp.json({Error: err});
             }
+            console.log("Update Success");
             return resp.json({Message: "Success"});
         });
 });
 
 /* Add a new image to MongoDB Atlas Database */
 /* WORKS BUT NEEDS VALID AUTH TOKEN FOR LOGIN FUNCTIONALITY*/
-router.post('/image/:id', urlencodedParser, (req, resp) => {
+router.post('/image/:id', multer.single(), (req, resp) => {
     let imageRecord = new ImageModel({
         id: req.body.id,
+        id: req.params.id,
         title: req.body.title,
         description: req.body.description,
         location: {
@@ -138,6 +154,7 @@ router.post('/image/:id', urlencodedParser, (req, resp) => {
             console.log("ERROR: INSERT IS WRONG");
         } else {
             console.log(imageR.title + " Inserted on images Collection");
+            resp.json({Message: "Success"});
         }
     });
 });
@@ -153,3 +170,6 @@ router.get('/logins', (req, resp) => {
 });
 
 module.exports = router;
+router.post('/upload', multer.single('image'), imgUpload.uploadToGcs, imgUpload.uploadToGcsSquare,  (req, res) => {
+    res.json({Success: "Success"});
+});

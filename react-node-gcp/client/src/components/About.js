@@ -20,7 +20,7 @@ class About extends React.Component {
                         </p>
                         <h3>Team Members:</h3>
                         <div className="memojis">  
-                            <a href="https://github.com/xDKevz" rel="noopener noreferrer" target="_blank">
+                            {/* <a href="https://github.com/xDKevz" rel="noopener noreferrer" target="_blank">
                                 <figure>
                                     <img src={memojiK} width="200" height="200" alt="Kevin" />
                                     <figcaption>John Kevin Ruiz</figcaption>
@@ -32,7 +32,13 @@ class About extends React.Component {
                                     <img src={memojiR} width="200" height="200" alt="Rafael" />
                                     <figcaption>Rafael Angelo Pucut</figcaption>
                                 </figure>
-                            </a>
+                            </a> */}
+                            <figcaption>John Kevin Ruiz</figcaption>
+                            <figcaption>Rafael Angelo Pucut</figcaption>
+                            <figcaption>Kevin Lam</figcaption>
+                            <figcaption>Ben Carr</figcaption>
+                            <figcaption>Ross McConnell</figcaption>
+                            <figcaption>Lee Palisoc</figcaption>
                             <br></br>
                         </div>
                         <h3>CREDITS AND OTHER RESOURCES</h3>
@@ -43,6 +49,13 @@ class About extends React.Component {
                                 <li><a href="https://www.movable-type.co.uk/scripts/latlong.html">Haversine Formula JavaScript</a></li>
                                 <li><a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en">CORS Extension</a></li>
                                 <li><a href="https://stuk.github.io/jszip/documentation/examples/downloader.html">JSZip Helpful Code</a></li>
+                                <li><a href="https://medium.com/@mahesh_joshi/reactjs-nodejs-upload-image-how-to-upload-image-using-reactjs-and-nodejs-multer-918dc66d304c">Uploading image from react to google buckets</a> </li>
+                                <li><a href="https://github.com/b-bly/simple-mern-passport and https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669">For Authentication</a> </li>
+                                <li><a href="https://docs.atlas.mongodb.com/driver-connection/"> Connecting to MongoDB Atlas </a></li>
+                                <li><a href="https://www.tutorialkart.com/nodejs/mongoose/insert-document-to-mongodb/"> POST/Insert API request </a></li>
+                                <li><a href="https://www.youtube.com/watch?v=v0t42xBIYIs&t=12s"> Video that showed how to use concurrent </a></li>
+                                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-capture"></a></li>
+                            
                             </ul>
                         </div>
                         <h3>Technology use:</h3>

@@ -25,8 +25,10 @@ class Favorites extends React.Component {
     }
 
     handleDownload = () => {
-        if (this.props.favorites.length !== 0)
+        if (this.props.favorites.length !== 0) {
+            console.log(this.props.favorites.length)
             this.props.downloadFavorites();
+        }
     }
 }
 

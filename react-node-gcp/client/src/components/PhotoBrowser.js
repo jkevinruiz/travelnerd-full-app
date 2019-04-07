@@ -59,7 +59,7 @@ class PhotoBrowser extends React.Component {
 
         let renderView = this.state.renderView;
         if (renderView === "edit")
-            return (<EditPhotoDetails changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} />);
+            return (<EditPhotoDetails updateDB={this.props.updateDB} changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} />);
         else if (renderView === "map")
             return (<MapContainer changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} />);
         else 
@@ -80,13 +80,13 @@ class PhotoBrowser extends React.Component {
        
         if (name === "city") {
             if (value !== "default")
-                filtered = tmp.filter(obj => obj.city === value);
+                filtered = tmp.filter(obj => obj.location.city === value);
             else
                 filtered = tmp;
         } else {
             console.log("country filter");
             if (value !== "default") {
-                filtered = tmp.filter(obj => obj.country === value);
+                filtered = tmp.filter(obj => obj.location.country === value);
                 console.log(filtered);
              }
             else 
@@ -99,7 +99,7 @@ class PhotoBrowser extends React.Component {
      * This function filters photo thumbnails by selected city.
      */
     uniqueCity = () => {
-        const cities = this.props.photos.map( (p) => p.city);
+        const cities = this.props.photos.map( (p) => p.location.city);
         // creates a unique array of cities returning only unique ones
         const uniqueCities = [...new Set(cities)];
         // console.log(uniqueCities);
@@ -110,7 +110,7 @@ class PhotoBrowser extends React.Component {
      * This function filters photo thumbnails by selected country.
      */
     uniqueCountry = () => {
-        const country = this.props.photos.map( (p) => p.country);
+        const country = this.props.photos.map( (p) => p.location.country);
         // creates a unique array of countries returning only unique ones
         const uniqueCountry = [...new Set(country)];
         // console.log(uniqueCountry);
@@ -123,7 +123,7 @@ class PhotoBrowser extends React.Component {
      */
     showImageDetails = (id) => {
         this.setState( {currentPhoto: id });
-        // console.log(this.state.currentPhoto);
+        //console.log(this.state.currentPhoto);
     }
 
     /**

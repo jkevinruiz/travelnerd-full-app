@@ -5,6 +5,9 @@ import PhotoBrowser from './components/PhotoBrowser.js';
 import Home from './components/Home.js';
 import About from './components/About.js';
 import _ from 'lodash';
+import ImageUpload from './components/ImageUpload.js';
+import Login from './components/Login.js';
+import axios from 'axios';
 
 
 class App extends Component {
@@ -23,10 +26,17 @@ class App extends Component {
     }
 
     try {
-      const url = "https://randyconnolly.com/funwebdev/services/travel/images.php";
+      // const url = "https://randyconnolly.com/funwebdev/services/travel/images.php";
+      // const response = await fetch(url);
+      // const jsonData = await response.json();
+      // this.setState( { photos: jsonData, temp: jsonData } );
+      //const url = "https://randyconnolly.com/funwebdev/services/travel/images.php"
+	    const url = "/api/images";
       const response = await fetch(url);
-      const jsonData = await response.json();
-      this.setState( { photos: jsonData, temp: jsonData } );
+      const photoJson = await response.json();
+      console.log(photoJson);
+
+      this.setState({photos: photoJson, temp: photoJson});
     }
     catch (error) {
       console.error(error);
@@ -39,6 +49,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Route path='/upload' exact component={ImageUpload}></Route>
         <Route path='/' exact component={Home} />
         <Route path='/home' exact component={Home} />
         <Route path='/browse' exact 
@@ -51,10 +62,12 @@ class App extends Component {
             photos={ this.state.photos } 
             updatePhoto={ this.updatePhoto }  
             addPhotoToFavorites={ this.addPhotoToFavorites }
+            updateDB={this.updateDB }
               />
            }
         />
         <Route path='/about' exact component={About} />
+        <Route path='/login' exact component={Login} />
       </div>
      
     );
@@ -75,12 +88,20 @@ class App extends Component {
 
     // replace photo fields with edited values
     photoToReplace.title = photo.title;
-    photoToReplace.city = photo.city;
-    photoToReplace.country = photo.country;
     photoToReplace.description = photo.description;
-    photoToReplace.latitude = photo.latitude;
-    photoToReplace.longitude = photo.longitude;
 
+    photoToReplace.location.city = photo.location.city;
+    photoToReplace.location.country = photo.location.country;
+    photoToReplace.location.latitude = photo.location.latitude;
+    photoToReplace.location.longitude = photo.location.longitude;
+    
+    photoToReplace.exif.make = photo.exif.make;
+    photoToReplace.exif.model = photo.exif.model;
+    photoToReplace.exif.exposure_time = photo.exif.exposure_time;
+    photoToReplace.exif.aperture = photo.exif.aperture;
+    photoToReplace.exif.focal_length = photo.exif.focal_length;
+    photoToReplace.exif.iso = photo.exif.iso;
+    
     // update state
     this.setState( { photos: copyPhotos } );
   }
@@ -179,7 +200,7 @@ class App extends Component {
     const JSZipUtils = require('jszip-utils');
     const FileSaver = require("file-saver");
     const zip = new JSZip();
-    const url = "https://storage.googleapis.com/funwebdev-3rd-travel/large/";
+    const url = "https://storage.googleapis.com/project-pixels/large/";
     const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 
@@ -197,8 +218,8 @@ class App extends Component {
 
     // iterates through favorites array and adds each image to zip
     for(let img of this.state.favorites) {
-      console.log(proxy+url+img.path);
-      zip.file(img.title+".jpg", image(proxy+url + img.path), {binary:true} );
+      console.log(proxy+url+img.filename);
+      zip.file(img.title+".jpg", image(proxy + url + img.filename), {binary:true} );
     }
 
     // saves images as zip
@@ -206,6 +227,49 @@ class App extends Component {
     .then(function(content) {
       FileSaver.saveAs(content, "Favorites.zip");
     });
+  }
+
+  updateDB = (id) => {
+    let index = _.findIndex(this.state.photos, ['id', id]);
+      
+    if (index > -1) {
+        // create copy of favorites
+        const photo = this.state.photos.find ( p => p.id === id);
+        console.log(id);
+        console.log(photo);
+        console.log(photo.exif.iso);
+        const formData = new FormData();
+        formData.append('title', photo.title);
+        formData.append('description', photo.description);
+        formData.append('country', photo.location.country);
+        formData.append('city', photo.location.city);
+        formData.append('latitude', photo.location.latitude);
+        formData.append('longitude', photo.location.longitude);
+        formData.append('exifiso', photo.exif.iso);
+        formData.append('make', photo.exif.make);
+        formData.append('model', photo.exif.model);
+        formData.append('exposure_time', photo.exif.exposure_time);
+        formData.append('aperture', photo.exif.aperture);
+        formData.append('focal_length', photo.exif.focal_length);
+
+        const config = {
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        };
+        
+        axios.put("/api/image/" + id , formData, config)
+            .then((response) => {
+                console.log("updated image");
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+        // for(let property in copyPhotos) {
+        //   console.log(property, copyPhotos[property]);
+        // }
+    }
   }
 
 

@@ -6,8 +6,7 @@ class FavoriteItem extends React.Component {
      * Renders/Displays website elements.
      */
     render() {
-        // const imgURL = `https://storage.googleapis.com/funwebdev-3rdtravel/square-medium/${this.props.photo.path}`
-        const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/square-medium/${this.props.favorites.path}`;
+        const imgURL = `https://storage.googleapis.com/project-pixels/square/${this.props.favorites.filename}`;
         return (
             <div className="favoriteItem">
                 <button onClick={this.handleRemoveFav}>X</button>

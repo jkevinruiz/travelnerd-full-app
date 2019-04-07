@@ -1,0 +1,32 @@
+#fileUpload {
+    display: none;
+}
+
+#label {
+    background-color:#FF3B3F;
+    padding: 10px 24% 10px 24%;
+    border-radius: 5px;
+}
+
+.fileInput {
+    background-color: transparent;
+}
+.formContainer {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.uploadContainer {
+    height: 750px;
+    width: 50%;
+    margin: auto;
+    background-color: #28AED5;
+    border-radius: 15px;
+}
+
+.btn {
+    display: none;
+    width: 90%;
+    margin: 15px auto 15px auto;
+}
+
