@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
-    id: Number,
+    id: String,
     details: {
         firstname: String,
         lastname: String,
@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
 UserSchema.methods.isValidPassword = async function(formPassword) {
 	const user = this;
 	const hash = user.password_bcrypt;
-	
+
 	// hashes the password sent and checks against the DB.
 	const compare = await bcrypt.compare(formPassword, hash);
 	return compare;
