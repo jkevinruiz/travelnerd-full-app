@@ -20,7 +20,7 @@ class About extends React.Component {
                         </p>
                         <h3>Team Members:</h3>
                         <div className="memojis">  
-                            <a href="https://github.com/xDKevz" rel="noopener noreferrer" target="_blank">
+                            {/* <a href="https://github.com/xDKevz" rel="noopener noreferrer" target="_blank">
                                 <figure>
                                     <img src={memojiK} width="200" height="200" alt="Kevin" />
                                     <figcaption>John Kevin Ruiz</figcaption>
@@ -32,7 +32,9 @@ class About extends React.Component {
                                     <img src={memojiR} width="200" height="200" alt="Rafael" />
                                     <figcaption>Rafael Angelo Pucut</figcaption>
                                 </figure>
-                            </a>
+                            </a> */}
+                            <figcaption>John Kevin Ruiz</figcaption>
+                            <figcaption>Rafael Angelo Pucut</figcaption>
                             <figcaption>Kevin Lam</figcaption>
                             <figcaption>Ben Carr</figcaption>
                             <figcaption>Ross McConnell</figcaption>
