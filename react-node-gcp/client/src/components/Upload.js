@@ -9,20 +9,20 @@ class Upload extends Component {
         super(props);
         this.state = {
             fields: {
-                title: null,
-                description: null,
+                title: "",
+                description: "",
                 
-                city: null,
-                country: null,
-                latitude: null,
-                longitude: null,
+                city: "",
+                country: "",
+                latitude: 0,
+                longitude: 0,
                 
-                make: null,
-                model: null,
-                aperture: null,
-                exposure_time: null,
-                focal_length: null,
-                exifiso: null
+                make: "",
+                model: "",
+                aperture: "",
+                exposure_time: "",
+                focal_length: "",
+                exifiso: 0
 
             }
         }
