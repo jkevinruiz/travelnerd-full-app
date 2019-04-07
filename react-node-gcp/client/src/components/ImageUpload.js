@@ -35,10 +35,6 @@ class ImageUpload extends React.Component {
                 alert("The file is successfully uploaded");
             }).catch((error) => {
         });
-
-        this.setState({fileChosen: true}); 
-
-        
     }
     onChange(e) {
         this.setState({file:e.target.files[0]});
@@ -59,8 +55,7 @@ class ImageUpload extends React.Component {
                             <p id="fileName"></p>
                             <button className="btn" type="submit">Upload</button>
                         </form>
-                        {/* <Upload filename={this.state.file} /> */}
-                        {this.state.fileChosen && <Upload filename={this.state.file} />}
+                        <Upload filename={this.state.file} />
                     </div>
                 </div>
             </div>
