@@ -70,7 +70,7 @@ class Login extends Component {
                 <HeaderApp />
                 <div className="loginContainer">
                     <div className="loginBox">
-                        <form className="loginForm">
+                        <form className="loginForm" onSubmit={this.handleSubmit}>
                         <label><strong>Email</strong></label>
                         <input
                           type="text"
