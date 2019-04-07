@@ -195,13 +195,15 @@ class App extends Component {
   addPhotoToFavorites = (id) => {
     // find photo to add
     const photo = this.state.photos.find ( p => p.id === id);
-    console.log(photo);
+    // console.log(photo);
+    // console.log(this.state.userID);
+    // console.log(photo.user.userid);
 
     // find photo in favorites
 
-    // check if item is already in favorite
+    // check if item is already in favorite && check if its their own image
     // if not add it
-    if (!this.state.favorites.find (p => p.id === id) && photo.user.userid !== this.state.usedID ) {
+    if ( (!this.state.favorites.find (p => p.id === id)) && (photo.user.userid !== Number(this.state.userID ))) {
       // create copy of favorites
       const copyFavorites = cloneDeep(this.state.favorites);
 
@@ -214,7 +216,7 @@ class App extends Component {
       // update local storage
       this.updateLocalStorage(copyFavorites);
     } else {
-      console.log ("Photo already in favorites")
+      console.log ("Photo already in favorites/ Cannot favorite your own image")
     }
   }
 
