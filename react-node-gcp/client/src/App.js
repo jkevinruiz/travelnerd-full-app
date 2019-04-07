@@ -113,7 +113,7 @@ class App extends Component {
         <Route path='/home' exact component={Home} />
         <Route path='/browse' exact
           render={ (props) => (
-            this.state.loggenIn ? (
+            this.state.loggedIn ? (
               <PhotoBrowser
                 downloadFavorites={ this.downloadFavorites}
                 removeFav={ this.removeFav}
