@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as cloneDeep from 'lodash/cloneDeep';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import PhotoBrowser from './components/PhotoBrowser.js';
 import Home from './components/Home.js';
 import About from './components/About.js';
@@ -101,28 +101,34 @@ class App extends Component {
     return (
       <div>
         <Route path='/upload' exact
-          render={ (props) =>
-            <ImageUpload
-              userEmail={ this.state.email }
-            />
-          }
+          render={ (props) => (
+            this.state.loggedIn ? (
+              <ImageUpload userEmail={ this.state.email } />
+            ) : (
+              <Redirect to="/login"/>
+            )
+          )}
         />
         <Route path='/' exact component={Home} />
         <Route path='/home' exact component={Home} />
         <Route path='/browse' exact
-          render={ (props) =>
-          <PhotoBrowser
-            downloadFavorites={ this.downloadFavorites}
-            removeFav={ this.removeFav}
-            removePhoto={ this.removePhoto}
-            favorites={ this.state.favorites}
-            photos={ this.state.photos }
-            updatePhoto={ this.updatePhoto }
-            addPhotoToFavorites={ this.addPhotoToFavorites }
-            updateDB={ this.updateDB }
-            logout={ this.logout }
+          render={ (props) => (
+            this.state.loggenIn ? (
+              <PhotoBrowser
+                downloadFavorites={ this.downloadFavorites}
+                removeFav={ this.removeFav}
+                removePhoto={ this.removePhoto}
+                favorites={ this.state.favorites}
+                photos={ this.state.photos }
+                updatePhoto={ this.updatePhoto }
+                addPhotoToFavorites={ this.addPhotoToFavorites }
+                updateDB={ this.updateDB }
+                logout={ this.logout }
               />
-           }
+            ) : (
+              <Redirect to="/login"/>
+            )
+          )}
         />
         <Route path='/about' exact component={About} />
         <Route
