@@ -7,6 +7,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
+const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -30,6 +31,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
+
+app.use(session({
+    secret: '5ced3db2-8ac6-46a3-a6de-cc0b7df13f6d', // random string
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+app.use(passport.session()); // calls serializeUser and deserializeUser in config/auth
 
 require("./config/auth");
 
