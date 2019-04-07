@@ -43,12 +43,16 @@ app.use(passport.session()); // calls serializeUser and deserializeUser in confi
 
 require("./config/auth");
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 
 //use route handlers for API
 const apiRoutes = require('./routes/apiRouter.js');
 app.use('/api', apiRoutes);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
