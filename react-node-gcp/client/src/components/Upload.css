@@ -10,7 +10,6 @@
     margin: auto;
     
 }
-
 .fileInput {
     margin: auto;
     background-color: #FE4448;
@@ -29,21 +28,11 @@
     grid-column-end: span 2;
 }
 .uploadForm{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 10% 45% 27% 10%;
-    background-color: #28AED5;
-    width: 100%;
-    margin: auto;
-    height: 710px;
-    border-radius: 15px;
+    
 }
 
 .formContainer {
-    margin: 0.5rem auto 0.5rem auto;
-    text-align: center; 
-    width: 50%;
-    opacity: 0.95;
+
     
 }
 

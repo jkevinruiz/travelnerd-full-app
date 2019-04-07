@@ -65,17 +65,13 @@ class Upload extends Component {
 
     render() {
         return (
-     
                 <div className="formContainer">
                     <form className="uploadForm" onSubmit={this.onFormSubmit}>
-                        
-                        <label>Title</label>
-                        <span><input type="text" name="title" placeholder="title" onChange={this.onChange} /> </span> 
-                        <br></br>
-                        <label>Description</label>
-                        <input type="text" name="description" placeholder="description" onChange={this.onChange}/>
-                        <br></br>
-                        <span>
+                        <span className="photoInfo">
+                            <label>Title</label>
+                            <span><input type="text" name="title" placeholder="title" onChange={this.onChange} /> </span> 
+                            <label>Description</label>
+                            <input type="text" name="description" placeholder="description" onChange={this.onChange}/>
                             <label>City</label>
                             <input type="text" name="city" placeholder="city" onChange={this.onChange}/>
 
@@ -89,7 +85,7 @@ class Upload extends Component {
                             <input type="number" name="longitude" placeholder="longitude" onChange={this.onChange}/>
                         </span>
                          
-                        <span>
+                        <span className="exifInfo">
                             <label>Camera</label>
                             <input type="text" name="make" placeholder="make" onChange={this.onChange}/>
                             

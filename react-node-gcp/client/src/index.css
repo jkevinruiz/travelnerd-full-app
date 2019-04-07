@@ -22,6 +22,7 @@ body {
     /* font-family: 'Raleway', sans-serif; */
     font-family: 'Courier New', Courier, monospace;
   -moz-osx-font-smoothing: grayscale;
+  background: url('https://source.unsplash.com/user/anniespratt/qyAka7W5uMY/1920x1080') top left/cover no-repeat;
 }
 
 h1,h2,h3,h4,h5,h6 {
