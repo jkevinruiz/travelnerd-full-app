@@ -21,6 +21,10 @@ const app = express();
 /* --- middleware section --- */
 app.use(cors());
 
+// server front end
+app.use(express.static('client'));
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
