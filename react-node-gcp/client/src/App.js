@@ -100,7 +100,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path='/upload' exact component={ImageUpload}></Route>
+        <Route path='/upload' exact
+          render={ (props) =>
+            <ImageUpload
+              userEmail={ this.state.email }
+            />
+          }
+        />
         <Route path='/' exact component={Home} />
         <Route path='/home' exact component={Home} />
         <Route path='/browse' exact
