@@ -52,7 +52,7 @@ class About extends React.Component {
                                 <li><a href="https://docs.atlas.mongodb.com/driver-connection/"> Connecting to MongoDB Atlas </a></li>
                                 <li><a href="https://www.tutorialkart.com/nodejs/mongoose/insert-document-to-mongodb/"> POST/Insert API request </a></li>
                                 <li><a href="https://www.youtube.com/watch?v=v0t42xBIYIs&t=12s"> Video that showed how to use concurrent </a></li>
-                                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-capture"></a></li>
+                                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-capture"> </a></li>
 
                             </ul>
                         </div>
