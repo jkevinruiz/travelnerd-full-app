@@ -1,6 +1,6 @@
 const express = require('express');
 const ImageModel = require('../models/Image.js');
-const LoginModel = require('../models/Login.js');
+const LoginModel = require('../models/User.js');
 const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 const Multer = require('multer');
@@ -16,10 +16,19 @@ const corsOptions = {
     origin: 'http://localhost:3000'
 }
 
-/* Provide JSON for specified image id */
-/* MUST SUPPLY VALID API KEY???*/
-router.get('/image/:id', (req, resp) => {
-    ImageModel.find({id: req.params.id}, (err, data) => {
+// /* Provide JSON for specified image id */
+// /* MUST SUPPLY VALID API KEY???*/
+// router.get('/image/:id', (req, resp) => {
+//     ImageModel.find({id: req.params.id}, (err, data) => {
+// const cors = require('cors');
+
+// const corsOptions = {
+//   origin: 'http://localhost:8080'
+// }
+
+/* Provide JSON for all images */
+router.get('/images', cors(corsOptions), (req, resp) => {
+    ImageModel.find({}, (err, data) => {
         if (err) {
             resp.json({ Error: 'Image not found'});
         } else {
@@ -47,7 +56,7 @@ router.put('/image/:id', multer.single(), (req, resp) => {
     // ImageModel.findById({id: req.params.id}, req.body.firstname, {new: true}, (err, data) => {
     //     if(err) {
     //         return resp.status(500).send(err);
-    //     } 
+    //     }
     //     return resp.send(data);
     //     console.log(data);
     //     resp.send(data);
@@ -61,9 +70,9 @@ router.put('/image/:id', multer.single(), (req, resp) => {
     //     });
     // });
 
-    ImageModel.updateOne( {id: req.params.id},  
+    ImageModel.updateOne( {id: req.params.id},
         {
-            title: req.body.title, 
+            title: req.body.title,
             description: req.body.description,
             'location.country': req.body.country,
             'location.city': req.body.city,
@@ -76,7 +85,7 @@ router.put('/image/:id', multer.single(), (req, resp) => {
             'exif.focal_length': req.body.focal_length,
             'exif.iso': req.body.exifiso,
 
-        }, 
+        },
         function(err, data) {
             if (err) {
                 return resp.json({Error: err});
@@ -146,7 +155,7 @@ router.post('/image/:id', multer.single(), (req, resp) => {
             console.log(imageR.title + " Inserted on images Collection");
             resp.json({Message: "Success"});
         }
-    });    
+    });
 });
 
 router.get('/logins', (req, resp) => {
