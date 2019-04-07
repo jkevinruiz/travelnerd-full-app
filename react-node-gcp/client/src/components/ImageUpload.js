@@ -35,18 +35,6 @@ class ImageUpload extends React.Component {
                 alert("The file is successfully uploaded");
             }).catch((error) => {
         });
-
-        // this.setState({fileChosen: true});
-        // document.querySelector('#label').style.display = "none"; 
-        // document.querySelector('.formContainer').style.marginTop = "0";
-        // document.querySelector('.fileInput').style.backgroundColor = 'transparent';
-        // document.querySelector('.uploadContainer').setAttribute('style', 'height: 715px; width: 50%; background-color: #28AED5; border-radius: 15px;');
-        // document.querySelector('.btn').display = "none";
-        // document.querySelector('.formStyle').display = "none";
-        // document.querySelector('#filename').style.visibility = "hidden"; 
-        
-
-        
     }
     onChange(e) {
         this.setState({file:e.target.files[0]});
@@ -68,7 +56,6 @@ class ImageUpload extends React.Component {
                             <button className="btn" type="submit">Upload</button>
                         </form>
                         <Upload filename={this.state.file} />
-                        {/* {this.state.fileChosen && <Upload filename={this.state.file} />} */}
                     </div>
                 </div>
             </div>
