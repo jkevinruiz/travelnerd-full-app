@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const passport = require("../config/auth")
+const uuid = require("uuid/v4");
 
 // load input validation
 const validateRegisterInput = require("../validation/register");
@@ -30,7 +31,9 @@ router.post('/register', function(req, res) {
     const newUser = new User({
       details: {firstname: req.body.name},
       email: req.body.email,
-      password_bcrypt: req.body.password
+      password_bcrypt: req.body.password,
+      id: uuid(),
+      apikey: uuid()
     });
 
     bcrypt.hash(newUser.password_bcrypt, 10, (err, hash) => {
