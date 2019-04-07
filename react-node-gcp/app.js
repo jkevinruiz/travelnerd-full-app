@@ -44,7 +44,9 @@ app.use(passport.session()); // calls serializeUser and deserializeUser in confi
 require("./config/auth");
 
 // app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+
+// use route handler for users
+app.use('/users', usersRouter);
 
 //use route handlers for API
 const apiRoutes = require('./routes/apiRouter.js');
