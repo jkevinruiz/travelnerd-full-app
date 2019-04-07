@@ -54,7 +54,6 @@ router.post(
   '/login',
   passport.authenticate('localLogin'),
   (req, res) => {
-
     const user = JSON.parse(JSON.stringify(req.user)); // hack???
     const cleanUser = Object.assign({}, user);
     res.json({ user: cleanUser });
