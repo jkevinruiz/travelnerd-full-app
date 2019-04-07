@@ -3,20 +3,26 @@
     align-content: center;
     background-color: white;
      position: absolute;
-    left: 300px;
-    top: 100px;
-    width: 70%;
-    height: 80%;
+    left: 25%;
+    top: 25%;
+    width: 50%;
+    height: 60%;
     border-radius: 35px;
     background: url('./images/randyForWeb3.jpg');
     background-size: cover ;
     background-repeat: no-repeat;
+    border: 2px solid black;
 
 }
 
 .loginBox {
     position: relative;
-    top: 300px;
+    width: 40%;
+    margin: 24% 43%;
+    background-color: rgba(40, 173, 213, 0.712);
+    padding: 10px;
+    border-radius: 15px;
+
 }
 
 .loginForm label{
@@ -24,7 +30,8 @@
 }
 
 .loginForm input{
-    width: 400px;
+    width: 75%;
+    margin: 5px;
 }
 
 
