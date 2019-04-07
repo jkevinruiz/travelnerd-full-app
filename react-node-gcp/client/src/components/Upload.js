@@ -87,7 +87,7 @@ class Upload extends Component {
                             <label>Description</label>
                             <input type="text" name="description" placeholder="description" id="desc" onChange={this.onChange}/>
                         </span>
-                        <span className="exifInfo">
+                        <span className="exifInfoUpload">
                             <label>Camera</label>
                             <input type="text" name="make" placeholder="make" onChange={this.onChange}/>
                             
