@@ -58,7 +58,7 @@ class PhotoBrowser extends React.Component {
                 if (photo.user.userid === Number(this.props.userID)) {
                     this.setState({renderView: value});
                 } else {
-                    alert("You can only edit images that you have uploaded");
+                    alert("Please select or view your own image first before editing!");
                 }
             } else {
                 this.setState({renderView: "view"});
