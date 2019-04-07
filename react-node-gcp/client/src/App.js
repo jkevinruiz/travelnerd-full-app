@@ -31,6 +31,19 @@ class App extends Component {
     };
   }
 
+componentWillMount() {
+  if (this.getLoginSession() !== null) {
+    console.log(this.getLoginSession());
+    const session = this.getLoginSession();
+    this.setState({
+      loggedIn: session.loggedIn,
+      email: session.email,
+      apiKey: session.apiKey,
+      userID: session.userID
+    })
+  }
+}
+
   /**
    * Asynchronous request for travel photo data.
    */
@@ -39,16 +52,6 @@ class App extends Component {
       this.setState({favorites: this.getLocalStorageFav()});
     }
 
-    if (this.getLoginSession() !== null) {
-      console.log(this.getLoginSession());
-      const session = this.getLoginSession();
-      this.setState({
-        loggedIn: session.loggedIn,
-        email: session.email,
-        apiKey: session.apiKey,
-        userID: session.userID
-      })
-    }
 
     try {
       // const url = "https://randyconnolly.com/funwebdev/services/travel/images.php";
@@ -136,6 +139,7 @@ class App extends Component {
                 addPhotoToFavorites={ this.addPhotoToFavorites }
                 updateDB={ this.updateDB }
                 logout={ this.logout }
+                userID={ this.state.userID}
               />
             ) : (
               <Redirect to="/login"/>

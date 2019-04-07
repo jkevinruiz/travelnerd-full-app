@@ -11,7 +11,7 @@ class PhotoList extends React.Component {
             return (
                 <div className="photos">
                     <div className="list">
-                        { this.props.photos.map( (p) => <PhotoThumb changeRenderView={this.props.changeRenderView} updateCurrentPhoto={this.props.updateCurrentPhoto} removeFav={this.props.removeFav} removePhoto={ this.props.removePhoto} photo={p} key={p.id} showImageDetails={ this.props.showImageDetails } addPhotoToFavorites={ this.props.addPhotoToFavorites } /> ) }
+                        { this.props.photos.map( (p) => <PhotoThumb userID={this.props.userID} changeRenderView={this.props.changeRenderView} updateCurrentPhoto={this.props.updateCurrentPhoto} removeFav={this.props.removeFav} removePhoto={ this.props.removePhoto} photo={p} key={p.id} showImageDetails={ this.props.showImageDetails } addPhotoToFavorites={ this.props.addPhotoToFavorites } /> ) }
                     </div>
                 </div>
             );
