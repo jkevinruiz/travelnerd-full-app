@@ -20,7 +20,7 @@ const strategy = new LocalStrategy(localOptions, async (email, password, done) =
 		// Validate password and make sure it matches with the corresponding hash stored in the database. If the pwds match, it retuns a value of true.
 		const validate = await userChosen.isValidPassword(password);
 		if (!validate){
-			return done(null, userChosen, {message : 'Wrong Password'});
+			return done(null, false, {message : 'Wrong Password'});
 		}
 
 		// Send the user information to the next middleware
@@ -30,7 +30,7 @@ const strategy = new LocalStrategy(localOptions, async (email, password, done) =
 	}
 });
 
-// for localLogin, use our strategy to handle user login
+// Use our strategy to handle user login
 passport.use('localLogin', strategy);
 
 // save email in session data
