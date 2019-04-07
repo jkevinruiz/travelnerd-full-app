@@ -52,7 +52,7 @@ router.post('/register', function(req, res) {
 // @access Public
 router.post(
   '/login',
-  passport.authenticate('localLogin'),
+  passport.authenticate('localLogin', {failureFlash: 'test'}),
   (req, res) => {
     const user = JSON.parse(JSON.stringify(req.user)); // hack???
     const cleanUser = Object.assign({}, user);

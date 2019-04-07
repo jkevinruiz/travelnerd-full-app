@@ -20,11 +20,7 @@ UserSchema.methods.isValidPassword = async function(formPassword) {
 	const hash = user.password_bcrypt;
 
 	// hashes the password sent and checks against the DB.
-  console.log("Comparing passwords");
-  console.log(formPassword);
-  console.log(hash);
 	const compare = await bcrypt.compare(formPassword, hash);
-  console.log(compare);
 	return compare;
 }
 
