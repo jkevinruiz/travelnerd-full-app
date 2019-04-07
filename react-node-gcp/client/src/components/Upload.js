@@ -84,7 +84,6 @@ class Upload extends Component {
                             <input type="number" name="longitude" placeholder="longitude" onChange={this.onChange}/>
                         </span>
                         <span className="description">
-                        <br></br><br></br>
                             <label>Description</label>
                             <input type="text" name="description" placeholder="description" id="desc" onChange={this.onChange}/>
                         </span>

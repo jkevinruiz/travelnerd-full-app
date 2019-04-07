@@ -16,8 +16,12 @@
     margin-top: 15px;
 }
 
+.uploadForm {
+    position: relative;
+}
+
 .uploadContainer {
-    height: 750px;
+    height: 800px;
     width: 50%;
     margin: auto;
     background-color: #28AED5;
