@@ -50,9 +50,6 @@ require("./config/auth");
 const apiRoutes = require('./routes/apiRouter.js');
 app.use('/api', apiRoutes);
 
-const apiRoutes = require('./routes/apiRouter.js');
-app.use('/api', apiRoutes);
-
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
