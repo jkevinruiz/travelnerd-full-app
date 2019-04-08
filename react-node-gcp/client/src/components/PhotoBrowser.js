@@ -135,11 +135,8 @@ class PhotoBrowser extends React.Component {
      * This function changes the current Photo being displayed by changing currentPhoto state.
      * @param id - id of the selected photo to view
      */
-    showImageDetails = (id, userid, type) => {
-        if (type !== "edit" && type !== "view") {
-            this.setState({renderView: "map", currentPhoto: id});
-        }
-        else if (userid === Number(this.props.userID))
+    showImageDetails = (id, userid) => {
+        if (userid === Number(this.props.userID))
             this.setState( {currentPhoto: id });
         else {
              this.setState({renderView: "view", currentPhoto: id});
