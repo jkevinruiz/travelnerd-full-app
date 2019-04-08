@@ -30,7 +30,7 @@ class PhotoThumb extends React.Component {
      * This function calls a parent component's function to change the data to be displayed into its edit mode.
      */
     handleEdit = () => {
-        this.props.showImageDetails(this.props.photo.id);
+        this.props.showImageDetails(this.props.photo.id, this.props.photo.user.userid, "edit");
         this.props.changeRenderView("edit");
         
     }
@@ -39,7 +39,7 @@ class PhotoThumb extends React.Component {
      * This function calls a parent component's function to change the data to be displayed into its view mode.
      */
     handleView = () => {
-        this.props.showImageDetails(this.props.photo.id);
+        this.props.showImageDetails(this.props.photo.id, this.props.photo.user.userid, "view");
         this.props.changeRenderView("view");
     }
 
@@ -47,7 +47,7 @@ class PhotoThumb extends React.Component {
      * This function calls a parent component's function to change the data to be displayed into its map mode.
      */
     handleMap = () => {
-        this.props.showImageDetails(this.props.photo.id);
+        this.props.showImageDetails(this.props.photo.id, this.props.photo.user.userid, "map");
         this.props.changeRenderView("map");
     }
 
