@@ -77,6 +77,7 @@ class EditPhotoDetails extends React.Component {
                                 </div>
                             </form>
                             {/* <label id="editTwoBtn">  </label> */}
+                            <button onClick={this.handleUpdate}>Update</button>
                             <button onClick={this.handleView}>View</button>
                             {/* <label id="editTwoBtn">  </label> */}
                             <button onClick={this.handleMap} >Map</button> 
@@ -100,7 +101,11 @@ class EditPhotoDetails extends React.Component {
      */
     handleView = () => {
         this.props.changeRenderView("view");
+    }
+
+    handleUpdate = () => {
         this.props.updateDB(this.props.currentPhoto);
+        this.props.changeRenderView("view");
     }
 
     /**

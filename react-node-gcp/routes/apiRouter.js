@@ -5,6 +5,7 @@ const urlencodedParser = express.urlencoded({ extended: false })
 const router = express.Router();
 const Multer = require('multer');
 const imgUpload = require('./imgUpload.js');
+const helper = require('../config/authHelper.js');
 
 const multer = Multer({
     storage: Multer.MemoryStorage,
@@ -37,10 +38,10 @@ router.get('/images', cors(corsOptions), (req, resp) => {
     });
 });
 
-router.get('/images', cors(corsOptions), (req, resp) => {
-    ImageModel.find({}, (err, data) => {
+router.get('/image/:id', cors(corsOptions), (req, resp) => {
+    ImageModel.find({id: req.params.id}, (err, data) => {
         if (err) {
-            resp.json({ Error: 'Images not found'});
+            resp.json({ Error: 'Selected Images not found'});
         } else {
             resp.json(data);
         }
@@ -112,7 +113,7 @@ router.post('/image/:id', multer.single(), (req, resp) => {
             longitude: req.body.longitude
         },
         user: {
-            userid: req.body.userid,
+            userid: req.body.userID,
             picture: {
                 large: req.body.large,
                 thumbnail: req.body.thumbnail
@@ -151,6 +152,7 @@ router.post('/image/:id', multer.single(), (req, resp) => {
     imageRecord.save((err, imageR) => {
         if (err) {
             console.log("ERROR: INSERT IS WRONG");
+            resp.json({Error: err});
         } else {
             console.log(imageR.title + " Inserted on images Collection");
             resp.json({Message: "Success"});

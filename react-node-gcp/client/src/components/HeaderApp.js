@@ -5,13 +5,15 @@ import HeaderMenu from './HeaderMenu.js';
 /**
  * Renders/Displays website elements.
  */
-const HeaderApp = function (props) {
+class HeaderApp extends React.Component {
+  render () {
     return (
         <header className="header">
             <HeaderBar />
-            <HeaderMenu />
+            <HeaderMenu logout={ this.props.logout } />
         </header>
     );
+  }
 }
 
 export default HeaderApp;

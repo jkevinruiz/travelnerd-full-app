@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const UserSchema = new mongoose.Schema({
-    id: String,
+    id: Number,
     details: {
         firstname: String,
         lastname: String,
@@ -24,4 +24,6 @@ UserSchema.methods.isValidPassword = async function(formPassword) {
 	return compare;
 }
 
-module.exports = User = mongoose.model('users', UserSchema);
+const User = mongoose.model('users', UserSchema);
+
+module.exports = User;

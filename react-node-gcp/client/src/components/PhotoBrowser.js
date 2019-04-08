@@ -49,7 +49,21 @@ class PhotoBrowser extends React.Component {
      * This function handles the state to determine what element component is to be displayed on website.
      */
     changeRenderView = (value) => {
-        this.setState({renderView: value});
+        const photo = this.props.photos.find( p => p.id === this.state.currentPhoto );
+
+        if (value !== "edit")
+            this.setState({renderView: value});
+        else {
+            if (photo !== undefined) {
+                if (photo.user.userid === Number(this.props.userID)) {
+                    this.setState({renderView: value});
+                } else {
+                    alert("Please select or view your own image first before editing!");
+                }
+            } else {
+                this.setState({renderView: "view"});
+            }
+        }
     }
 
     /**
@@ -62,7 +76,7 @@ class PhotoBrowser extends React.Component {
             return (<EditPhotoDetails updateDB={this.props.updateDB} changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} />);
         else if (renderView === "map")
             return (<MapContainer changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} />);
-        else 
+        else
             return (<ViewSinglePhoto changeRenderView={this.changeRenderView} photos={this.props.photos} currentPhoto={this.state.currentPhoto} />);
     }
 
@@ -77,7 +91,7 @@ class PhotoBrowser extends React.Component {
         console.log(value);
         let filtered = [];
         const tmp = cloneDeep(this.props.photos);
-       
+
         if (name === "city") {
             if (value !== "default")
                 filtered = tmp.filter(obj => obj.location.city === value);
@@ -89,7 +103,7 @@ class PhotoBrowser extends React.Component {
                 filtered = tmp.filter(obj => obj.location.country === value);
                 console.log(filtered);
              }
-            else 
+            else
                 filtered = tmp;
         }
         this.setState({filteredPhoto: filtered, currentPhoto: filtered[0].id});
@@ -121,8 +135,19 @@ class PhotoBrowser extends React.Component {
      * This function changes the current Photo being displayed by changing currentPhoto state.
      * @param id - id of the selected photo to view
      */
-    showImageDetails = (id) => {
-        this.setState( {currentPhoto: id });
+    showImageDetails = (id, userid) => {
+        if (userid === Number(this.props.userID))
+            this.setState( {currentPhoto: id });
+        else {
+             this.setState({renderView: "view", currentPhoto: id});
+        }
+        // const photo = this.props.photos.find( p => p.id === this.state.currentPhoto );
+        // if (photo !== undefined) {
+        //     if (photo.user.userid !== this.props.userID) {
+        //         this.setState({renderView: "view"})
+        //     }
+        // }
+
         //console.log(this.state.currentPhoto);
     }
 
@@ -132,7 +157,7 @@ class PhotoBrowser extends React.Component {
     render() {
         return (
             <div>
-                <HeaderApp />
+                <HeaderApp logout={this.props.logout} />
                 <Favorites downloadFavorites={this.props.downloadFavorites} favorites={this.props.favorites} removeFav={this.props.removeFav} />
                 <div className="photoBrowser">
                     <div className="sorting">
@@ -149,7 +174,7 @@ class PhotoBrowser extends React.Component {
                             </select>
                     </div>
                     <section className="container">
-                        <PhotoList changeRenderView={this.changeRenderView} updateCurrentPhoto={this.updateCurrentPhoto} removeFav={this.props.removeFav} removePhoto={ this.props.removePhoto} photos={ this.state.filteredPhoto } showImageDetails={ this.showImageDetails } addPhotoToFavorites={ this.props.addPhotoToFavorites } />
+                        <PhotoList userID={this.props.userID} changeRenderView={this.changeRenderView} updateCurrentPhoto={this.updateCurrentPhoto} removeFav={this.props.removeFav} removePhoto={ this.props.removePhoto} photos={ this.state.filteredPhoto } showImageDetails={ this.showImageDetails } addPhotoToFavorites={ this.props.addPhotoToFavorites } />
                         {this.viewEditMap()}
                     </section>
                 </div>

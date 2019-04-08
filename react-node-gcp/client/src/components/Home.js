@@ -20,14 +20,28 @@ class Home extends React.Component {
                         <Link to='/about'>
                             <button>About</button>
                         </Link>
-                        <Link to='/login'>
-                            <button>Login</button>
-                        </Link>
+                        {this.handleLogout()}
+                        {console.log(this.props.getLoginSession())}
                     </p>
                 </div>
             </div>
         );
     }
+
+    handleLogout = () => {
+        if (this.props.getLoginSession() == null) {
+           return( <Link to='/login'>
+            <button>Login</button>
+            </Link>
+            );
+        } else {
+            return( 
+            <button onClick={this.props.logout}>Logout</button>
+            );
+        }
+    }
+
+
 }
 
 export default Home;

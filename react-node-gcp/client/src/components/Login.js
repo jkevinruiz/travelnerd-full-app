@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './Login.css';
 import HeaderApp from "./HeaderApp"
 import axios from 'axios'
@@ -47,6 +46,14 @@ class Login extends Component {
                userID: response.data.user.id
            })
 
+           // create a session storage
+           this.props.loginLocalStorage({
+            loggedIn: true,
+            email: response.data.user.email,
+            apikey: response.data.user.apikey,
+            userID: response.data.user.id
+           })
+
            // update the state to redirect to home
            console.log("updating redirectTo");
            this.setState({
@@ -64,7 +71,13 @@ class Login extends Component {
     render() {
       if (this.state.redirectTo) {
         return <Redirect to={{ pathname: this.state.redirectTo }} />
-      }
+      } else if (this.props.getLoginSession() !== null) {
+        return <div className="loginContainer">
+                <div className="loginBox">
+                  <button onClick={this.props.logout}>Logout</button>
+                  </div>
+              </div>;
+      } else 
         return (
             <div>
                 <HeaderApp />
@@ -93,7 +106,11 @@ class Login extends Component {
 
                         </form>
                         <button onClick={this.handleSubmit} type="submit">Login</button>
-                        <Link to='/browse'><button> Cancel </button> </Link>
+                        <Link to='/'><button> Cancel </button> </Link>
+                        <p>New user? Register for an account:</p>
+                            <Link to='/register'>
+                                <button>Register</button>
+                            </Link>
                     </div>
                 </div>
             </div>

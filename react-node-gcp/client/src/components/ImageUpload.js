@@ -55,7 +55,7 @@ class ImageUpload extends React.Component {
                             <p id="fileName"></p>
                             <button className="btn" type="submit">Upload</button>
                         </form>
-                        <Upload filename={this.state.file} />
+                        <Upload filename={this.state.file} userEmail={this.props.userEmail} userID={this.props.userID } />
                     </div>
                 </div>
             </div>

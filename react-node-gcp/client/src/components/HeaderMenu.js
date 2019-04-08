@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 /**
  * Renders/Displays website elements.
  */
-const HeaderMenu = function (props) {
+class HeaderMenu extends React.Component {
+  render () {
     return (
         <nav>
             <Link to="/home">
@@ -20,11 +21,12 @@ const HeaderMenu = function (props) {
             <Link to="/upload">
                 <button>Upload</button>
             </Link>
-            <Link to="/login"> 
-                <button>Login</button>
+            <Link to="/">
+                <button onClick={ this.props.logout }>Logout</button>
             </Link>
         </nav>
     );
+  }
 }
 
 export default HeaderMenu;

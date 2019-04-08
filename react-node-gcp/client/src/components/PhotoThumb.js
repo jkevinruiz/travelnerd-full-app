@@ -16,7 +16,7 @@ class PhotoThumb extends React.Component {
      * This function calls a parent component's function to display selected thumbnail's information.
      */
     handleViewClick = () => {
-        this.props.showImageDetails(this.props.photo.id);
+        this.props.showImageDetails(this.props.photo.id, this.props.photo.user.userid);
     }
 
     /**
@@ -30,13 +30,16 @@ class PhotoThumb extends React.Component {
      * This function calls a parent component's function to change the data to be displayed into its edit mode.
      */
     handleEdit = () => {
+        this.props.showImageDetails(this.props.photo.id);
         this.props.changeRenderView("edit");
+        
     }
 
     /**
      * This function calls a parent component's function to change the data to be displayed into its view mode.
      */
     handleView = () => {
+        this.props.showImageDetails(this.props.photo.id);
         this.props.changeRenderView("view");
     }
 
@@ -44,6 +47,7 @@ class PhotoThumb extends React.Component {
      * This function calls a parent component's function to change the data to be displayed into its map mode.
      */
     handleMap = () => {
+        this.props.showImageDetails(this.props.photo.id);
         this.props.changeRenderView("map");
     }
 

@@ -20,7 +20,7 @@ const strategy = new LocalStrategy(localOptions, async (email, password, done) =
 		// Validate password and make sure it matches with the corresponding hash stored in the database. If the pwds match, it retuns a value of true.
 		const validate = await userChosen.isValidPassword(password);
 		if (!validate){
-			return done(null, userChosen, {message : 'Wrong Password'});
+			return done(null, false, {message : 'Wrong Password'});
 		}
 
 		// Send the user information to the next middleware
@@ -30,14 +30,20 @@ const strategy = new LocalStrategy(localOptions, async (email, password, done) =
 	}
 });
 
-// for localLogin, use our strategy to handle user login
+// Use our strategy to handle user login
 passport.use('localLogin', strategy);
 
 // save email in session data
-passport.serializeUser( (user, done) => done(null, user.email) );
+passport.serializeUser(function(user, done){
+	console.log("serialize");
+	done(null, user.email);
+});
 
-passport.deserializeUser( (email, done) => {
-	UserModel.findOne({email: email}, (err, user) => done(err, user) );
+passport.deserializeUser(function(email, done){
+	console.log("deserialize");
+	UserModel.findOne({email: email}, function(err, user){
+		done(err, user)
+	 });
 });
 
 module.exports = passport;

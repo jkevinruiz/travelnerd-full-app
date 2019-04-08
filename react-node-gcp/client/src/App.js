@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as cloneDeep from 'lodash/cloneDeep';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import PhotoBrowser from './components/PhotoBrowser.js';
 import Home from './components/Home.js';
 import About from './components/About.js';
@@ -31,6 +31,19 @@ class App extends Component {
     };
   }
 
+componentWillMount() {
+  if (this.getLoginSession() !== null) {
+    console.log(this.getLoginSession());
+    const session = this.getLoginSession();
+    this.setState({
+      loggedIn: session.loggedIn,
+      email: session.email,
+      apiKey: session.apiKey,
+      userID: session.userID
+    })
+  }
+}
+
   /**
    * Asynchronous request for travel photo data.
    */
@@ -38,6 +51,7 @@ class App extends Component {
     if (this.getLocalStorageFav() !== null) {
       this.setState({favorites: this.getLocalStorageFav()});
     }
+
 
     try {
       // const url = "https://randyconnolly.com/funwebdev/services/travel/images.php";
@@ -55,6 +69,16 @@ class App extends Component {
     catch (error) {
       console.error(error);
     }
+  }
+
+  logout = () => {
+    localStorage.removeItem("session_login");
+    this.setState({
+      loggedIn: false,
+      email: null,
+      apiKey: null,
+      userID: null
+    })
   }
 
   updateUser (userObject) {
@@ -91,28 +115,42 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path='/upload' exact component={ImageUpload}></Route>
-        <Route path='/' exact component={Home} />
-        <Route path='/home' exact component={Home} />
+        <Route path='/upload' exact
+          render={ (props) => (
+            this.state.loggedIn ? (
+              <ImageUpload userEmail={ this.state.email } userID={ this.state.userID} />
+            ) : (
+              <Redirect to="/login"/>
+            )
+          )}
+        />
+        <Route path='/' exact  render={ (props) => <Home getLoginSession={this.getLoginSession} logout={this.logout}/> } />
+        <Route path='/home' exact  render={ (props) => <Home getLoginSession={this.getLoginSession} logout={this.logout}/> } />
         <Route path='/browse' exact
-          render={ (props) =>
-          <PhotoBrowser
-            downloadFavorites={ this.downloadFavorites}
-            removeFav={ this.removeFav}
-            removePhoto={ this.removePhoto}
-            favorites={ this.state.favorites}
-            photos={ this.state.photos }
-            updatePhoto={ this.updatePhoto }
-            addPhotoToFavorites={ this.addPhotoToFavorites }
-            updateDB={this.updateDB }
+          render={ (props) => (
+            this.state.loggedIn ? (
+              <PhotoBrowser
+                downloadFavorites={ this.downloadFavorites}
+                removeFav={ this.removeFav}
+                removePhoto={ this.removePhoto}
+                favorites={ this.state.favorites}
+                photos={ this.state.photos }
+                updatePhoto={ this.updatePhoto }
+                addPhotoToFavorites={ this.addPhotoToFavorites }
+                updateDB={ this.updateDB }
+                logout={ this.logout }
+                userID={ this.state.userID}
               />
-           }
+            ) : (
+              <Redirect to="/login"/>
+            )
+          )}
         />
         <Route path='/about' exact component={About} />
         <Route
           path='/login'
           render={() =>
-            <Login updateUser={this.updateUser}/>
+            <Login updateUser={this.updateUser} loginLocalStorage={this.loginLocalStorage} getLoginSession={this.getLoginSession} logout={this.logout} />
           }
         />
         <Route path='/register' exact component={Register} />
@@ -161,11 +199,15 @@ class App extends Component {
   addPhotoToFavorites = (id) => {
     // find photo to add
     const photo = this.state.photos.find ( p => p.id === id);
-    console.log(photo);
+    // console.log(photo);
+    // console.log(this.state.userID);
+    // console.log(photo.user.userid);
 
-    // check if item is already in favorite
+    // find photo in favorites
+
+    // check if item is already in favorite && check if its their own image
     // if not add it
-    if (!this.state.favorites.find (p => p.id === id) ) {
+    if ( (!this.state.favorites.find (p => p.id === id)) && (photo.user.userid !== Number(this.state.userID ))) {
       // create copy of favorites
       const copyFavorites = cloneDeep(this.state.favorites);
 
@@ -178,7 +220,7 @@ class App extends Component {
       // update local storage
       this.updateLocalStorage(copyFavorites);
     } else {
-      console.log ("Photo already in favorites")
+      console.log ("Photo already in favorites/ Cannot favorite your own image")
     }
   }
 
@@ -219,6 +261,14 @@ class App extends Component {
         // update local storage
         this.updateLocalStorage(copyFav);
     }
+  }
+
+  loginLocalStorage = (data) => {
+    localStorage.setItem('session_login', JSON.stringify(data));
+  }
+
+  getLoginSession = () => {
+    return JSON.parse(localStorage.getItem('session_login'));
   }
 
   /**
