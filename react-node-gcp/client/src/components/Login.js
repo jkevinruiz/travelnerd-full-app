@@ -71,7 +71,13 @@ class Login extends Component {
     render() {
       if (this.state.redirectTo) {
         return <Redirect to={{ pathname: this.state.redirectTo }} />
-      }
+      } else if (this.props.getLoginSession() !== null) {
+        return <div className="loginContainer">
+                <div className="loginBox">
+                  <button onClick={this.props.logout}>Logout</button>
+                  </div>
+              </div>;
+      } else 
         return (
             <div>
                 <HeaderApp />

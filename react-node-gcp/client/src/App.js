@@ -124,8 +124,8 @@ componentWillMount() {
             )
           )}
         />
-        <Route path='/' exact component={Home} />
-        <Route path='/home' exact component={Home} />
+        <Route path='/' exact  render={ (props) => <Home getLoginSession={this.getLoginSession} logout={this.logout}/> } />
+        <Route path='/home' exact  render={ (props) => <Home getLoginSession={this.getLoginSession} logout={this.logout}/> } />
         <Route path='/browse' exact
           render={ (props) => (
             this.state.loggedIn ? (
@@ -150,7 +150,7 @@ componentWillMount() {
         <Route
           path='/login'
           render={() =>
-            <Login updateUser={this.updateUser} loginLocalStorage={this.loginLocalStorage}/>
+            <Login updateUser={this.updateUser} loginLocalStorage={this.loginLocalStorage} getLoginSession={this.getLoginSession} logout={this.logout} />
           }
         />
         <Route path='/register' exact component={Register} />
