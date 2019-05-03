@@ -1,2 +1,2 @@
 # COMP4513-Asg2
-Mongo, Node, React assignment for Web III
+Mongo, Node, React Web application
