@@ -1,6 +1,8 @@
 # travel nerd app
 Mongo, Node, React Web application
 
+![](https://github.com/jkevinruiz/travelnerd-full-app/blob/master/travelnerd.webp)
+
 # goal
 This web project aims to allow its collaborators to gain a knowledge and understanding of react, node, express, and mongo database web development. 
 
