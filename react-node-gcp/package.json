@@ -32,7 +32,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
     "passport-local": "^1.0.0",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "random-int": "^1.0.0",
     "uuid": "^3.3.2",
     "validator": "^10.11.0"
